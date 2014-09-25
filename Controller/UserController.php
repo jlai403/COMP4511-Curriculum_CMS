@@ -3,37 +3,40 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserDto.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 
 $action = $_GET['action'];
-$action();
+$controller = new UserController();
+call_user_func(array($controller, $action));
 
-function signUp() {
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+class UserController {
+	function signUp() {
+		$email = $_POST['email'];
+		$password = $_POST['password'];
 	
-	$userDto = new UserDto();
-	$userDto->setEmail($email);
-	$userDto->setPassword($password);
+		$userDto = new UserDto();
+		$userDto->setEmail($email);
+		$userDto->setPassword($password);
 	
-	FacadeFactory::getDomainFacade()->signUp($userDto);
-	FacadeFactory::getDomainFacade()->login($userDto);
+		FacadeFactory::getDomainFacade()->signUp($userDto);
+		FacadeFactory::getDomainFacade()->login($userDto);
 	
-	redirect("Location: /View/Dashboard");
-}
-
-function login() {
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+		$this->redirect("Location: /View/Dashboard");
+	}
 	
-	$userDto = new UserDto();
-	$userDto->setEmail($email);
-	$userDto->setPassword($password);
+	function login() {
+		$email = $_POST['email'];
+		$password = $_POST['password'];
 	
-	FacadeFactory::getDomainFacade()->login($userDto);
+		$userDto = new UserDto();
+		$userDto->setEmail($email);
+		$userDto->setPassword($password);
 	
-	redirect("Location: /View/Dashboard");
-}
-
-function redirect($location) {
-	header($location);
-	exit();
+		FacadeFactory::getDomainFacade()->login($userDto);
+	
+		$this->redirect("Location: /View/Dashboard");
+	}
+	
+	function redirect($location) {
+		header($location);
+		exit();
+	}
 }
 ?>
