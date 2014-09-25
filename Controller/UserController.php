@@ -11,22 +11,29 @@ function signUp() {
 	
 	$userDto = new UserDto();
 	$userDto->setEmail($email);
-	$password->setPassword($passwordl);
+	$userDto->setPassword($password);
+	
 	FacadeFactory::getDomainFacade()->signUp($userDto);
 	FacadeFactory::getDomainFacade()->login($userDto);
 	
-	header("Location: /View/Dashboard");
-	exit();
+	redirect("Location: /View/Dashboard");
 }
 
 function login() {
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	
-	$userDto = new UserDto($email, $password);
+	$userDto = new UserDto();
+	$userDto->setEmail($email);
+	$userDto->setPassword($password);
+	
 	FacadeFactory::getDomainFacade()->login($userDto);
 	
-	header("Location: /View/Dashboard");
+	redirect("Location: /View/Dashboard");
+}
+
+function redirect($location) {
+	header($location);
 	exit();
 }
 ?>

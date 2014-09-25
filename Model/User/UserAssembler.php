@@ -13,6 +13,7 @@ class UserAssembler {
 	public function assemble() {
 		$userDto = new UserDto();
 		$userDto->setEmail($this->user->getEmail());
+		$userDto->setPassword($this->user->getPassword());
 		return $userDto;
 	}
 }
