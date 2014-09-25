@@ -1,12 +1,9 @@
 <?php
+require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/BaseController.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserDto.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 
-$action = $_GET['action'];
-$controller = new UserController();
-call_user_func(array($controller, $action));
-
-class UserController {
+class UserController extends BaseController {
 	function signUp() {
 		$email = $_POST['email'];
 		$password = $_POST['password'];
@@ -18,7 +15,7 @@ class UserController {
 		FacadeFactory::getDomainFacade()->signUp($userDto);
 		FacadeFactory::getDomainFacade()->login($userDto);
 	
-		$this->redirect("Location: /View/Dashboard");
+		parent::redirect("Location: /View/Dashboard");
 	}
 	
 	function login() {
@@ -31,12 +28,9 @@ class UserController {
 	
 		FacadeFactory::getDomainFacade()->login($userDto);
 	
-		$this->redirect("Location: /View/Dashboard");
-	}
-	
-	function redirect($location) {
-		header($location);
-		exit();
+		parent::redirect("Location: /View/Dashboard");
 	}
 }
-?>
+
+$action = $_GET['action'];
+(new UserController())->invokeAction($action);
