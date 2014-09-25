@@ -23,6 +23,10 @@ abstract class Repository {
 		}
 	}
 	
+	protected function beginTransaction() {
+		$this->dbConnection->beginTransaction();
+	}
+	
 	protected function commitTransaction() {
 		$this->dbConnection->commit();
 	}
@@ -36,10 +40,13 @@ abstract class Repository {
 	}
 	
 	protected function executeStoredProcedure($sp, array $params) {
-		$this->initializeDbConnection()->beginTransaction();
+		$success = false;
+		
+		$this->initializeDbConnection();
+		$this->beginTransaction();
 		try {
 			$statement = $this->dbConnection->prepare($sp);
-			$sqlExecuted = $statement->execute($params);
+			$success = $statement->execute($params);
 			$this->commitTransaction();
 		} catch(Exception $e){
 			$this->rollbackConnection();
@@ -47,5 +54,27 @@ abstract class Repository {
 		} finally {
 			$this->closeDbConnection();
 		}
+		
+		return $success;
 	}
+	
+	protected function executeSelectStoredProcedure($sp, array $params) {
+		$resultSet = array();
+		
+		$this->initializeDbConnection();
+		try {
+			$statement = $this->dbConnection->prepare($sp);
+			$statement->execute($params);
+			$resultSet = $statement->fetchAll();
+		} catch(Exception $e){
+			throw new MyException($e->getMessage());
+		} finally {
+			$this->closeDbConnection();
+		}
+		
+		return $resultSet;
+	}
+	
+	/*** ABSTRACT METHODS ***/
+	public abstract function create(IEntity $entity);
 }

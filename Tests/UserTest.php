@@ -5,7 +5,7 @@ class UserTest extends PHPUnit_Framework_TestCase
 	public function setUp() {
 		$_SERVER['DOCUMENT_ROOT'] = "/Users/jlai/Documents/Projects/COMP4511/Assignment1";
 		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/User/User.php');
-		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/Exceptions/MyException.php');
+		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/Erro/MyException.php');
 		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/SecurityManager.php');
 	}
 	

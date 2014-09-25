@@ -1,7 +1,7 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/IEntity.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/SecurityManager.php');
-require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Exceptions/MyException.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class User implements IEntity {
 	private $id;
@@ -20,14 +20,23 @@ class User implements IEntity {
 		return $this->password;
 	}
 	
-	public function setPassword($password) {
+	public function validateAndEncrpytPassword($password) {
 		$hashedPassword = SecurityManager::validateAndEncrpytPassword($password);
 		$this->password = $hashedPassword;
+	}
+	
+	public function setEncryptedPassword($password) {
+		$this->password = $password;
 	}
 	
 	// Overriden: IEntity
 	public function getId() {
 		return $this->id;
+	}
+	
+	// Overriden: IEntity
+	public function setId($id) {
+		$this->id = $id;
 	}
 	
 	// Overriden: IEntity

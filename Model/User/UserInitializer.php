@@ -12,7 +12,7 @@ class UserInitializer {
 	public function initialize() {
 		$user = new User();
 		$user->setEmail($this->userDto->getEmail());
-		$user->setPassword($this->userDto->getPassword());
+		$user->validateAndEncrpytPassword($this->userDto->getPassword());
 		return $user;
 	}
 }

@@ -5,9 +5,7 @@ class UserDto {
 	private $email;
 	private $password;
 	
-	public function __construct($email, $password) {
-		$this->setEmail($email);
-		$this->setPassword($password);
+	public function __construct() {
 	}
 	
 	public function getEmail(){
