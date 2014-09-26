@@ -30,6 +30,11 @@ class UserController extends BaseController {
 	
 		parent::redirect("Location: /View/Dashboard");
 	}
+	
+	function logout() {
+		FacadeFactory::getDomainFacade()->logout();
+		parent::redirect("Location: /View");
+	}
 }
 
 $action = $_GET['action'];

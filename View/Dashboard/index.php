@@ -11,6 +11,10 @@ $currentUser = LoginManager::verifyAuthentication();
 	</head>
 	
 	<body>
-		Hello <?php echo $currentUser->getEmail() ?>
+		<div class="navigation" style="float: right;">
+			Hello <?php echo $currentUser->getEmail() ?>
+			<a href="/Controller/UserController.php?action=logout">Logout</a>
+		</div>
+		
 	</body>
 </html> 

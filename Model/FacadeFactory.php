@@ -25,6 +25,10 @@ class DomainFacade {
 		LoginManager::login($user, $userDto);
 	}
 	
+	public function logout(){
+		LoginManager::logout();
+	}
+	
 	public function findUserByEmail($email) {
 		$user = (new UserRepository())->findUserByEmail($email);
 		return (new UserAssembler($user))->assemble();

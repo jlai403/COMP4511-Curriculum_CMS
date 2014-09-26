@@ -1,5 +1,7 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserDto.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/User.php');
 
 class LoginManager {
 	
@@ -32,5 +34,11 @@ class LoginManager {
 		}
 		
 		return FacadeFactory::getDomainFacade()->findUserByEmail($currentUserEmail);
+	}
+	
+	public static function logout() {
+		session_start();
+		session_unset();
+		session_destroy();
 	}
 }

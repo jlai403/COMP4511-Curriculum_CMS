@@ -7,9 +7,9 @@
 
 	<body>
 		<form action="/Controller/UserController.php?action=login" method="POST">
-			<input type="text" name="email" />
-			<input type="password" name="password" />
-			<input type="submit" />
+			<input type="text" name="email" placeholder="email" />
+			<input type="password" name="password" placeholder="password" />
+			<input type="submit" value="Login"/>
 		</form>
 	</body>
 </html> 
