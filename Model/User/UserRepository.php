@@ -6,10 +6,12 @@ class UserRepository extends Repository {
 	
 	public function create(User $user){
 		$params = array(
+			$user->getFirstName(),
+			$user->getLastName(),
 			$user->getEmail(),
 			$user->getPassword(),
 		);
-		$this->executeStoredProcedure("call createUser(?,?)", $params);
+		$this->executeStoredProcedure("call createUser(?,?,?,?)", $params);
 		
 		$userId = $this->findUserByEmail($user->getEmail())->getId();
 		$this->addRolesToUser($userId, $user->getRoles());
@@ -35,6 +37,8 @@ class UserRepository extends Repository {
 	private function extractUserFromResultSet($record) {
 		$user = new User();
 		$user->setId($record["id"]);
+		$user->setFirstName($record["firstName"]);
+		$user->setLastName($record["lastName"]);
 		$user->setEmail($record["email"]);
 		$user->setEncryptedPassword($record["password"]);
 		return $user;

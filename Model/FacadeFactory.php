@@ -2,7 +2,8 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserAssembler.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserRepository.php');
-require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/LoginManager.php');
+
+require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleAssembler.php');
@@ -25,11 +26,11 @@ class DomainFacade {
 	
 	public function login($userDto){
 		$user = (new UserRepository())->findUserByEmail($userDto->getEmail());
-		LoginManager::login($user, $userDto);
+		SessionManager::login($user, $userDto);
 	}
 	
 	public function logout(){
-		LoginManager::logout();
+		SessionManager::logout();
 	}
 	
 	public function findUserByEmail($email) {

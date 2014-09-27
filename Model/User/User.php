@@ -5,9 +5,27 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class User implements IEntity {
 	private $id;
+	private $firstName;
+	private $lastName;
 	private $email;
 	private $password;
 	private $roles;
+	
+	public function getFirstName() {
+		return $this->firstName;
+	}
+	
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
+	}
+	
+	public function getLastName() {
+		return $this->lastName;
+	}
+	
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
+	}
 	
 	public function getEmail() {
 		return $this->email;

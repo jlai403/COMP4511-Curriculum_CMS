@@ -2,10 +2,28 @@
 
 class UserDto {
 	
+	private $firstName;
+	private $lastName;
 	private $email;
 	private $password;
 	private $roleDtos;
 
+	public function getFirstName(){
+		return $this->firstName;
+	}
+	
+	public function setFirstName($firstName){
+		$this->firstName = $firstName;
+	}
+
+	public function getLastName(){
+		return $this->lastName;
+	}
+	
+	public function setLastName($lastName){
+		$this->lastName = $lastName;
+	}
+	
 	public function getEmail(){
 		return $this->email;
 	}

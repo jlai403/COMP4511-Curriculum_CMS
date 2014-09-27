@@ -1,6 +1,6 @@
 <?php 
-require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/LoginManager.php');
-$currentUser = LoginManager::verifyAuthentication();
+require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
+$currentUser = SessionManager::authorize();
 ?>
 
 <!DOCTYPE html>

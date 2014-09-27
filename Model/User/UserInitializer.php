@@ -12,6 +12,8 @@ class UserInitializer {
 	
 	public function initialize() {
 		$user = new User();
+		$user->setFirstName($this->userDto->getFirstName());
+		$user->setLastName($this->userDto->getLastName());
 		$user->setEmail($this->userDto->getEmail());
 		$user->assertAndEncrpytPassword($this->userDto->getPassword());
 		$roles = $this->initializeRoles($this->userDto->getRoleDtos());
