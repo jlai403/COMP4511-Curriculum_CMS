@@ -1,6 +1,9 @@
 <?php 
-require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionnManager.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 $currentUser = SessionManager::authorize();
+
+$faculties = FacadeFactory::getDomainFacade()->findAllFaculties();
+$disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +20,8 @@ $currentUser = SessionManager::authorize();
 		</div>
 	
 		<form action="/Controller/ProgramController.php?action=create" method="POST">
+			Requester: <input type="text" name="requester" value="<?php echo $currentUser->getFirstName()." ".$currentUser->getLastName()?>" /> <br/>
 			Program name: <input type="text" name="name" placeholder="Program Name" /> <br/>
-			Program type<select name="type">
 			
 			<input type="submit" value="Submit Request"/>
 		</form>

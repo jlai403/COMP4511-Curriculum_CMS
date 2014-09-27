@@ -1,7 +1,7 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 
-$roles = FacadeFactory::getDomainFacade()->getAllRoles();
+$roles = FacadeFactory::getDomainFacade()->findAllRoles();
 ?>
 
 <!DOCTYPE html>
