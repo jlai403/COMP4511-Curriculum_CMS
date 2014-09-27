@@ -7,6 +7,7 @@ class User implements IEntity {
 	private $id;
 	private $email;
 	private $password;
+	private $roles;
 	
 	public function getEmail() {
 		return $this->email;
@@ -16,12 +17,20 @@ class User implements IEntity {
 		$this->email = $email;
 	}
 	
+	public function getRoles() {
+		return $this->roles;
+	}
+	
+	public function setRoles($roles) {
+		$this->roles = $roles;
+	}
+	
 	public function getPassword(){
 		return $this->password;
 	}
 	
-	public function validateAndEncrpytPassword($password) {
-		$hashedPassword = SecurityManager::validateAndEncrpytPassword($password);
+	public function assertAndEncrpytPassword($password) {
+		$hashedPassword = SecurityManager::assertAndEncrpytPassword($password);
 		$this->password = $hashedPassword;
 	}
 	
@@ -42,6 +51,7 @@ class User implements IEntity {
 	// Overriden: IEntity
 	public function assertValid() {
 		$this->assertEmailIsValid();
+		$this->assertAtLeastOneRoleIsSelected();
 	}
 	
 	private function assertEmailIsValid() {
@@ -52,4 +62,9 @@ class User implements IEntity {
 		}
 	}
 	
+	private function assertAtLeastOneRoleIsSelected() {
+		if (sizeof($this->getRoles()) == 0 ) {
+			throw new MyException("At least one role must be selected");
+		}
+	}
 }

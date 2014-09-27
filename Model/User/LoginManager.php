@@ -18,7 +18,7 @@ class LoginManager {
 	public static function validateLogin(User $user, UserDto $userDto) { 
 		if ($user == null) return false;
 		
-		$encryptedPassword = SecurityManager::validateAndEncrpytPassword($userDto->getPassword());
+		$encryptedPassword = SecurityManager::assertAndEncrpytPassword($userDto->getPassword());
 		if ($user->getPassword() !== $encryptedPassword) return false;
 
 		return true;	

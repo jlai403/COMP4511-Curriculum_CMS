@@ -19,15 +19,15 @@ $currentUser = LoginManager::verifyAuthentication();
 		</div>
 	
 		<form action="/Controller/ProgramController.php?action=create" method="POST">
-			<input type="text" name="name" placeholder="Program Name" />
-			<select name="type">
+			Program name: <input type="text" name="name" placeholder="Program Name" /> <br/>
+			Program type<select name="type">
 				<?php 
 				$validProgramTypes = unserialize(VALID_PROGRAM_TYPES);
 				foreach ($validProgramTypes as $programType) {
 					echo "<option value='" . $programType . "'>" . $programType . "</option>";
 				}
 				?>
-			</select>
+			</select> <br/>
 			
 			<input type="submit" value="Submit Request"/>
 		</form>

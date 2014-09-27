@@ -50,7 +50,7 @@ abstract class Repository {
 		return $success;
 	}
 	
-	protected function executeSelectStoredProcedure($sp, array $params) {
+	protected function executeSelectStoredProcedure($sp, array $params = array()) {
 		$resultSet = array();
 		
 		$this->initializeDbConnection();
@@ -66,7 +66,4 @@ abstract class Repository {
 		
 		return $resultSet;
 	}
-	
-	/*** ABSTRACT METHODS ***/
-	public abstract function create(IEntity $entity);
 }

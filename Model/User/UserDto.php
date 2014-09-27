@@ -4,10 +4,8 @@ class UserDto {
 	
 	private $email;
 	private $password;
-	
-	public function __construct() {
-	}
-	
+	private $roleDtos;
+
 	public function getEmail(){
 		return $this->email;
 	}
@@ -22,5 +20,13 @@ class UserDto {
 	
 	public function setPassword($password){
 		$this->password = $password;
+	}
+	
+	public function getRoleDtos(){
+		return $this->roleDtos;
+	}
+	
+	public function setRoleDtos($roleDtos){
+		$this->roleDtos = $roleDtos;
 	}
 }

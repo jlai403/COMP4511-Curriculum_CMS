@@ -1,7 +1,7 @@
 <?php
 
 class SecurityManager {
-	public static function validateAndEncrpytPassword($password) {
+	public static function assertAndEncrpytPassword($password) {
 		self::assertPasswordIsValid($password);
 		return hash('sha256', $password);
 	}

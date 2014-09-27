@@ -4,13 +4,25 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/User.php');
 
 class UserRepository extends Repository {
 	
-	public function create(IEntity $entity){
+	public function create(User $user){
 		$params = array(
-			$entity->getEmail(),
-			$entity->getPassword(),
+			$user->getEmail(),
+			$user->getPassword(),
 		);
-		$success = $this->executeStoredProcedure("call createUser(?,?)", $params);
-		return $success;
+		$this->executeStoredProcedure("call createUser(?,?)", $params);
+		
+		$userId = $this->findUserByEmail($user->getEmail())->getId();
+		$this->addRolesToUser($userId, $user->getRoles());
+	}
+	
+	private function addRolesToUser($userId, $roles) {
+		foreach($roles as $role) {
+			$params = array(
+				$userId,
+				$role->getId()		
+			);
+			$this->executeStoredProcedure("call addRoleToUser(?,?)", $params);
+		}
 	}
 	
 	public function findUserByEmail($email) {
