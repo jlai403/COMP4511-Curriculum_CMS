@@ -22,8 +22,23 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		<form action="/Controller/ProgramController.php?action=create" method="POST">
 			Requester: <input type="text" name="requester" value="<?php echo $currentUser->getFirstName()." ".$currentUser->getLastName()?>" /> <br/>
 			Program name: <input type="text" name="name" placeholder="Program Name" /> <br/>
-			
-			<input type="submit" value="Submit Request"/>
+			Faculty: 
+			<select name="faculty">
+				<?php 
+					foreach($faculties as $faculty) {
+						echo "<option value='".$faculty->getId()."'>".$faculty->getName()."</option>";
+					}
+				?>
+			</select> <br/>
+			Discipline: 
+			<select name="discipline">
+				<?php 
+					foreach($disciplines as $discipline) {
+						echo "<option value='".$discipline->getId()."'>".$discipline->getDisplayName()."</option>";
+					}
+				?>
+			</select> <br/>
+			<br/><input type="submit" value="Submit Request"/>
 		</form>
 	</body>
 </html> 

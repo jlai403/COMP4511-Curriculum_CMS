@@ -12,7 +12,7 @@ class DisciplineAssembler {
 			$disciplineDto->setName($discipline->getName());
 			$disciplineDto->setCode($discipline->getCode());
 			
-			array_push($disciplineDtos, $discipline);
+			array_push($disciplineDtos, $disciplineDto);
 		}
 		return $disciplineDtos;
 	}

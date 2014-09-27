@@ -21,6 +21,10 @@ class DisciplineDto {
 		$this->name = $name;
 	}
 	
+	public function getDisplayName(){
+		return $this->getCode()." - ".$this->getName();
+	}
+	
 	// Overriden: IEntity
 	public function getId() {
 		return $this->id;
