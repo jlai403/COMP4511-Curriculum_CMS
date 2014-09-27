@@ -9,4 +9,8 @@ abstract class BaseController {
 		header($location);
 		exit();
 	}
+	
+	protected function authenticateUser() {
+		return LoginManager::verifyAuthentication();
+	}
 }

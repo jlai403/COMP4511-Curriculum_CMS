@@ -5,6 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 class ProgramController extends BaseController {
 
 	function create() {
+		$currentUser = parent::authenticateUser();
 		parent::redirect("Location: /View/Program/Requested.php");
 	}
 }

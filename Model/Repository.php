@@ -1,20 +1,12 @@
 <?php
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/DbConstants.php');
 
 abstract class Repository {
-	/*** mysql hostname ***/
-	private $hostname = 'localhost';
-	
-	/*** mysql username ***/
-	private $username = 'comp4511_dev';
-	
-	/*** mysql password ***/
-	private $password = 'comp4511_password$1';
-	
 	private $dbConnection;
 	
 	protected function initializeDbConnection() {
 		try {
-			$this->dbConnection = new PDO("mysql:host=".$this->hostname.";dbname=assignment1", $this->username, $this->password);
+			$this->dbConnection = new PDO("mysql:host=".DBConstants::HOSTNAME.";dbname=assignment1", DBConstants::USERNAME, DBConstants::PASSWORD);
 			return $this->dbConnection;
 		}
 		catch(PDOException $e)
