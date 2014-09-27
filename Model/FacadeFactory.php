@@ -6,6 +6,9 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Faculty/FacultyRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Faculty/FacultyAssembler.php');
 
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Discipline/DisciplineRepository.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Discipline/DisciplineAssembler.php');
+
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleRepository.php');
@@ -57,6 +60,7 @@ class DomainFacade {
 	}
 	
 	public function findAllDisciplines() {
-		
+		$disciplines = (new DisciplineRepository())->findAll();
+		return (new DisciplineAssembler())->assembleAll($disciplines);
 	}
 }
