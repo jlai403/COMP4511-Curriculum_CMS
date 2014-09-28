@@ -1,0 +1,31 @@
+.form {
+	margin-top: 20px;
+	max-width: 600px;	
+}
+
+.form .link {
+	font-size: 11px;
+}
+
+.form .row input, .form .row select {
+	margin-bottom: 10px;
+}
+
+.split-left, .split-right {
+	padding: 0;
+}
+
+.form .logo {
+	width: 100%;
+}
+
+/** Desktop Specific css **/
+@media only screen and (min-width:990px) {
+	.split-left {
+		padding-right: 5px;
+	}
+	
+	.split-right {
+		padding-left: 5px;
+	}
+}

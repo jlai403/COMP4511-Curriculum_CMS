@@ -30,5 +30,6 @@ $currentUser = SessionManager::authorize();
 				</li>
 			</ul>
 		</div>
+		
 	</body>
 </html> 
