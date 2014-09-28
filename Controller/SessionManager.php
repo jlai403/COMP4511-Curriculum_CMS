@@ -2,13 +2,19 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 
 class SessionManager {
+	private static function startSession() {
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+	}
+	
 	public static function set($key, $value){
-		session_start();
+		self::startSession();
 		$_SESSION[$key] = serialize($value);
 	}
 	
 	public static function get($key) {
-		session_start();
+		self::startSession();
 		$value = isset($_SESSION[$key]) ? unserialize($_SESSION[$key]) : null;
 		return $value;
 	}
@@ -32,19 +38,22 @@ class SessionManager {
 	}
 	
 	public static function logout() {
-		session_start();
+		self::startSession();
 		session_unset();
 		session_destroy();
 	}
 	
 	public static function authorize() {
-		$currentUserEmail = self::get("userEmail");
-	
-		if ($currentUserEmail == null) {
+		if (self::userIsLoggedIn() == false) {
 			header('Location: /View/Error/401.php');
 			exit;
 		}
+		return FacadeFactory::getDomainFacade()->findUserByEmail(self::get("userEmail"));
+	}
 	
-		return FacadeFactory::getDomainFacade()->findUserByEmail($currentUserEmail);
+	public static function userIsLoggedIn() {
+		$currentUserEmail = self::get("userEmail");
+		if (is_null($currentUserEmail)) return false;
+		return true;
 	}
 }

@@ -8,6 +8,9 @@ $currentUser = SessionManager::authorize();
 	<head>
 	<meta charset="UTF-8">
 		<title>Dashboard</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
 	</head>
 	
 	<body>

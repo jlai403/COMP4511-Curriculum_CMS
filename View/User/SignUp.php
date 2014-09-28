@@ -11,7 +11,6 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 		<title>Sign Up</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
 		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/signup.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
