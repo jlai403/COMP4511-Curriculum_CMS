@@ -1,0 +1,15 @@
+.form {
+	max-width: 400px;	
+}
+
+.form .sign-up {
+	font-size: 11px;
+}
+
+.form .row {
+	margin: 10px 30px;
+}
+
+.form .logo {
+	width: 100%;
+}
