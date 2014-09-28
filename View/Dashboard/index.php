@@ -22,10 +22,10 @@ $currentUser = SessionManager::authorize();
 	      	</a>
 			
 			<ul>
-				<li class="nav-item">
+				<li>
 					<a href="/View/Program/Create.php">Create Program</a>
 				</li>
-				<li class="nav-item">
+				<li>
 					<a href="/Controller/UserController.php?action=logout">Logout</a>
 				</li>
 			</ul>

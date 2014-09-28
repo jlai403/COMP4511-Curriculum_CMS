@@ -64,7 +64,7 @@
 	padding: 10px 13px;
 }
 
-.nav ul li a:HOVER {
+.nav ul li.active a, .nav ul li a:HOVER {
 	color: #FFFFFF;
 	background-color: #0088CC;
 	text-decoration: none;

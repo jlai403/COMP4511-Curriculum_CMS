@@ -26,10 +26,10 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 	      	</a>
 			
 			<ul>
-				<li class="nav-item">
+				<li class="active">
 					<a href="/View/Program/Create.php">Create Program</a>
 				</li>
-				<li class="nav-item">
+				<li>
 					<a href="/Controller/UserController.php?action=logout">Logout</a>
 				</li>
 			</ul>
