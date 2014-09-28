@@ -7,3 +7,16 @@
 	text-align: center;	
 }
 
+.info-mark {
+	position: relative;
+	font-size: 15px;
+	font-family: 'Times New Roman';
+	font-weight: 600;
+	margin-top: -40px;
+	left: 30px;
+	float: right;
+	border-radius: 50px;
+	color: #FFFFFF;
+	background-color: #0088CC;
+	padding: 1px 10px;
+}

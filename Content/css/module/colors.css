@@ -2,6 +2,14 @@
 	background-color: #0088CC;
 }
 
-.text-white {
+.button.blue {
 	color: #FFFFFF;
+}
+
+.button.blue:HOVER {
+	background-color: #285E8E;
+}
+
+.text-white {
+	
 }

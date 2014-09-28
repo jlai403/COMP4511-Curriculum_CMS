@@ -16,8 +16,8 @@
 	<body>
 		
 		<div class="container">
-			<form class="form center" action="/Controller/UserController.php?action=login" method="POST">
-				<div class="col-md-12">
+			<div class="col-md-12">
+				<form class="form center" action="/Controller/UserController.php?action=login" method="POST">
 					<div class="row center-text">
 						<img class="logo" src="/Content/img/Mount_Royal_University_Logo.svg.png" /> <br/>
 						<h3>Please sign in</h3>
@@ -32,11 +32,11 @@
 					</div>
 			
 					<div class="row center-text">
-						<input class="form-control text-white blue" type="submit" value="Login"/> <br/>
-						<a class="sign-up" href="/View/User/SignUp.php">Don't have an account?</a>
+						<input class="form-control button blue" type="submit" value="Login"/>
+						<a class="link" href="/View/User/SignUp.php">Don't have an account?</a>
 					</div>
-				</div>
-			</form>			
+				</form>			
+			</div>
 		</div>
 	</body>
 </html> 
