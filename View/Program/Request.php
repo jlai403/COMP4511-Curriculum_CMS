@@ -10,7 +10,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 <html>
 	<head>
 	<meta charset="UTF-8">
-		<title>Create Program</title>
+		<title>New Program Request</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
@@ -27,7 +27,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 			
 			<ul>
 				<li class="active">
-					<a href="/View/Program/Create.php">Create Program</a>
+					<a href="/View/Program/Request.php">Create Program</a>
 				</li>
 				<li>
 					<a href="/Controller/UserController.php?action=logout">Logout</a>
