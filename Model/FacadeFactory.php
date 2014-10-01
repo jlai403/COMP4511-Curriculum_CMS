@@ -14,6 +14,9 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleAssembler.php');
 
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInputDto.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramRepository.php');
+
 class FacadeFactory {
 	
 	public static function getDomainFacade(){
@@ -62,5 +65,9 @@ class DomainFacade {
 	public function findAllDisciplines() {
 		$disciplines = (new DisciplineRepository())->findAll();
 		return (new DisciplineAssembler())->assembleAll($disciplines);
+	}
+	
+	public function createProgramRequest(ProgramInputDto $programInputDto) {
+		(new ProgramRepository())->createProgramRequest($programInputDto);
 	}
 }

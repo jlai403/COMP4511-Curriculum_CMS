@@ -6,7 +6,7 @@ class DisciplineRepository extends Repository {
 	
 	public function findAll() {
 		$params = array();
-		$resultSet = $this->executeSelectStoredProcedure("call findAllDisciplines()", $params);
+		$resultSet = $this->executeStoredProcedureWithResultSet("call findAllDisciplines()", $params);
 		$disciplines = $this->extractDisciplinesFromResultSet($resultSet);
 		return $disciplines;
 	}

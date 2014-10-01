@@ -5,11 +5,11 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 
 class UserController extends BaseController {
 	function signUp() {
-		$firstName = $_POST['firstName'];
-		$lastName = $_POST['lastName'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-		$selectedRoles = $_POST['roles'];
+		$firstName = $_POST["firstName"];
+		$lastName = $_POST["lastName"];
+		$email = $_POST["email"];
+		$password = $_POST["password"];
+		$selectedRoles = $_POST["roles"];
 		$roleDtos = FacadeFactory::getDomainFacade()->findRolesByIds($selectedRoles);
 		
 		$userDto = new UserDto();

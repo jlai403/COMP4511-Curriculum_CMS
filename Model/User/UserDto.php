@@ -2,12 +2,21 @@
 
 class UserDto {
 	
+	private $id;
 	private $firstName;
 	private $lastName;
 	private $email;
 	private $password;
 	private $roleDtos;
 
+	public function getId(){
+		return $this->id;
+	}
+	
+	public function setId($id){
+		$this->id = $id;
+	}
+	
 	public function getFirstName(){
 		return $this->firstName;
 	}

@@ -6,7 +6,7 @@ class FacultyRepository extends Repository {
 	
 	public function findAll() {
 		$params = array();
-		$resultSet = $this->executeSelectStoredProcedure("call findAllFaculties()", $params);
+		$resultSet = $this->executeStoredProcedureWithResultSet("call findAllFaculties()", $params);
 		$faculties = $this->extractFacultiesFromResultSet($resultSet);
 		return $faculties;
 	}

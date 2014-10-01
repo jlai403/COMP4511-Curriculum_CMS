@@ -38,7 +38,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 	
 		<div class="container form center">
 			<div class="col-md-12">
-				<form action="/Controller/ProgramController.php?action=create" method="POST">
+				<form action="/Controller/ProgramController.php?action=request" method="POST">
 					<div class="row center-text">
 						<h3 style="margin: 20px;">Create Program</h3>
 					</div>
@@ -48,7 +48,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 							Requester
 						</div>
 						<div class="col-md-9">
-							<input class="form-control" type="text" name="requester" value="<?php echo $currentUser->getFirstName()." ".$currentUser->getLastName()?>" />
+							<input class="form-control" type="text" name="requester" value="<?php echo $currentUser->getFirstName()." ".$currentUser->getLastName()?>" readonly/>
 						</div>
 					</div>
 			

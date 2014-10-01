@@ -5,7 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/Role.php');
 class RoleRepository extends Repository {
 	
 	public function findAll() {
-		$resultSet = parent::executeSelectStoredProcedure("call findAllRoles()");
+		$resultSet = parent::executeStoredProcedureWithResultSet("call findAllRoles()");
 		$roles = $this->extractRolesFromResultSet($resultSet);
 		return $roles;
 	}
@@ -14,7 +14,7 @@ class RoleRepository extends Repository {
 		$roles = array();
 		foreach($roleIds as $id) {
 			$params = array($id);
-			$resultSet = parent::executeSelectStoredProcedure("call findRoleById(?)", $params);
+			$resultSet = parent::executeStoredProcedureWithResultSet("call findRoleById(?)", $params);
 			array_push($roles, $this->extractRoleFromRecord($resultSet[0]));
 		}
 		return $roles;

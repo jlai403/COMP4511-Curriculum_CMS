@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"].'/Model/DbConstants.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Constants.php');
 
 abstract class Repository {
 	private $dbConnection;
@@ -31,6 +31,23 @@ abstract class Repository {
 		$this->dbConnection = null;
 	}
 	
+	protected function executeQueryWithResultSet($query) {
+		$resultSet = array();
+		
+		$this->initializeDbConnection();
+		$this->beginTransaction();
+		try {
+			$statement = $this->dbConnection->prepare($query);
+			$statement->execute();
+			$resultSet = $statement->fetchAll();
+		} catch(Exception $e){
+			throw new MyException($e->getMessage());
+		} finally {
+			$this->closeDbConnection();
+		}
+		return $resultSet;
+	}
+	
 	protected function executeStoredProcedure($sp, array $params) {
 		$success = false;
 		
@@ -50,7 +67,7 @@ abstract class Repository {
 		return $success;
 	}
 	
-	protected function executeSelectStoredProcedure($sp, array $params = array()) {
+	protected function executeStoredProcedureWithResultSet($sp, array $params = array()) {
 		$resultSet = array();
 		
 		$this->initializeDbConnection();

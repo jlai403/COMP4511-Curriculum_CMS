@@ -1,0 +1,32 @@
+<?php 
+
+class ProgramInputDto {
+	
+	private $programName;
+	private $requesterId;
+	private $disciplineId;
+
+	public function getProgramName(){
+		return $this->programName;
+	}
+	
+	public function setProgramName($programName){
+		$this->programName = $programName;
+	}
+
+	public function getRequesterId(){
+		return $this->requesterId;
+	}
+	
+	public function setRequesterId($requesterId){
+		$this->requesterId = $requesterId;
+	}
+	
+	public function getDisciplineId(){
+		return $this->disciplineId;
+	}
+	
+	public function setDisciplineId($disciplineId){
+		$this->disciplineId = $disciplineId;
+	}
+}

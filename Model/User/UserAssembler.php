@@ -12,6 +12,7 @@ class UserAssembler {
 	
 	public function assemble() {
 		$userDto = new UserDto();
+		$userDto->setId($this->user->getId());
 		$userDto->setFirstName($this->user->getFirstName());
 		$userDto->setLastName($this->user->getLastName());
 		$userDto->setEmail($this->user->getEmail());

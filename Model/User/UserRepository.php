@@ -29,7 +29,7 @@ class UserRepository extends Repository {
 	
 	public function findUserByEmail($email) {
 		$params = array($email);
-		$resultSet = $this->executeSelectStoredProcedure("call findUserByEmail(?)", $params);
+		$resultSet = $this->executeStoredProcedureWithResultSet("call findUserByEmail(?)", $params);
 		$user = $this->extractUserFromResultSet($resultSet[0]);
 		return $user;
 	}
