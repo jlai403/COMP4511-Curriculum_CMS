@@ -33,9 +33,9 @@ class DomainFacade {
 		(new UserRepository())->create($user);
 	}
 	
-	public function login($userDto){
+	public function signIn($userDto){
 		$user = (new UserRepository())->findUserByEmail($userDto->getEmail());
-		SessionManager::login($user, $userDto);
+		SessionManager::signIn($user, $userDto);
 	}
 	
 	public function logout(){

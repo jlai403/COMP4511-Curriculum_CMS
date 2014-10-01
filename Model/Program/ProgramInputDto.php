@@ -3,6 +3,7 @@
 class ProgramInputDto {
 	
 	private $programName;
+	private $comments;
 	private $requesterId;
 	private $disciplineId;
 
@@ -12,6 +13,14 @@ class ProgramInputDto {
 	
 	public function setProgramName($programName){
 		$this->programName = $programName;
+	}
+
+	public function getComments(){
+		return $this->comments;
+	}
+	
+	public function setComments($comments){
+		$this->comments = $comments;
 	}
 
 	public function getRequesterId(){

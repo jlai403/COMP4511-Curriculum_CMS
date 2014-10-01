@@ -19,8 +19,8 @@ class SessionManager {
 		return $value;
 	}
 	
-	public static function login(User $user, UserDto $userDto) {
-		$success = self::authenticateLogin($user, $userDto);
+	public static function signIn(User $user, UserDto $userDto) {
+		$success = self::authenticateSignIn($user, $userDto);
 		if ($success) {
 			self::set("userEmail", $userDto->getEmail());
 		} else {
@@ -28,7 +28,7 @@ class SessionManager {
 		}
 	}
 	
-	private static function authenticateLogin(User $user, UserDto $userDto) {
+	private static function authenticateSignIn(User $user, UserDto $userDto) {
 		if ($user == null) return false;
 	
 		$encryptedPassword = SecurityManager::assertAndEncrpytPassword($userDto->getPassword());

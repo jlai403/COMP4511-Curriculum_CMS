@@ -17,7 +17,7 @@
 		
 		<div class="container">
 			<div class="col-md-12">
-				<form class="form center" action="/Controller/UserController.php?action=login" method="POST">
+				<form class="form center" action="/Controller/UserController.php?action=signIn" method="POST">
 					<div class="row center-text">
 						<img class="logo" src="/Content/img/Mount_Royal_University_Logo.svg.png" /> <br/>
 						<h3>Please sign in</h3>

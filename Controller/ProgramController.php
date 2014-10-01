@@ -8,10 +8,12 @@ class ProgramController extends BaseController {
 	function request() {
 		$currentUser = SessionManager::authorize();
 		$programName = $_POST["name"];
+		$comments = $_POST["comments"];
 		$disciplineId = $_POST["discipline"];
 		
 		$programInputDto = new ProgramInputDto();
 		$programInputDto->setRequesterId($currentUser->getId());
+		$programInputDto->setComments($comments);
 		$programInputDto->setProgramName($programName);
 		$programInputDto->setDisciplineId($disciplineId);
 		

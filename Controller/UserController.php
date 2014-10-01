@@ -20,12 +20,12 @@ class UserController extends BaseController {
 		$userDto->setRoleDtos($roleDtos);
 	
 		FacadeFactory::getDomainFacade()->signUp($userDto);
-		FacadeFactory::getDomainFacade()->login($userDto);
+		FacadeFactory::getDomainFacade()->signIn($userDto);
 	
 		parent::redirect("Location: /View/Dashboard");
 	}
 	
-	function login() {
+	function signIn() {
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 	
@@ -33,7 +33,7 @@ class UserController extends BaseController {
 		$userDto->setEmail($email);
 		$userDto->setPassword($password);
 	
-		FacadeFactory::getDomainFacade()->login($userDto);
+		FacadeFactory::getDomainFacade()->signIn($userDto);
 	
 		parent::redirect("Location: /View/Dashboard");
 	}

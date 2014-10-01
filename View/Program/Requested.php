@@ -34,9 +34,9 @@ $currentUser = SessionManager::authorize();
 	
 	
 		<div class="container form center">
-			<div class="col-md-12">
-				<h3>Program has been requested and is now in the approval process.</h3>
-				<h5>You can check the status of your request on the <a href="/View/Dashboard">Homepage</a>.</h5>		
+			<div class="col-md-12 center-text">
+				<h4>Program requested is now in the approval process.</h4>
+				<h6>You can check the status of your request on the <a href="/View/Dashboard">Homepage</a>.</h6>		
 			</div>
 		</div>
 	</body>

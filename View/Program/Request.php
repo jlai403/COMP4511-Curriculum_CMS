@@ -91,6 +91,15 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 					</div>
 					
+					<div class="row">
+						<div class="col-md-3">
+							Comments
+						</div>
+						<div class="col-md-9">
+							<textarea name="comments" class="form-control" placeholder="Comments..."></textarea>
+						</div>
+					</div>
+					
 					<div class="row center-text">
 						<input class="form-control button blue center" type="submit" value="Request" style="max-width: 300px;"/>
 					</div>
