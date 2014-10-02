@@ -38,6 +38,7 @@ class ProgramRepository extends Repository {
 	
 	private function extractProgramFromRecord($record) {
 		$program = new Program();
+		$program->setId($record["id"]);
 		$program->setProgramName($record["name"]);
 		$program->setComments($record["comments"]);
 		

@@ -53,7 +53,7 @@ $requestedProgramDtos = FacadeFactory::getDomainFacade()->findProgramsByRequeste
 						
 						<?php foreach($requestedProgramDtos as $requestedProgramDto) { 
 						?>
-							<a href="/View">
+							<a href="/View/Program/Summary.php?id=<?=$requestedProgramDto->getId()?>">
 								<div class="container item">
 									<div class="row">
 										<div class="col-xs-3"> Program Name: </div>
