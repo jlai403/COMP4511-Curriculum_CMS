@@ -4,6 +4,7 @@ class DisciplineDto {
 	private $id;
 	private $name;
 	private $code;
+	private $facultyDto;
 	
 	public function getCode(){
 		return $this->code;
@@ -11,6 +12,14 @@ class DisciplineDto {
 	
 	public function setCode($code){
 		$this->code = $code;
+	}
+	
+	public function getFacultyDto(){
+		return $this->facultyDto;
+	}
+	
+	public function setFacultyDto($facultyDto){
+		$this->facultyDto = $facultyDto;
 	}
 	
 	public function getName(){

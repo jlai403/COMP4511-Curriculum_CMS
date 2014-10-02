@@ -16,4 +16,16 @@ class DisciplineAssembler {
 		}
 		return $disciplineDtos;
 	}
+	
+	public function assemble(Discipline $discipline) {
+		$disciplineDto = array();
+		$disciplineDto = new DisciplineDto();
+		$disciplineDto->setId($discipline->getId());
+		$disciplineDto->setName($discipline->getName());
+		$disciplineDto->setCode($discipline->getCode());
+		
+		$facultyDto = (new FacultyAssembler())->assemble($discipline->getFaculty());
+		$disciplineDto->setFacultyDto($facultyDto);
+		return $disciplineDto;
+	}
 }

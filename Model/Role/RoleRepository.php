@@ -10,12 +10,18 @@ class RoleRepository extends Repository {
 		return $roles;
 	}
 	
+	public function findById($id) {
+		$params = array($id);
+		$resultSet = parent::executeStoredProcedureWithResultSet("call findRoleById(?)", $params);
+		return $this->extractRoleFromRecord($resultSet[0]);
+	}
+	
 	public function findRolesByIds($roleIds) {
 		$roles = array();
 		foreach($roleIds as $id) {
 			$params = array($id);
-			$resultSet = parent::executeStoredProcedureWithResultSet("call findRoleById(?)", $params);
-			array_push($roles, $this->extractRoleFromRecord($resultSet[0]));
+			$role = $this->findById($id);
+			array_push($roles, $role);
 		}
 		return $roles;
 	}

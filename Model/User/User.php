@@ -27,6 +27,10 @@ class User implements IEntity {
 		$this->lastName = $lastName;
 	}
 	
+	public function getFullName() {
+		return $this->getFirstName()." ".$this->getLastName();
+	}
+	
 	public function getEmail() {
 		return $this->email;
 	}

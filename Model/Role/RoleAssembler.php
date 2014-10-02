@@ -7,12 +7,16 @@ class RoleAssembler {
 	public function assembleAll($roles) {
 		$roleDtos = array();
 		foreach($roles as $role){
-			$roleDto = new RoleDto();
-			$roleDto->setId($role->getId());
-			$roleDto->setName($role->getName());
-			
+			$roleDto = $this->assemble($role);			
 			array_push($roleDtos, $roleDto);
 		}
 		return $roleDtos;
+	}
+	
+	public function assemble($role) {
+		$roleDto = new RoleDto();
+		$roleDto->setId($role->getId());
+		$roleDto->setName($role->getName());
+		return $roleDto;
 	}
 }

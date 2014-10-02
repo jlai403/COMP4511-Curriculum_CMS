@@ -46,11 +46,9 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					
 					<div class="row">
 						<select class="form-control" name="roles[]" multiple size="5">
-							<?php 
-								foreach($roles as $role) {
-									echo "<option value='".$role->getId()."'>".$role->getName()."</option>";
-								}	
-							?>
+							<?php foreach($roles as $role) { ?>
+								<option value="<?=$role->getId()?>"> <?=$role->getName()?> </option>
+							<?php } ?>
 						</select>
 					</div>
 			

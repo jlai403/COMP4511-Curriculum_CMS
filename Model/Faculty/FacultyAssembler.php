@@ -15,4 +15,12 @@ class FacultyAssembler {
 		}
 		return $facultyDtos;
 	}
+	
+	public function assemble($faculty) {
+		$facultyDto = array();
+		$facultyDto = new FacultyDto();
+		$facultyDto->setId($faculty->getId());
+		$facultyDto->setName($faculty->getName());
+		return $facultyDto;
+	}
 }

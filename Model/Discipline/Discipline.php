@@ -4,6 +4,15 @@ class Discipline implements IEntity {
 	private $id;
 	private $name;
 	private $code; 
+	private $faculty;
+	
+	public function getFaculty(){
+		return $this->faculty;
+	}
+	
+	public function setFaculty($faculty){
+		$this->faculty = $faculty;
+	}
 	
 	public function getCode(){
 		return $this->code;

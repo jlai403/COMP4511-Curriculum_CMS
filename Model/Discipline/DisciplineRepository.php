@@ -11,19 +11,29 @@ class DisciplineRepository extends Repository {
 		return $disciplines;
 	}
 	
-private function extractDisciplinesFromResultSet($resultSet) {
+	public function findById($id) {
+		$params = array($id);
+		$resultSet = $this->executeStoredProcedureWithResultSet("call findDisciplineById(?)", $params);
+		$discipline = $this->extractDisciplineFromRecord($resultSet[0]);
+		return $discipline;
+	}
+	
+	private function extractDisciplinesFromResultSet($resultSet) {
 		$disciplines = array();
 		foreach($resultSet as $record) {
-			array_push($disciplines, $this->extractDisciplinesFromRecord($record));
+			array_push($disciplines, $this->extractDisciplineFromRecord($record));
 		}
 		return $disciplines;
 	}
 	
-	private function extractDisciplinesFromRecord($record) {
+	private function extractDisciplineFromRecord($record) {
 		$discipline = new Discipline();
 		$discipline->setId($record['id']);
 		$discipline->setName($record['name']);
 		$discipline->setCode($record['code']);
+		
+		$faculty = (new FacultyRepository())->findById($record["faculty_id"]);
+		$discipline->setFaculty($faculty);
 		return $discipline;
 	}
 }

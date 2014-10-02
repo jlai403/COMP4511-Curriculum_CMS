@@ -16,6 +16,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleAssembler.php');
 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInputDto.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramRepository.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramAssembler.php');
 
 class FacadeFactory {
 	
@@ -69,5 +70,11 @@ class DomainFacade {
 	
 	public function createProgramRequest(ProgramInputDto $programInputDto) {
 		(new ProgramRepository())->createProgramRequest($programInputDto);
+	}
+	
+	public function findProgramsByRequester($email) {
+		$user = (new UserRepository())->findUserByEmail($email);
+		$programs = (new ProgramRepository())->findProgramsByRequester($user->getId());
+		return (new ProgramAssembler())->assembleAll($programs);
 	}
 }

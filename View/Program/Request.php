@@ -4,6 +4,8 @@ $currentUser = SessionManager::authorize();
 
 $faculties = FacadeFactory::getDomainFacade()->findAllFaculties();
 $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
+
+$requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($currentUser->getEmail());
 ?>
 
 <!DOCTYPE html>
@@ -67,11 +69,9 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						<div class="col-md-9">
 							<select class="form-control" name="faculty">
-								<?php 
-									foreach($faculties as $faculty) {
-										echo "<option value='".$faculty->getId()."'>".$faculty->getName()."</option>";
-									}
-								?>
+								<?php foreach($faculties as $faculty) { ?>
+									<option value="<?=$faculty->getId()?>"> <?=$faculty->getName()?> </option>
+								<?php } ?>
 							</select>
 						</div>
 					</div>
@@ -82,11 +82,9 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						<div class="col-md-9">
 							<select class="form-control" name="discipline">
-								<?php 
-									foreach($disciplines as $discipline) {
-										echo "<option value='".$discipline->getId()."'>".$discipline->getDisplayName()."</option>";
-									}
-								?>
+								<?php foreach($disciplines as $discipline) { ?>
+									<option value="<?=$discipline->getId()?>"> <?=$discipline->getDisplayName()?> </option>
+								<?php } ?>
 							</select>
 						</div>
 					</div>

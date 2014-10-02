@@ -11,7 +11,14 @@ class FacultyRepository extends Repository {
 		return $faculties;
 	}
 	
-private function extractFacultiesFromResultSet($resultSet) {
+	public function findById($id) {
+		$params = array($id);
+		$resultSet = $this->executeStoredProcedureWithResultSet("call findFacultyById(?)", $params);
+		$faculty = $this->extractFacultyFromRecord($resultSet[0]);
+		return $faculty;
+	}
+	
+	private function extractFacultiesFromResultSet($resultSet) {
 		$faculties = array();
 		foreach($resultSet as $record) {
 			array_push($faculties, $this->extractFacultyFromRecord($record));

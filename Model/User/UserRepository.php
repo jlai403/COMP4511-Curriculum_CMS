@@ -30,11 +30,18 @@ class UserRepository extends Repository {
 	public function findUserByEmail($email) {
 		$params = array($email);
 		$resultSet = $this->executeStoredProcedureWithResultSet("call findUserByEmail(?)", $params);
-		$user = $this->extractUserFromResultSet($resultSet[0]);
+		$user = $this->extractUserFromRecord($resultSet[0]);
 		return $user;
 	}
 	
-	private function extractUserFromResultSet($record) {
+	public function findById($id) {
+		$params = array($id);
+		$resultSet = $this->executeStoredProcedureWithResultSet("call findUserById(?)", $params);
+		$user = $this->extractUserFromRecord($resultSet[0]);
+		return $user;
+	}
+	
+	private function extractUserFromRecord($record) {
 		$user = new User();
 		$user->setId($record["id"]);
 		$user->setFirstName($record["firstName"]);
