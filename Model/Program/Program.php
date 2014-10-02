@@ -10,6 +10,7 @@ class Program implements IEntity {
 	private $requester;
 	private $discipline;
 	private $workflowData;
+	private $requestedDate;
 
 	// Overriden: IEntity
 	public function getId(){
@@ -38,6 +39,14 @@ class Program implements IEntity {
 	
 	public function setProgramName($programName){
 		$this->programName = $programName;
+	}
+	
+	public function getRequestedDate(){
+		return $this->requestedDate;
+	}
+	
+	public function setRequestedDate($requestedDate){
+		$this->requestedDate = $requestedDate;
 	}
 
 	public function getComments(){

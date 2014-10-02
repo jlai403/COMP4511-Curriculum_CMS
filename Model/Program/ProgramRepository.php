@@ -14,9 +14,10 @@ class ProgramRepository extends Repository {
 			$program->getComments(),
 			$program->getRequester()->getId(),
 			$program->getDiscipline()->getId(),
+			$program->getRequestedDate(),
 			$workflowDataId
 		);
-		$success = parent::executeStoredProcedure("call createProgramRequest(?,?,?,?,?)", $params);
+		$success = parent::executeStoredProcedure("call createProgramRequest(?,?,?,?,?,?)", $params);
 		if(!$success) {
 			(new WorkflowRepository())->delete($workflowDataId);
 			throw new MyException("Error when trying to create program request");
@@ -42,6 +43,7 @@ class ProgramRepository extends Repository {
 		$program->setId($record["id"]);
 		$program->setProgramName($record["name"]);
 		$program->setComments($record["comments"]);
+		$program->setRequestedDate($record["requestedDate"]);
 		
 		$requester = (new UserRepository())->findById($record["requester_id"]);
 		$program->setRequester($requester);

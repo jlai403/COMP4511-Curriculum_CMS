@@ -18,6 +18,7 @@ class ProgramAssembler {
 	public function assemble(Program $program) {
 		$programDto = new ProgramDto();
 		$programDto->setId($program->getId());
+		$programDto->setRequestedDate($program->getRequestedDate());
 		$programDto->setProgramName($program->getProgramName());
 		$programDto->setComments($program->getComments());
 		$programDto->setRequesterName($program->getRequester()->getFullName());

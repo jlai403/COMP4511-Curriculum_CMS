@@ -3,6 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 $currentUser = SessionManager::authorize();
 
 $requestedProgramDtos = FacadeFactory::getDomainFacade()->findProgramsByRequester($currentUser->getEmail());
+
 ?>
 
 <!DOCTYPE html>
@@ -56,16 +57,12 @@ $requestedProgramDtos = FacadeFactory::getDomainFacade()->findProgramsByRequeste
 							<a href="/View/Program/Summary.php?id=<?=$requestedProgramDto->getId()?>">
 								<div class="container item">
 									<div class="row">
+										<div class="col-xs-3"> Request Date: </div>
+										<div class="col-xs-9"> <?= $requestedProgramDto->getRequestedDate() ?>  </div>
+									</div>
+									<div class="row">
 										<div class="col-xs-3"> Program Name: </div>
 										<div class="col-xs-9"> <?= $requestedProgramDto->getProgramName() ?>  </div>
-									</div>
-									<div class="row">
-										<div class="col-xs-3"> Faculty: </div>
-										<div class="col-xs-9"> <?= $requestedProgramDto->getDisciplineDto()->getFacultyDto()->getName() ?>  </div>
-									</div>
-									<div class="row">
-										<div class="col-xs-3"> Discipline: </div>
-										<div class="col-xs-9"> <?= $requestedProgramDto->getDisciplineDto()->getName() ?>  </div>
 									</div>
 									<div class="row">
 										<div class="col-xs-3"> Reponsible Party: </div>

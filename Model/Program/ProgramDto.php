@@ -7,6 +7,7 @@ class ProgramDto {
 	private $comments;
 	private $requesterName;
 	private $disciplineDto;
+	private $requestedDate;
 	private $workflowDataDto;
 
 	public function getId(){
@@ -15,6 +16,14 @@ class ProgramDto {
 	
 	public function setId($id){
 		$this->id = $id;
+	}
+	
+	public function getRequestedDate(){
+		return $this->requestedDate;
+	}
+	
+	public function setRequestedDate($requestedDate){
+		$this->requestedDate = $requestedDate;
 	}
 	
 	public function getWorkflowDataDto(){
