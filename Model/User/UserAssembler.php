@@ -17,6 +17,9 @@ class UserAssembler {
 		$userDto->setLastName($this->user->getLastName());
 		$userDto->setEmail($this->user->getEmail());
 		$userDto->setPassword($this->user->getPassword());
+		
+		$roleDtos = (new RoleAssembler())->assembleAll($this->user->getRoles());
+		$userDto->setRoleDtos($roleDtos);
 		return $userDto;
 	}
 }

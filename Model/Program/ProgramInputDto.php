@@ -4,8 +4,8 @@ class ProgramInputDto {
 	
 	private $programName;
 	private $comments;
-	private $requesterId;
-	private $disciplineId;
+	private $requesterDto;
+	private $disciplineDto;
 
 	public function getProgramName(){
 		return $this->programName;
@@ -23,19 +23,19 @@ class ProgramInputDto {
 		$this->comments = $comments;
 	}
 
-	public function getRequesterId(){
-		return $this->requesterId;
+	public function getRequesterDto(){
+		return $this->requesterDto;
 	}
 	
-	public function setRequesterId($requesterId){
-		$this->requesterId = $requesterId;
+	public function setRequesterDto($requesterDto){
+		$this->requesterDto = $requesterDto;
 	}
 	
-	public function getDisciplineId(){
-		return $this->disciplineId;
+	public function getDisciplineDto(){
+		return $this->disciplineDto;
 	}
 	
-	public function setDisciplineId($disciplineId){
-		$this->disciplineId = $disciplineId;
+	public function setDisciplineDto($disciplineDto){
+		$this->disciplineDto = $disciplineDto;
 	}
 }

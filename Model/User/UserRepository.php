@@ -48,6 +48,10 @@ class UserRepository extends Repository {
 		$user->setLastName($record["lastName"]);
 		$user->setEmail($record["email"]);
 		$user->setEncryptedPassword($record["password"]);
+		
+		$roles = (new RoleRepository())->findRolesForUser($user->getId());
+		$user->setRoles($roles);
+		
 		return $user;
 	}
 }

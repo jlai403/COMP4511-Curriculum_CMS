@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Repository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/ApprovalChain/ApprovalChainRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Workflow/WorkflowData.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class WorkflowRepository extends Repository {
 	
@@ -11,6 +12,14 @@ class WorkflowRepository extends Repository {
 		);
 		$resultSet = parent::executeStoredProcedureWithResultSet("call createWorkflowData(?)", $params);
 		return $resultSet[0]["WorkflowDataId"];
+	}
+	
+	public function delete($id) {
+		$params = array(
+			$id
+		);
+		$success = parent::executeStoredProcedure("call deleteWorkflowData(?)", $params);
+		if(!$success) throw new MyException("Error when deleting WorkflowData.");
 	}
 	
 	public function findById($id) {

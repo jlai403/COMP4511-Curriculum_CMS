@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/IEntity.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class Program implements IEntity {
 	
@@ -22,6 +23,13 @@ class Program implements IEntity {
 	
 	// Overriden: IEntity
 	public function assertValid(){
+		$this->assertProgramNameIsValid();
+	}
+	
+	private function assertProgramNameIsValid(){
+		$programNameIsNull = is_null($this->getProgramName());
+		$programNameIsEmpty = empty($this->getProgramName());
+		if ($programNameIsNull || $programNameIsEmpty) throw new MyException("Program Name is required.");
 	}
 	
 	public function getProgramName(){

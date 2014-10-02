@@ -26,6 +26,12 @@ class RoleRepository extends Repository {
 		return $roles;
 	}
 	
+	public function findRolesForUser($userId) {
+		$params = array($userId);
+		$resultSet = parent::executeStoredProcedureWithResultSet("call findRolesForUser(?)", $params);
+		return $this->extractRolesFromResultSet($resultSet);
+	}
+	
 	private function extractRolesFromResultSet($resultSet) {
 		$roles = array();
 		foreach($resultSet as $record) {

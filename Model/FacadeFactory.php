@@ -15,6 +15,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleAssembler.php');
 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInputDto.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramAssembler.php');
 
@@ -47,7 +48,7 @@ class DomainFacade {
 		$user = (new UserRepository())->findUserByEmail($email);
 		return (new UserAssembler($user))->assemble();
 	}
-	
+
 	public function findAllRoles() {
 		$roles = (new RoleRepository())->findAll();
 		return (new RoleAssembler())->assembleAll($roles);
@@ -57,7 +58,7 @@ class DomainFacade {
 		$roles = (new RoleRepository())->findRolesByIds($roleIds);
 		return (new RoleAssembler())->assembleAll($roles);
 	}
-	
+
 	public function findAllFaculties() {
 		$faculties = (new FacultyRepository())->findAll();
 		return (new FacultyAssembler())->assembleAll($faculties);
@@ -68,8 +69,15 @@ class DomainFacade {
 		return (new DisciplineAssembler())->assembleAll($disciplines);
 	}
 	
+	public function findDisiplineById($id) {
+		$discipline = (new DisciplineRepository())->findById($id);
+		return (new DisciplineAssembler())->assemble($discipline);
+	}
+	
 	public function createProgramRequest(ProgramInputDto $programInputDto) {
-		(new ProgramRepository())->createProgramRequest($programInputDto);
+		$program = (new ProgramInitializer($programInputDto))->initialize();
+		$program->assertValid();
+		(new ProgramRepository())->createProgramRequest($program);
 	}
 	
 	public function findProgramsByRequester($email) {

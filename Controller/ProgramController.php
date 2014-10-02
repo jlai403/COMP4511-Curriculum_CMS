@@ -12,10 +12,12 @@ class ProgramController extends BaseController {
 		$disciplineId = $_POST["discipline"];
 		
 		$programInputDto = new ProgramInputDto();
-		$programInputDto->setRequesterId($currentUser->getId());
+		$programInputDto->setRequesterDto($currentUser);
 		$programInputDto->setComments($comments);
 		$programInputDto->setProgramName($programName);
-		$programInputDto->setDisciplineId($disciplineId);
+		
+		$disciplineDto = FacadeFactory::getDomainFacade()->findDisiplineById($disciplineId);
+		$programInputDto->setDisciplineDto($disciplineDto);
 		
 		FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
 		parent::redirect("Location: /View/Program/Requested.php");

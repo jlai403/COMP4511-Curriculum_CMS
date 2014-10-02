@@ -12,6 +12,7 @@ class UserInitializer {
 	
 	public function initialize() {
 		$user = new User();
+		$user->setId($this->userDto->getId());
 		$user->setFirstName($this->userDto->getFirstName());
 		$user->setLastName($this->userDto->getLastName());
 		$user->setEmail($this->userDto->getEmail());
