@@ -30,6 +30,12 @@ class ProgramRepository extends Repository {
 		return $this->extractProgramsFromResultSet($resultSet);
 	}
 	
+	public function findById($id) {
+		$params = array($id);
+		$resultSet = parent::executeStoredProcedureWithResultSet("call findProgramById(?)", $params);
+		return $this->extractProgramFromRecord($resultSet[0]);
+	}
+	
 	private function extractProgramsFromResultSet($resultSet) {
 		$programs = array();
 		foreach($resultSet as $record) {

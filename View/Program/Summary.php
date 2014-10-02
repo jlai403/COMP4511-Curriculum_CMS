@@ -1,6 +1,8 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 $currentUser = SessionManager::authorize();
+
+$programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +25,7 @@ $currentUser = SessionManager::authorize();
 	      	</a>
 			
 			<ul>
-				<li class="active">
+				<li>
 					<a href="/View/Program/Request.php">Create Program</a>
 				</li>
 				<li>
@@ -44,6 +46,7 @@ $currentUser = SessionManager::authorize();
 						Requester
 					</div>
 					<div class="col-md-9">
+						<input class="form-control" type="text" value="<?=$programDto->getRequesterName()?>" readonly/>
 					</div>
 				</div>
 		
@@ -52,6 +55,7 @@ $currentUser = SessionManager::authorize();
 						Program Name
 					</div>
 					<div class="col-md-9">
+						<input class="form-control" type="text" value="<?=$programDto->getProgramName()?>" readonly/>
 					</div>
 				</div>
 				
@@ -60,6 +64,7 @@ $currentUser = SessionManager::authorize();
 						Faculty
 					</div>
 					<div class="col-md-9">
+						<input class="form-control" type="text" value="<?=$programDto->getDisciplineDto()->getFacultyDto()->getName()?>" readonly/>
 					</div>
 				</div>
 				
@@ -68,6 +73,7 @@ $currentUser = SessionManager::authorize();
 						Discipline
 					</div>
 					<div class="col-md-9">
+						<input class="form-control" type="text" value="<?=$programDto->getDisciplineDto()->getName()?>" readonly/>
 					</div>
 				</div>
 				
@@ -76,6 +82,7 @@ $currentUser = SessionManager::authorize();
 						Comments
 					</div>
 					<div class="col-md-9">
+						<textarea class="form-control" readonly> <?=$programDto->getComments()?> </textarea>
 					</div>
 				</div>
 			</div>

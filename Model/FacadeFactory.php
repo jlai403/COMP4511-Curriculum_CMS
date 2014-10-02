@@ -86,4 +86,9 @@ class DomainFacade {
 		$programs = (new ProgramRepository())->findProgramsByRequester($user->getId());
 		return (new ProgramAssembler())->assembleAll($programs);
 	}
+	
+	public function findProgramById($id) {
+		$program = (new ProgramRepository())->findById($id);
+		return (new ProgramAssembler())->assemble($program);
+	}
 }
