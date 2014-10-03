@@ -46,7 +46,7 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 						
 						<?php foreach($actionableProgramDtos as $actionableProgramDto) { 
 						?>
-							<a href="">
+							<a href="/View/Program/UpdateStatus.php?id=<?=$actionableProgramDto->getId()?>">
 								<div class="container item">
 									<div class="row">
 										<div class="col-md-4 col-xs-6"> Request Date: </div>
