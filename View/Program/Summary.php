@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/View/Workflow/WorkflowViewHelper.php');
 $currentUser = SessionManager::authorize();
 
 $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
@@ -35,67 +36,56 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		</div>
 	
 	
-		<div class="container form center">
+		<div class="container summary center">
 			<div class="col-md-12">
 				<div class="row center-text">
 					<h3 style="margin: 20px;">Program Summary</h3>
 				</div>
 				
 				<div class="row">
-					<div class="col-md-3">
-						Requester
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getRequesterName()?>" readonly/>
-					</div>
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Name: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getProgramName()?> </div>
+					
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Faculty: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getFacultyDto()->getName() ?> </div>
 				</div>
 		
 				<div class="row">
-					<div class="col-md-3">
-						Program Name
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getProgramName()?>" readonly/>
-					</div>
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Requested By: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getRequesterName() ?> </div>
+					
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Discipline: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getName() ?> </div>
 				</div>
+				
+				<hr style="margin:20px 0 0 0;"/>
 				
 				<div class="row">
-					<div class="col-md-3">
-						Faculty
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getDisciplineDto()->getFacultyDto()->getName()?>" readonly/>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-3">
-						Discipline
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getDisciplineDto()->getName()?>" readonly/>
-					</div>
-				</div>
-				
-				<hr/>
-				
-				<div class="row center-text">
-					<h3 style="margin: 20px;">Comments</h3>
-				</div>
-				
-				<?php foreach($programDto->getCommentDtos() as $commentDto) { ?>
-					<div class="row">
-						<div class="col-md-12">
-							<h5><?=$commentDto->getAuthorName()?></h5>
-							<h6><?=$commentDto->getDateTime()?></h6>
-							
-							<div class="comment">
-								<?=$commentDto->getComment()?>
-							</div>
+					<div class="col-md-6 workflow">
+						<div class="row center-text">
+							<h5>Workflow</h5>
 						</div>
 					</div>
-				<?php } ?>
 				
+					<div class="col-md-6 comments">
+						<div class="row center-text">
+							<h5>Comments</h5>
+						</div>
+					
+						<?php foreach($programDto->getCommentDtos() as $commentDto) { ?>
+							<div class="row">
+								<div class="col-md-12">
+									<h5><?=$commentDto->getAuthorName()?></h5>
+									<h6><?=$commentDto->getDateTime()?></h6>
+									
+									<div class="comment">
+										<?=$commentDto->getComment()?>
+									</div>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
