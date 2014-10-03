@@ -94,9 +94,8 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 							</div>
 						</div>
 					</div>
-					
-					
 				<?php } ?>
+				
 			</div>
 		</div>
 	</body>
