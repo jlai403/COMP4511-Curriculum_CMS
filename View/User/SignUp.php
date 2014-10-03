@@ -27,6 +27,10 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					</div>
 					
 					<div class="row">
+						<h6>* All fields required.</h6>
+					</div>
+					
+					<div class="row">
 						<div class="col-md-6 split-left">
 							<input class="form-control" type="text" name="firstName" placeholder="First name" />
 						</div>
@@ -37,11 +41,12 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 			
 					<div class="row">
 						<input class="form-control" type="text" name="email" placeholder="Email"/>
-						<abbr class="info-mark" title="Must be a valid @mtroyal.ca email."> i </abbr>
+						<abbr class="info-mark" tooltip="Must be a valid @mtroyal.ca email."> i </abbr>
 					</div>
 					
 					<div class="row">
 						<input class="form-control" type="password" name="password" placeholder="Password"/>
+						<abbr class="info-mark" tooltip="Must be at least 6 characters."> i </abbr>
 					</div>
 					
 					<div class="row">

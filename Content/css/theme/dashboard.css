@@ -38,4 +38,6 @@
 	cursor: pointer;
 }
 
-
+.container.item .row {
+	margin: 2px 0;
+}

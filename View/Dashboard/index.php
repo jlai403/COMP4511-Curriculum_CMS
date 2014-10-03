@@ -49,20 +49,20 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 							<a href="">
 								<div class="container item">
 									<div class="row">
-										<div class="col-xs-3"> Request Date: </div>
-										<div class="col-xs-9"> <?= $actionableProgramDto->getRequestedDate() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Request Date: </div>
+										<div class="col-md-8 col-xs-6"> <?= $actionableProgramDto->getRequestedDate() ?>  </div>
 									</div>
 									<div class="row">
-										<div class="col-xs-3"> Requested By: </div>
-										<div class="col-xs-9"> <?= $actionableProgramDto->getRequesterName() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Requested By: </div>
+										<div class="col-md-8 col-xs-6"> <?= $actionableProgramDto->getRequesterName() ?>  </div>
 									</div>
 									<div class="row">
-										<div class="col-xs-3"> Program Name: </div>
-										<div class="col-xs-9"> <?= $actionableProgramDto->getProgramName() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Program Name: </div>
+										<div class="col-md-8 col-xs-6"> <?= $actionableProgramDto->getProgramName() ?>  </div>
 									</div>
 									<div class="row">
-										<div class="col-xs-3"> Status: </div>
-										<div class="col-xs-9"> <?= $actionableProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Status: </div>
+										<div class="col-md-8 col-xs-6"> <?= $actionableProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
 									</div>
 								</div>
 							</a>
@@ -82,20 +82,20 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 							<a href="/View/Program/Summary.php?id=<?=$requestedProgramDto->getId()?>">
 								<div class="container item">
 									<div class="row">
-										<div class="col-xs-3"> Request Date: </div>
-										<div class="col-xs-9"> <?= $requestedProgramDto->getRequestedDate() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Request Date: </div>
+										<div class="col-md-8 col-xs-6"> <?= $requestedProgramDto->getRequestedDate() ?>  </div>
 									</div>
 									<div class="row">
-										<div class="col-xs-3"> Program Name: </div>
-										<div class="col-xs-9"> <?= $requestedProgramDto->getProgramName() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Program Name: </div>
+										<div class="col-md-8 col-xs-6"> <?= $requestedProgramDto->getProgramName() ?>  </div>
 									</div>
 									<div class="row">
-										<div class="col-xs-3"> Reponsible Party: </div>
-										<div class="col-xs-9"> <?= $requestedProgramDto->getResponsibleParty() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Reponsible Party: </div>
+										<div class="col-md-8 col-xs-6"> <?= $requestedProgramDto->getResponsibleParty() ?>  </div>
 									</div>
 									<div class="row">
-										<div class="col-xs-3"> Status: </div>
-										<div class="col-xs-9"> <?= $requestedProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
+										<div class="col-md-4 col-xs-6"> Status: </div>
+										<div class="col-md-8 col-xs-6"> <?= $requestedProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
 									</div>
 								</div>
 							</a>

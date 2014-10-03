@@ -21,6 +21,34 @@
 	padding: 1px 10px;
 }
 
+.info-mark[tooltip]:hover:after {
+	font-weight: 400;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	
+	content: attr(tooltip);
+	padding: 4px 8px;
+	color: #333;
+	position: absolute;
+	left: 30px;
+	margin-top: -23px;
+	white-space: nowrap;
+	z-index: 20px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 0px 4px #AAAAAA;
+	-webkit-box-shadow: 0px 0px 4px #AAAAAA;
+	box-shadow: 0px 0px 4px #AAAAAA;
+	background-image: -moz-linear-gradient(top, #EEEEEE, #DDDDDD);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #DDDDDD),
+		color-stop(1, #cccccc));
+	background-image: -webkit-linear-gradient(top, #EEEEEE, #DDDDDD);
+	background-image: -moz-linear-gradient(top, #EEEEEE, #DDDDDD);
+	background-image: -ms-linear-gradient(top, #EEEEEE, #DDDDDD);
+	background-image: -o-linear-gradient(top, #EEEEEE, #DDDDDD);
+}
+
 /** Navigation Bar **/
 .nav {
 	height: 150px;
