@@ -14,7 +14,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
-		<link type="text/css" rel="stylesheet" href="/Content/css/theme/create-program.css" />
+		<link type="text/css" rel="stylesheet" href="/Content/css/theme/program-summary.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
 	</head>
 
@@ -77,14 +77,26 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 					</div>
 				</div>
 				
-				<div class="row">
-					<div class="col-md-3">
-						Comments
-					</div>
-					<div class="col-md-9">
-						<textarea class="form-control" readonly> <?=$programDto->getComments()?> </textarea>
-					</div>
+				<hr/>
+				
+				<div class="row center-text">
+					<h3 style="margin: 20px;">Comments</h3>
 				</div>
+				
+				<?php foreach($programDto->getCommentDtos() as $commentDto) { ?>
+					<div class="row">
+						<div class="col-md-12">
+							<h5><?=$commentDto->getAuthorName()?></h5>
+							<h6><?=$commentDto->getDateTime()?></h6>
+							
+							<div class="comment">
+								<?=$commentDto->getComment()?>
+							</div>
+						</div>
+					</div>
+					
+					
+				<?php } ?>
 			</div>
 		</div>
 	</body>

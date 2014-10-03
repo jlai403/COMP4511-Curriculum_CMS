@@ -1,6 +1,6 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"].'/Model/User/UserInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Discipline/DisciplineInitializer.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Comment/CommentInitializer.php');
 
 class ProgramInitializer {
 	
@@ -13,7 +13,11 @@ class ProgramInitializer {
 	public function initialize() {
 		$program = new Program();
 		$program->setProgramName($this->programInputDto->getProgramName());
-		$program->setComments($this->programInputDto->getComments());
+		
+		$commentString = $this->programInputDto->getComments();
+		$commentAuthor = $this->programInputDto->getRequesterDto();
+		$comment = (new CommentInitializer($commentString, $commentAuthor))->initialize();
+		$program->addComment($comment);
 		
 		$discipline = (new DisciplineInitializer($this->programInputDto->getDisciplineDto()))->initialize();
 		$program->setDiscipline($discipline);

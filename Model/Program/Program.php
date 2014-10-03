@@ -6,7 +6,7 @@ class Program implements IEntity {
 	
 	private $id;
 	private $programName;
-	private $comments;
+	private $comments = array();
 	private $requester;
 	private $discipline;
 	private $workflowData;
@@ -57,6 +57,10 @@ class Program implements IEntity {
 		$this->comments = $comments;
 	}
 
+	public function addComment($comment){
+		array_push($this->comments, $comment);
+	}
+	
 	public function getRequester(){
 		return $this->requester;
 	}

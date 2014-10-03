@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Constants.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Repository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Workflow/WorkflowRepository.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Comment/CommentRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/Program.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
@@ -11,17 +12,27 @@ class ProgramRepository extends Repository {
 		$workflowDataId = (new WorkflowRepository())->create(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME);
 		$params = array(
 			$program->getProgramName(),
-			$program->getComments(),
 			$program->getRequester()->getId(),
 			$program->getDiscipline()->getId(),
 			$program->getRequestedDate(),
 			$workflowDataId
 		);
-		$success = parent::executeStoredProcedure("call createProgramRequest(?,?,?,?,?,?)", $params);
-		if(!$success) {
-			(new WorkflowRepository())->delete($workflowDataId);
-			throw new MyException("Error when trying to create program request");
+		$resultSet = parent::executeStoredProcedureWithResultSet("call createProgramRequest(?,?,?,?,?)", $params);
+		$program->setId($resultSet[0]["ProgramId"]);
+		
+		$this->addCommentsToProgram($program);
+	}
+	
+	private function addCommentsToProgram(Program $program) {
+		foreach($program->getComments() as $comment) {
+			$commentId = (new CommentRepository())->create($comment);
+			$this->addCommentToProgram($program->getId(), $commentId);
 		}
+	}
+	
+	public function addCommentToProgram($programId, $commentId) {
+		$params = array($programId, $commentId);
+		$success = parent::executeStoredProcedure("call addCommentToProgram(?,?)", $params);
 	}
 	
 	public function findProgramsByRequester($userId) {
@@ -54,8 +65,10 @@ class ProgramRepository extends Repository {
 		$program = new Program();
 		$program->setId($record["id"]);
 		$program->setProgramName($record["name"]);
-		$program->setComments($record["comments"]);
 		$program->setRequestedDate($record["requestedDate"]);
+		
+		$comments = (new CommentRepository())->findCommentsForProgram($program->getId());
+		$program->setComments($comments);
 		
 		$requester = (new UserRepository())->findById($record["requester_id"]);
 		$program->setRequester($requester);

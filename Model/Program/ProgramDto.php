@@ -4,7 +4,7 @@ class ProgramDto {
 	
 	private $id;
 	private $programName;
-	private $comments;
+	private $commentDtos = array();
 	private $requesterName;
 	private $disciplineDto;
 	private $requestedDate;
@@ -42,12 +42,12 @@ class ProgramDto {
 		$this->programName = $programName;
 	}
 
-	public function getComments(){
-		return $this->comments;
+	public function getCommentDtos(){
+		return $this->commentDtos;
 	}
 	
-	public function setComments($comments){
-		$this->comments = $comments;
+	public function setCommentDtos($commentDtos){
+		$this->commentDtos = $commentDtos;
 	}
 
 	public function getRequesterName(){
