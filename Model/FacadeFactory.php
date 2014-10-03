@@ -91,4 +91,10 @@ class DomainFacade {
 		$program = (new ProgramRepository())->findById($id);
 		return (new ProgramAssembler())->assemble($program);
 	}
+	
+	public function findProgramsForApproval($email) {
+		$user = (new UserRepository())->findUserByEmail($email);
+		$programs = (new ProgramRepository())->findProgramsForApproval($user->getId());
+		return (new ProgramAssembler())->assembleAll($programs);
+	}
 }

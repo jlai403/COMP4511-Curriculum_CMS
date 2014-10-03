@@ -19,7 +19,6 @@ class RoleRepository extends Repository {
 	public function findRolesByIds($roleIds) {
 		$roles = array();
 		foreach($roleIds as $id) {
-			$params = array($id);
 			$role = $this->findById($id);
 			array_push($roles, $role);
 		}

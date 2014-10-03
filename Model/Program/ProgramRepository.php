@@ -30,6 +30,12 @@ class ProgramRepository extends Repository {
 		return $this->extractProgramsFromResultSet($resultSet);
 	}
 	
+	public function findProgramsForApproval($userId) {
+		$params = array($userId);
+		$resultSet = parent::executeStoredProcedureWithResultSet("call findProgramsForApproval(?)", $params);
+		return $this->extractProgramsFromResultSet($resultSet);
+	}
+	
 	public function findById($id) {
 		$params = array($id);
 		$resultSet = parent::executeStoredProcedureWithResultSet("call findProgramById(?)", $params);

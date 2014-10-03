@@ -3,7 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 $currentUser = SessionManager::authorize();
 
 $requestedProgramDtos = FacadeFactory::getDomainFacade()->findProgramsByRequester($currentUser->getEmail());
-
+$actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApproval($currentUser->getEmail());
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +43,31 @@ $requestedProgramDtos = FacadeFactory::getDomainFacade()->findProgramsByRequeste
 				<div class="col-md-6">
 					<div class="actionable-items">
 						<h6>Actionable Items</h6>
+						
+						<?php foreach($actionableProgramDtos as $actionableProgramDto) { 
+						?>
+							<a href="">
+								<div class="container item">
+									<div class="row">
+										<div class="col-xs-3"> Request Date: </div>
+										<div class="col-xs-9"> <?= $actionableProgramDto->getRequestedDate() ?>  </div>
+									</div>
+									<div class="row">
+										<div class="col-xs-3"> Requested By: </div>
+										<div class="col-xs-9"> <?= $actionableProgramDto->getRequesterName() ?>  </div>
+									</div>
+									<div class="row">
+										<div class="col-xs-3"> Program Name: </div>
+										<div class="col-xs-9"> <?= $actionableProgramDto->getProgramName() ?>  </div>
+									</div>
+									<div class="row">
+										<div class="col-xs-3"> Status: </div>
+										<div class="col-xs-9"> <?= $actionableProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
+									</div>
+								</div>
+							</a>
+						<?php }?>
+						
 					</div>
 				</div>
 				<!-- ACTIONABLE ITEMS END -->
