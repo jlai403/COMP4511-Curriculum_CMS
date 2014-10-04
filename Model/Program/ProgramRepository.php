@@ -8,6 +8,18 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class ProgramRepository extends Repository {
 	
+	public function approve(Program $program) {
+		$workflowDataId = (new WorkflowRepository())->advanceToNextStep(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME, $program->getWorkflowData());
+		if ($program->getWorkflowData()->getId() === $workflowDataId) return;
+		
+		$this->updateWorkflowDataForProgram($program, $workflowDataId);
+	}
+	
+	private function updateWorkflowDataForProgram(Program $program, $workflowDataId) {
+		$params = array($program->getId(), $workflowDataId);
+		$success = parent::executeStoredProcedure("call updateWorkflowDataForProgram(?,?)", $params);
+	}
+	
 	public function createProgramRequest(Program $program) {
 		$workflowDataId = (new WorkflowRepository())->create(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME);
 		$params = array(

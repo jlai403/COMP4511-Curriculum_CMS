@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/BaseController.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInputDto.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class ProgramController extends BaseController {
 
@@ -21,6 +22,24 @@ class ProgramController extends BaseController {
 		
 		FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
 		parent::redirect("Location: /View/Program/Requested.php");
+	}
+	
+	function updateStatus(){
+		$action = $_POST["submit"];
+		$programId = $_POST["id"];
+		
+		if ($action == "approve") $this->approve($programId);
+		if ($action == "reject") $this->reject($programId);
+		throw new MyException("Unknown action.");
+	}
+	
+	private function approve($programId) {
+		FacadeFactory::getDomainFacade()->approveProgram($programId);
+		parent::redirect("Location: /View/Program/Summary.php?id=".$programId);
+	}
+	
+	private function reject($programId) {
+		
 	}
 }
 

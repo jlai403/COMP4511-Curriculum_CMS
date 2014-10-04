@@ -2,10 +2,27 @@
 	background-color: #0088CC;
 }
 
-.button.blue {
-	color: #FFFFFF;
+.red {
+	background-color: #F00000;
+}
+
+.button.red:HOVER {
+	background-color: #CD2626;
+}
+
+.green {
+	background-color: #3AEEAA;
+}
+
+.button.green:HOVER {
+	background-color: #00CC99;
 }
 
 .button.blue:HOVER {
 	background-color: #285E8E;
+}
+
+
+.button.blue, .button.green, .button.red {
+	color: #FFFFFF;
 }

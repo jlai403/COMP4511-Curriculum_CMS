@@ -8,3 +8,10 @@ class DBConstants {
 class ApprovalChainConstants {
 	const PROGRAM_APPROVAL_CHAIN_NAME = "Program";
 }
+
+class StatusConstants {
+	const PENDING_APPROVAL = 1;
+	const APPROVED = 2;
+	const COMPLETED = 3;
+	const REJECTED = 4;
+}

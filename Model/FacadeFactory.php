@@ -97,4 +97,9 @@ class DomainFacade {
 		$programs = (new ProgramRepository())->findProgramsForApproval($user->getId());
 		return (new ProgramAssembler())->assembleAll($programs);
 	}
+	
+	public function approveProgram($programId) {
+		$program = (new ProgramRepository())->findById($programId);
+		(new ProgramRepository())->approve($program);
+	}
 }

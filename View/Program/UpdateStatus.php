@@ -96,6 +96,11 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 					</div>
 				<?php } ?>
 				
+				<form action="/Controller/ProgramController.php?action=updateStatus" method="post">
+					<input type="hidden" name="id" value="<?= $programDto->getId() ?>">
+					<input class="form-control button red" name="submit" type="submit" value="reject"/>
+					<input class="form-control button green" name="submit"  type="submit" value="approve"/>
+				</form>
 			</div>
 		</div>
 	</body>
