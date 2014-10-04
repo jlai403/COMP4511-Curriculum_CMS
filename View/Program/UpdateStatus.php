@@ -1,5 +1,6 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/View/Workflow/WorkflowViewHelper.php');
 $currentUser = SessionManager::authorize();
 
 $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
@@ -14,7 +15,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
-		<link type="text/css" rel="stylesheet" href="/Content/css/theme/program-summary.css" />
+		<link type="text/css" rel="stylesheet" href="/Content/css/theme/update-program.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
 	</head>
 
@@ -35,72 +36,108 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		</div>
 	
 	
-		<div class="container form center">
+		<div class="container summary center">
 			<div class="col-md-12">
 				<div class="row center-text">
 					<h3 style="margin: 20px;">Update Program Status</h3>
 				</div>
 				
 				<div class="row">
-					<div class="col-md-3">
-						Requester
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getRequesterName()?>" readonly/>
-					</div>
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Name: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getProgramName()?> </div>
+					
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Faculty: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getFacultyDto()->getName() ?> </div>
 				</div>
 		
 				<div class="row">
-					<div class="col-md-3">
-						Program Name
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getProgramName()?>" readonly/>
-					</div>
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Requested By: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getRequesterName() ?> </div>
+					
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Discipline: </div>
+					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getName() ?> </div>
 				</div>
+				
+				<hr style="margin:20px 0 0 0;"/>
 				
 				<div class="row">
-					<div class="col-md-3">
-						Faculty
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getDisciplineDto()->getFacultyDto()->getName()?>" readonly/>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-md-3">
-						Discipline
-					</div>
-					<div class="col-md-9">
-						<input class="form-control" type="text" value="<?=$programDto->getDisciplineDto()->getName()?>" readonly/>
-					</div>
-				</div>
-				
-				<hr/>
-				
-				<div class="row center-text">
-					<h3 style="margin: 20px;">Comments</h3>
-				</div>
-				
-				<?php foreach($programDto->getCommentDtos() as $commentDto) { ?>
-					<div class="row">
-						<div class="col-md-12">
-							<h5><?=$commentDto->getAuthorName()?></h5>
-							<h6><?=$commentDto->getDateTime()?></h6>
+					<div class="col-md-6 workflow">
+						<div class="row center-text">
+							<h5 style="margin-bottom: 25px;">Workflow</h5>
 							
-							<div class="comment">
-								<?=$commentDto->getComment()?>
-							</div>
+							<?php foreach($programDto->getWorkflowDataDtos() as $workflowDataDto) { ?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-xs-4 right-align">
+												Role: 
+											</div>
+											<div class="col-md-8 left-align">
+												<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4 right-align">
+												Status: 
+											</div>
+											<div class="col-xs-8 left-align">
+												<?= $workflowDataDto->getStatus() ?>
+											</div>
+										</div>
+										
+										<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
+										<div class="row">
+											<div class="col-xs-4 right-align">
+												
+												<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
+											</div>
+											<div class="col-xs-8 left-align">
+												<?= $workflowDataDto->getUserDto()->getFullName() ?>
+											</div>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+								
+								<?php if ($programDto->getCurrentWorkflowDataDto() === $workflowDataDto) { ?>
+								<form class="update-program-form" action="/Controller/ProgramController.php?action=updateStatus" method="post">
+									<input type="hidden" name="id" value="<?= $programDto->getId() ?>">
+									<div class="row" style="margin-top: 15px;">
+										<div class="col-xs-6">
+											<input class="form-control button green" name="submit"  type="submit" value="approve"/>
+										</div>
+										<div class="col-xs-6">
+											<input class="form-control button red" name="submit" type="submit" value="reject"/>
+										</div>
+									</div>
+								</form>
+								<?php } ?>
+								
+								<hr/>
+							<?php } ?>
+							
 						</div>
 					</div>
-				<?php } ?>
 				
-				<form action="/Controller/ProgramController.php?action=updateStatus" method="post">
-					<input type="hidden" name="id" value="<?= $programDto->getId() ?>">
-					<input class="form-control button red" name="submit" type="submit" value="reject"/>
-					<input class="form-control button green" name="submit"  type="submit" value="approve"/>
-				</form>
+					<div class="col-md-6 comments">
+						<div class="row center-text">
+							<h5>Comments</h5>
+						</div>
+					
+						<?php foreach($programDto->getCommentDtos() as $commentDto) { ?>
+							<div class="row">
+								<div class="col-md-12">
+									<h5><?=$commentDto->getAuthorName()?></h5>
+									<h6><?=$commentDto->getDateTime()?></h6>
+									
+									<p class="comment">
+										<?=$commentDto->getComment()?>
+									</p>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
