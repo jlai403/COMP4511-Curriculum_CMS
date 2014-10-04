@@ -102,4 +102,9 @@ class DomainFacade {
 		$program = (new ProgramRepository())->findById($programId);
 		(new ProgramRepository())->approve($program);
 	}
+	
+	public function rejectProgram($programId) {
+		$program = (new ProgramRepository())->findById($programId);
+		(new ProgramRepository())->reject($program);
+	}
 }

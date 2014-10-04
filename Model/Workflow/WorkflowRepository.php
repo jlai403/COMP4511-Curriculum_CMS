@@ -26,6 +26,10 @@ class WorkflowRepository extends Repository {
 			return $resultSet[0]["WorkflowDataId"];
 		}
 	}
+
+	public function reject(WorkflowData $workflowData) {
+		$this->updateWorkflowDataStatus($workflowData->getId(), StatusConstants::REJECTED);
+	}
 	
 	private function updateWorkflowDataStatus($id, $statusId) {
 		$params = array($id, $statusId);

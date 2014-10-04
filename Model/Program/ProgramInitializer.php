@@ -14,10 +14,7 @@ class ProgramInitializer {
 		$program = new Program();
 		$program->setProgramName($this->programInputDto->getProgramName());
 		
-		$commentString = $this->programInputDto->getComments();
-		$commentAuthor = $this->programInputDto->getRequesterDto();
-		$comment = (new CommentInitializer($commentString, $commentAuthor))->initialize();
-		$program->addComment($comment);
+		$this->addComments($program);
 		
 		$discipline = (new DisciplineInitializer($this->programInputDto->getDisciplineDto()))->initialize();
 		$program->setDiscipline($discipline);
@@ -25,5 +22,14 @@ class ProgramInitializer {
 		$requester = (new UserInitializer($this->programInputDto->getRequesterDto()))->initialize();
 		$program->setRequester($requester);
 		return $program;
+	}
+	
+	private function addComments($program){
+		$commentString = $this->programInputDto->getComments();
+		if (trim($commentString) == false) return;
+
+		$commentAuthor = $this->programInputDto->getRequesterDto();
+		$comment = (new CommentInitializer($commentString, $commentAuthor))->initialize();
+		$program->addComment($comment);
 	}
 }

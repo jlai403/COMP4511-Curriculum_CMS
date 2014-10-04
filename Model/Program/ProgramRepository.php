@@ -15,6 +15,11 @@ class ProgramRepository extends Repository {
 		$this->updateWorkflowDataForProgram($program, $workflowDataId);
 	}
 	
+	public function reject(Program $program) {
+		(new WorkflowRepository())->reject($program->getWorkflowData());
+	}
+	
+	
 	private function updateWorkflowDataForProgram(Program $program, $workflowDataId) {
 		$params = array($program->getId(), $workflowDataId);
 		$success = parent::executeStoredProcedure("call updateWorkflowDataForProgram(?,?)", $params);

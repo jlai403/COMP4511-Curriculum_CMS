@@ -39,7 +39,8 @@ class ProgramController extends BaseController {
 	}
 	
 	private function reject($programId) {
-		
+		FacadeFactory::getDomainFacade()->rejectProgram($programId);
+		parent::redirect("Location: /View/Program/Summary.php?id=".$programId);
 	}
 }
 
