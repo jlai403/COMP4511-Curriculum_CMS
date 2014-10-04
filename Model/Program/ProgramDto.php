@@ -5,6 +5,7 @@ class ProgramDto {
 	private $id;
 	private $programName;
 	private $commentDtos = array();
+	private $fileDtos = array();
 	private $requesterName;
 	private $disciplineDto;
 	private $requestedDate;
@@ -49,6 +50,15 @@ class ProgramDto {
 	public function setCommentDtos($commentDtos){
 		$this->commentDtos = $commentDtos;
 	}
+	
+	public function getFileDtos(){
+		return $this->fileDtos;
+	}
+	
+	public function setFileDtos($fileDtos){
+		$this->fileDtos = $fileDtos;
+	}
+	
 
 	public function getRequesterName(){
 		return $this->requesterName;

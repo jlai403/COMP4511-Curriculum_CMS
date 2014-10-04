@@ -102,6 +102,9 @@ class ProgramRepository extends Repository {
 		$comments = (new CommentRepository())->findCommentsForProgram($program->getId());
 		$program->setComments($comments);
 		
+		$files = (new FileRepository())->findFilesForProgram($program->getId());
+		$program->setFiles($files);
+		
 		$requester = (new UserRepository())->findById($record["requester_id"]);
 		$program->setRequester($requester);
 		

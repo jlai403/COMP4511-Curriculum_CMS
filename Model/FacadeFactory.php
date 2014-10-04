@@ -19,6 +19,8 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramAssembler.php');
 
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileAssembler.php');
+
 class FacadeFactory {
 	
 	public static function getDomainFacade(){
@@ -113,5 +115,10 @@ class DomainFacade {
 		$comment = (new CommentInitializer($commentString, $authorDto))->initialize();
 		$commentId = (new CommentRepository())->create($comment);
 		(new ProgramRepository())->addCommentToProgram($programId, $commentId);
+	}
+	
+	public function findFileById($fileId) {
+		$file = (new FileRepository())->findById($fileId);
+		return (new FileAssembler())->assemble($file);
 	}
 }

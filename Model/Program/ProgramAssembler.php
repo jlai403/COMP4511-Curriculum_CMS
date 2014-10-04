@@ -3,6 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/Program.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramDto.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Workflow/WorkflowDataAssembler.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Comment/CommentAssembler.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileAssembler.php');
 
 class ProgramAssembler {
 	
@@ -22,9 +23,12 @@ class ProgramAssembler {
 		$programDto->setRequestedDate($program->getRequestedDate());
 		$programDto->setProgramName($program->getProgramName());
 		$programDto->setRequesterName($program->getRequester()->getFullName());
-
+		
 		$commentDtos = (new CommentAssembler())->assembleAll($program->getComments());
 		$programDto->setCommentDtos($commentDtos);
+				
+		$fileDtos = (new FileAssembler())->assembleAll($program->getFiles());
+		$programDto->setFileDtos($fileDtos);
 		
 		$disciplineDto = (new DisciplineAssembler())->assemble($program->getDiscipline());
 		$programDto->setDisciplineDto($disciplineDto);

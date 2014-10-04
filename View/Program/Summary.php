@@ -58,6 +58,17 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getName() ?> </div>
 				</div>
 				
+				<?php if (!empty($programDto->getFileDtos())) { ?>
+				<div class="row">
+					<div class="col-xs-5 col-sm-3 bold-text right-align"> Attachments: </div>
+					<div class="col-xs-7 col-sm-3"> 
+						<?php foreach($programDto->getFileDtos() as $fileDto) { ?>
+							<a href="/Controller/FileController.php?action=download&id=<?= $fileDto->getId() ?>" target="_blank"><?= $fileDto->getName() ?></a> <br/>
+						<?php } ?>
+					</div>
+				</div>
+				<?php } ?>
+				
 				<hr style="margin:20px 0 0 0;"/>
 				
 				<div class="row">
