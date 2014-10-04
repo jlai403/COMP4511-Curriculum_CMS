@@ -22,6 +22,9 @@ class WorkflowDataAssembler {
 		$status = (new StatusFactory())->getStatus($workflowData->getStatus());
 		$workflowDataDto->setStatus($status);
 	
+		$userDto = (new UserAssembler())->assemble($workflowData->getUser());
+		$workflowDataDto->setUserDto($userDto);
+		
 		$approvalChainStepDto = (new ApprovalChainAssembler())->assemble($workflowData->getApprovalChainStep());
 		$workflowDataDto->setApprovalChainStepDto($approvalChainStepDto);
 	

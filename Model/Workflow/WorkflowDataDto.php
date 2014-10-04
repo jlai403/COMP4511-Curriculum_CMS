@@ -5,6 +5,7 @@ class WorkflowDataDto {
 	private $approvalChainStepDto;
 	private $status;
 	private $previousWorkflowDataDto;
+	private $userDto;
 	
 	public function getId(){
 		return $this->id;
@@ -36,5 +37,17 @@ class WorkflowDataDto {
 	
 	public function setPreviousWorkflowDataDto($previousWorkflowDataDto){
 		$this->previousWorkflowDataDto = $previousWorkflowDataDto;
+	}
+	
+	public function getUserDto(){
+		return $this->userDto;
+	}
+	
+	public function setUserDto($userDto){
+		$this->userDto = $userDto;
+	}
+	
+	public function isRejected() {
+		return $this->getStatus() === "Rejected";
 	}
 }

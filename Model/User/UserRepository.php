@@ -30,6 +30,8 @@ class UserRepository extends Repository {
 	public function findUserByEmail($email) {
 		$params = array($email);
 		$resultSet = $this->executeStoredProcedureWithResultSet("call findUserByEmail(?)", $params);
+		if (empty($resultSet)) return null;
+		
 		$user = $this->extractUserFromRecord($resultSet[0]);
 		return $user;
 	}
@@ -37,6 +39,8 @@ class UserRepository extends Repository {
 	public function findById($id) {
 		$params = array($id);
 		$resultSet = $this->executeStoredProcedureWithResultSet("call findUserById(?)", $params);
+		if (empty($resultSet)) return null;
+		
 		$user = $this->extractUserFromRecord($resultSet[0]);
 		return $user;
 	}

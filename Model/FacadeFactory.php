@@ -46,7 +46,7 @@ class DomainFacade {
 	
 	public function findUserByEmail($email) {
 		$user = (new UserRepository())->findUserByEmail($email);
-		return (new UserAssembler($user))->assemble();
+		return (new UserAssembler())->assemble($user);
 	}
 
 	public function findAllRoles() {
@@ -98,13 +98,15 @@ class DomainFacade {
 		return (new ProgramAssembler())->assembleAll($programs);
 	}
 	
-	public function approveProgram($programId) {
+	public function approveProgram($userId, $programId) {
+		$user = (new UserRepository())->findById($userId);
 		$program = (new ProgramRepository())->findById($programId);
-		(new ProgramRepository())->approve($program);
+		(new ProgramRepository())->approve($user, $program);
 	}
 	
-	public function rejectProgram($programId) {
+	public function rejectProgram($userId, $programId) {
+		$user = (new UserRepository())->findById($userId);
 		$program = (new ProgramRepository())->findById($programId);
-		(new ProgramRepository())->reject($program);
+		(new ProgramRepository())->reject($user, $program);
 	}
 }

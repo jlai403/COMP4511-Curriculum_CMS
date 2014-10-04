@@ -63,7 +63,45 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 				<div class="row">
 					<div class="col-md-6 workflow">
 						<div class="row center-text">
-							<h5>Workflow</h5>
+							<h5 style="margin-bottom: 25px;">Workflow</h5>
+							
+							<?php foreach($programDto->getWorkflowDataDtos() as $workflowDataDto) { ?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-xs-4 right-align">
+												Role: 
+											</div>
+											<div class="col-md-8 left-align">
+												<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-4 right-align">
+												Status: 
+											</div>
+											<div class="col-xs-8 left-align">
+												<?= $workflowDataDto->getStatus() ?>
+											</div>
+										</div>
+										
+										<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
+										<div class="row">
+											<div class="col-xs-4 right-align">
+												
+												<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
+											</div>
+											<div class="col-xs-8 left-align">
+												<?= $workflowDataDto->getUserDto()->getFullName() ?>
+											</div>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+								
+								<hr/>
+							<?php } ?>
+							
 						</div>
 					</div>
 				
@@ -78,9 +116,9 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 									<h5><?=$commentDto->getAuthorName()?></h5>
 									<h6><?=$commentDto->getDateTime()?></h6>
 									
-									<div class="comment">
+									<p class="comment">
 										<?=$commentDto->getComment()?>
-									</div>
+									</p>
 								</div>
 							</div>
 						<?php } ?>

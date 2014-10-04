@@ -8,15 +8,15 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
 class ProgramRepository extends Repository {
 	
-	public function approve(Program $program) {
-		$workflowDataId = (new WorkflowRepository())->advanceToNextStep(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME, $program->getCurrentWorkflowData());
+	public function approve(User $user, Program $program) {
+		$workflowDataId = (new WorkflowRepository())->advanceToNextStep(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME, $user, $program->getCurrentWorkflowData());
 		if ($program->getCurrentWorkflowData()->getId() === $workflowDataId) return;
 		
 		$this->updateWorkflowDataForProgram($program, $workflowDataId);
 	}
 	
-	public function reject(Program $program) {
-		(new WorkflowRepository())->reject($program->getWorkflowData());
+	public function reject(User $user, Program $program) {
+		(new WorkflowRepository())->reject($user, $program->getCurrentWorkflowData());
 	}
 	
 	

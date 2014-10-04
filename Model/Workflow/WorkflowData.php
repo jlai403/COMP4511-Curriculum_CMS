@@ -6,6 +6,7 @@ class WorkflowData implements IEntity {
 	private $approvalChainStep;
 	private $status;
 	private $previousWorkflowData;
+	private $user;
 	
 	// Overriden: IEntity
 	public function getId(){
@@ -44,4 +45,13 @@ class WorkflowData implements IEntity {
 	public function setPreviousWorkflowData($previousWorkflowData){
 		$this->previousWorkflowData = $previousWorkflowData;
 	}
+	
+	public function getUser(){
+		return $this->user;
+	}
+	
+	public function setUser($user){
+		$this->user = $user;
+	}
+	
 }

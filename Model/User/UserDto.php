@@ -56,4 +56,8 @@ class UserDto {
 	public function setRoleDtos($roleDtos){
 		$this->roleDtos = $roleDtos;
 	}
+	
+	public function getFullName() {
+		return $this->getFirstName()." ".$this->getLastName();
+	}
 }

@@ -34,12 +34,14 @@ class ProgramController extends BaseController {
 	}
 	
 	private function approve($programId) {
-		FacadeFactory::getDomainFacade()->approveProgram($programId);
+		$currentUser = SessionManager::authorize();
+		FacadeFactory::getDomainFacade()->approveProgram($currentUser->getId(), $programId);
 		parent::redirect("Location: /View/Program/Summary.php?id=".$programId);
 	}
 	
 	private function reject($programId) {
-		FacadeFactory::getDomainFacade()->rejectProgram($programId);
+		$currentUser = SessionManager::authorize();
+		FacadeFactory::getDomainFacade()->rejectProgram($currentUser->getId(), $programId);
 		parent::redirect("Location: /View/Program/Summary.php?id=".$programId);
 	}
 }
