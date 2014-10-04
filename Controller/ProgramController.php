@@ -27,10 +27,19 @@ class ProgramController extends BaseController {
 	function updateStatus(){
 		$action = $_POST["submit"];
 		$programId = $_POST["id"];
+		$comment = $_POST["comments"];
+
+		$this->addCommentToProgram($programId, $comment);
 		
 		if ($action == "approve") $this->approve($programId);
 		if ($action == "reject") $this->reject($programId);
 		throw new MyException("Unknown action.");
+	}
+	
+	private function addCommentToProgram($programId, $comment) {
+		if (trim($comment) == false) return;
+		$currentUser = SessionManager::authorize();
+		FacadeFactory::getDomainFacade()->addCommentToProgram($programId, $comment, $currentUser);
 	}
 	
 	private function approve($programId) {

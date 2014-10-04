@@ -109,4 +109,10 @@ class DomainFacade {
 		$program = (new ProgramRepository())->findById($programId);
 		(new ProgramRepository())->reject($user, $program);
 	}
+	
+	public function addCommentToProgram($programId, $commentString, $authorDto) {
+		$comment = (new CommentInitializer($commentString, $authorDto))->initialize();
+		$commentId = (new CommentRepository())->create($comment);
+		(new ProgramRepository())->addCommentToProgram($programId, $commentId);
+	}
 }

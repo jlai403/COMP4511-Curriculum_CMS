@@ -102,7 +102,13 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 								<?php if ($programDto->getCurrentWorkflowDataDto() === $workflowDataDto) { ?>
 								<form class="update-program-form" action="/Controller/ProgramController.php?action=updateStatus" method="post">
 									<input type="hidden" name="id" value="<?= $programDto->getId() ?>">
-									<div class="row" style="margin-top: 15px;">
+
+									<div class="row left-align" style="padding: 0 15px; margin-top: 15px;">
+										<h6 style="padding-left: 2px;">Comments</h6>
+										<textarea name="comments" class="form-control" rows="3" placeholder="Comments..."></textarea>
+									</div>
+									
+									<div class="row">
 										<div class="col-xs-6">
 											<input class="form-control button green" name="submit"  type="submit" value="approve"/>
 										</div>
@@ -111,11 +117,10 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 										</div>
 									</div>
 								</form>
-								<?php } ?>
+								<?php } //END FORM?>
 								
 								<hr/>
-							<?php } ?>
-							
+							<?php } //END WORKFLOWS ITERATION?> 
 						</div>
 					</div>
 				

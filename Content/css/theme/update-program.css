@@ -25,7 +25,7 @@
 	padding: 0 20px;
 }
 
-.update-program-form .button {
+.update-program-form .button, .update-program-form textarea {
 	font-size: 12px;
 }
 
