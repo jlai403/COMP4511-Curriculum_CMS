@@ -9,8 +9,8 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 class ProgramRepository extends Repository {
 	
 	public function approve(Program $program) {
-		$workflowDataId = (new WorkflowRepository())->advanceToNextStep(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME, $program->getWorkflowData());
-		if ($program->getWorkflowData()->getId() === $workflowDataId) return;
+		$workflowDataId = (new WorkflowRepository())->advanceToNextStep(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME, $program->getCurrentWorkflowData());
+		if ($program->getCurrentWorkflowData()->getId() === $workflowDataId) return;
 		
 		$this->updateWorkflowDataForProgram($program, $workflowDataId);
 	}
@@ -93,8 +93,9 @@ class ProgramRepository extends Repository {
 		$discipline = (new DisciplineRepository())->findById($record["discipline_id"]);
 		$program->setDiscipline($discipline);
 		
-		$workflowData = (new WorkflowRepository())->findById($record["workflowData_id"]);
-		$program->setWorkflowData($workflowData);
+		$workflowDatas = array();
+		(new WorkflowRepository())->getWorkflowDataHistory($record["workflowData_id"], $workflowDatas);
+		$program->setWorkflowDatas($workflowDatas);
 		
 		return $program;
 	}

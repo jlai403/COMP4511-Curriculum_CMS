@@ -29,8 +29,8 @@ class ProgramAssembler {
 		$disciplineDto = (new DisciplineAssembler())->assemble($program->getDiscipline());
 		$programDto->setDisciplineDto($disciplineDto);
 		
-		$workflowDataDto = (new WorkflowDataAssembler())->assemble($program->getWorkflowData());
-		$programDto->setWorkflowDataDto($workflowDataDto);
+		$workflowDataDtos = (new WorkflowDataAssembler())->assembleAll($program->getWorkflowDatas());
+		$programDto->setWorkflowDataDtos($workflowDataDtos);
 		
 		return $programDto;
 	}

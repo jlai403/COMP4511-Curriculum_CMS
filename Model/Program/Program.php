@@ -9,7 +9,7 @@ class Program implements IEntity {
 	private $comments = array();
 	private $requester;
 	private $discipline;
-	private $workflowData;
+	private $workflowDatas;
 	private $requestedDate;
 
 	// Overriden: IEntity
@@ -77,11 +77,17 @@ class Program implements IEntity {
 		$this->discipline = $discipline;
 	}
 	
-	public function getWorkflowData(){
-		return $this->workflowData;
+	public function getWorkflowDatas(){
+		return $this->workflowDatas;
 	}
 	
-	public function setWorkflowData($workflowData){
-		$this->workflowData = $workflowData;
+	public function setWorkflowDatas($workflowDatas){
+		$this->workflowDatas = $workflowDatas;
+	}
+	
+	public function getCurrentWorkflowData() {
+		$currentWorkflowData = end($this->workflowDatas);
+		reset($this->workflowDatas);
+		return $currentWorkflowData;
 	}
 }

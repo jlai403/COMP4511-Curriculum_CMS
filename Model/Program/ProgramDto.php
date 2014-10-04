@@ -8,7 +8,7 @@ class ProgramDto {
 	private $requesterName;
 	private $disciplineDto;
 	private $requestedDate;
-	private $workflowDataDto;
+	private $workflowDataDtos = array();
 
 	public function getId(){
 		return $this->id;
@@ -26,12 +26,12 @@ class ProgramDto {
 		$this->requestedDate = $requestedDate;
 	}
 	
-	public function getWorkflowDataDto(){
-		return $this->workflowDataDto;
+	public function getWorkflowDataDtos(){
+		return $this->workflowDataDtos;
 	}
 	
-	public function setWorkflowDataDto($workflowDataDto){
-		$this->workflowDataDto = $workflowDataDto;
+	public function setWorkflowDataDtos($workflowDataDtos){
+		$this->workflowDataDtos = $workflowDataDtos;
 	}
 	
 	public function getProgramName(){
@@ -67,6 +67,12 @@ class ProgramDto {
 	}
 	
 	public function getResponsibleParty() {
-		return $this->getWorkflowDataDto()->getApprovalChainStepDto()->getRoleDto()->getName();
+		return $this->getCurrentWorkflowDataDto()->getApprovalChainStepDto()->getRoleDto()->getName();
+	}
+	
+	public function getCurrentWorkflowDataDto() {
+		$currentWorkflowDataDto = end($this->workflowDataDtos);
+		reset($this->workflowDataDtos);
+		return $currentWorkflowDataDto;
 	}
 }

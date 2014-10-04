@@ -62,7 +62,7 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 									</div>
 									<div class="row">
 										<div class="col-md-4 col-xs-6"> Status: </div>
-										<div class="col-md-8 col-xs-6"> <?= $actionableProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
+										<div class="col-md-8 col-xs-6"> <?= $actionableProgramDto->getCurrentWorkflowDataDto()->getStatus() ?>  </div>
 									</div>
 								</div>
 							</a>
@@ -95,7 +95,7 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 									</div>
 									<div class="row">
 										<div class="col-md-4 col-xs-6"> Status: </div>
-										<div class="col-md-8 col-xs-6"> <?= $requestedProgramDto->getWorkflowDataDto()->getStatus() ?>  </div>
+										<div class="col-md-8 col-xs-6"> <?= $requestedProgramDto->getCurrentWorkflowDataDto()->getStatus() ?>  </div>
 									</div>
 								</div>
 							</a>

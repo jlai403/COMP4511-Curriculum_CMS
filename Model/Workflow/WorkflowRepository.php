@@ -48,6 +48,15 @@ class WorkflowRepository extends Repository {
 		return $this->extractWorkflowDataFromRecord($resultSet[0]);
 	}
 	
+	public function getWorkflowDataHistory($id, &$workflowDatas) {
+		$workflowData = $this->findById($id);
+		array_unshift($workflowDatas, $workflowData);
+		
+		$previousWorkflowData = $workflowData->getPreviousWorkflowData();
+		if (is_null($previousWorkflowData)) return;
+		$this->getWorkflowDataHistory($previousWorkflowData->getId(), $workflowDatas);
+	}
+	
 	public function findStatusById($id) {
 		$params = array( $id );
 		$resultSet = parent::executeStoredProcedureWithResultSet("call findStatusById(?)", $params);
