@@ -77,7 +77,6 @@ class DomainFacade {
 	public function createProgramRequest(ProgramInputDto $programInputDto) {
 		$program = (new ProgramInitializer($programInputDto))->initialize();
 		$program->assertValid();
-		$program->setRequestedDate(date("Y-m-d")); //todo: move this
 		(new ProgramRepository())->createProgramRequest($program);
 	}
 	

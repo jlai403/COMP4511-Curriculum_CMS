@@ -40,7 +40,7 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					</div>
 			
 					<div class="row">
-						<input class="form-control" type="text" name="email" placeholder="Email"/>
+						<input class="form-control" type="email" name="email" placeholder="Email"/>
 						<abbr class="info-mark" tooltip="Must be a valid @mtroyal.ca email."> i </abbr>
 					</div>
 					

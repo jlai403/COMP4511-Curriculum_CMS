@@ -11,7 +11,8 @@ class Program implements IEntity {
 	private $discipline;
 	private $workflowDatas;
 	private $requestedDate;
-
+	private $files = array();
+	
 	// Overriden: IEntity
 	public function getId(){
 		return $this->id;
@@ -59,6 +60,18 @@ class Program implements IEntity {
 
 	public function addComment($comment){
 		array_push($this->comments, $comment);
+	}
+	
+	public function getFiles(){
+		return $this->files;
+	}
+	
+	public function setFiles($files){
+		$this->files = $files;
+	}
+	
+	public function addFile($file){
+		array_push($this->files, $file);
 	}
 	
 	public function getRequester(){

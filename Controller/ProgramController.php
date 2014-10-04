@@ -3,6 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/BaseController.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInputDto.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileUploadHelper.php');
 
 class ProgramController extends BaseController {
 
@@ -12,11 +13,16 @@ class ProgramController extends BaseController {
 		$comments = $_POST["comments"];
 		$disciplineId = $_POST["discipline"];
 		
+		$fileInputDtos = array();
+		if(isset($_FILES["attachments"])){
+			$fileInputDtos = FileUploadHelper::convertToFileInputDtos($_FILES["attachments"]);
+		}
+		
 		$programInputDto = new ProgramInputDto();
 		$programInputDto->setRequesterDto($currentUser);
 		$programInputDto->setComments($comments);
 		$programInputDto->setProgramName($programName);
-		
+		$programInputDto->setFileInputDtos($fileInputDtos);
 		$disciplineDto = FacadeFactory::getDomainFacade()->findDisiplineById($disciplineId);
 		$programInputDto->setDisciplineDto($disciplineDto);
 		

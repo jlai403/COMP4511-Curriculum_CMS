@@ -24,7 +24,7 @@
 					</div>
 					
 					<div class="row">
-						<input class="form-control" type="text" name="email" placeholder="email" />
+						<input class="form-control" type="email" name="email" placeholder="email" />
 					</div>
 			
 					<div class="row">

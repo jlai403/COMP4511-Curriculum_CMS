@@ -40,7 +40,7 @@ $requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($cur
 	
 		<div class="container form center">
 			<div class="col-md-12">
-				<form action="/Controller/ProgramController.php?action=request" method="POST">
+				<form action="/Controller/ProgramController.php?action=request" method="POST" enctype="multipart/form-data">
 					<div class="row center-text">
 						<h3 style="margin: 20px;">Create Program</h3>
 					</div>
@@ -95,6 +95,15 @@ $requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($cur
 						</div>
 						<div class="col-md-9">
 							<textarea name="comments" class="form-control" placeholder="Comments..."></textarea>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							Attachments
+						</div>
+						<div class="col-md-9">
+							<input name="attachments[]" class="form-control" type="file" multiple />
 						</div>
 					</div>
 					

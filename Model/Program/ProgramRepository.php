@@ -3,6 +3,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Constants.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Repository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Workflow/WorkflowRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Comment/CommentRepository.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/Program.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
@@ -38,6 +39,7 @@ class ProgramRepository extends Repository {
 		$program->setId($resultSet[0]["ProgramId"]);
 		
 		$this->addCommentsToProgram($program);
+		$this->addFilesToProgram($program);
 	}
 	
 	private function addCommentsToProgram(Program $program) {
@@ -51,6 +53,19 @@ class ProgramRepository extends Repository {
 		$params = array($programId, $commentId);
 		$success = parent::executeStoredProcedure("call addCommentToProgram(?,?)", $params);
 	}
+
+	private function addFilesToProgram(Program $program) {
+		foreach($program->getFiles() as $file) {
+			$fileId = (new FileRepository())->create($file);
+			$this->addFileToProgram($program->getId(), $fileId);
+		}
+	}
+	
+	public function addFileToProgram($programId, $fileId) {
+		$params = array($programId, $fileId);
+		$success = parent::executeStoredProcedure("call addFileToProgram(?,?)", $params);
+	}
+	
 	
 	public function findProgramsByRequester($userId) {
 		$params = array($userId);

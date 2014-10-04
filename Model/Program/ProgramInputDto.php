@@ -6,7 +6,8 @@ class ProgramInputDto {
 	private $comments;
 	private $requesterDto;
 	private $disciplineDto;
-
+	private $fileInputDtos;
+	
 	public function getProgramName(){
 		return $this->programName;
 	}
@@ -37,5 +38,13 @@ class ProgramInputDto {
 	
 	public function setDisciplineDto($disciplineDto){
 		$this->disciplineDto = $disciplineDto;
+	}
+	
+	public function getFileInputDtos(){
+		return $this->fileInputDtos;
+	}
+	
+	public function setFileInputDtos($fileInputDtos){
+		$this->fileInputDtos = $fileInputDtos;
 	}
 }
