@@ -23,8 +23,13 @@ class ProgramController extends BaseController {
 		$disciplineDto = FacadeFactory::getDomainFacade()->findDisiplineById($disciplineId);
 		$programInputDto->setDisciplineDto($disciplineDto);
 		
-		FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
-		parent::redirect("/View/Program/Requested.php");
+		try {
+			FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
+			parent::redirect("/View/Program/Requested.php");
+		} catch (Exception $e) {
+			parent::addError($e->getMessage());
+		}
+		
 	}
 	
 	function updateStatus(){

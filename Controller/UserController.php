@@ -25,9 +25,7 @@ class UserController extends BaseController {
 			FacadeFactory::getDomainFacade()->signIn($userDto);
 			parent::redirect("/View/Dashboard");
 		} catch (Exception $e) {
-			$uri = $_SERVER['HTTP_REFERER'];
-			SessionManager::addError($e->getMessage());
-			parent::redirect($uri);
+			parent::addError($e->getMessage());
 		}
 	}
 	

@@ -13,4 +13,10 @@ abstract class BaseController {
 	protected function authenticateUser() {
 		return LoginManager::verifyAuthentication();
 	}
+	
+	protected function addError($errorMessage) {
+		$uri = $_SERVER['HTTP_REFERER'];
+		SessionManager::addError($errorMessage);
+		$this->redirect($uri);
+	}
 }

@@ -2,6 +2,8 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 $currentUser = SessionManager::authorize();
 
+$errorMessage = SessionManager::getError();
+
 $faculties = FacadeFactory::getDomainFacade()->findAllFaculties();
 $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 
@@ -44,6 +46,12 @@ $requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($cur
 					<div class="row center-text">
 						<h3 style="margin: 20px;">Create Program</h3>
 					</div>
+					
+					<?php if (!is_null($errorMessage)) { ?>
+					<div class="row">
+						<p class="error center-text"><?= $errorMessage ?></p>
+					</div>
+					<?php } ?>
 					
 					<div class="row">
 						<div class="col-md-3">
