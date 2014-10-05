@@ -117,6 +117,11 @@ class DomainFacade {
 		(new ProgramRepository())->addCommentToProgram($programId, $commentId);
 	}
 	
+	public function addFilesToProgram($programId, $fileInputDtos) {
+		$files = (new FileInitializer())->initializeAll($fileInputDtos);
+		(new ProgramRepository())->addFilesToProgram($programId, $files);
+	}
+	
 	public function findFileById($fileId) {
 		$file = (new FileRepository())->findById($fileId);
 		return (new FileAssembler())->assemble($file);

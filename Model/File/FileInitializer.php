@@ -3,18 +3,23 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/File.php');
 
 class FileInitializer {
 	
-	private $fileInputDto;
-	
-	public function __construct(FileInputDto $fileInputDto) {
-		$this->fileInputDto = $fileInputDto;
+	public function initializeAll($fileInputDtos) {
+		if (empty($fileInputDtos)) return;
+		
+		$files = array();
+		foreach($fileInputDtos as $fileInputDto) {
+			$file = $this->initialize($fileInputDto);
+			array_push($files, $file);
+		}
+		return $files;
 	}
 	
-	public function initialize() {
+	public function initialize($fileInputDto) {
 		$file = new File();
-		$file->setName($this->fileInputDto->getName());
-		$file->setType($this->fileInputDto->getType());
-		$file->setSize($this->fileInputDto->getSize());
-		$file->setContent($this->fileInputDto->getContent());
+		$file->setName($fileInputDto->getName());
+		$file->setType($fileInputDto->getType());
+		$file->setSize($fileInputDto->getSize());
+		$file->setContent($fileInputDto->getContent());
 		return $file;
 	}
 }

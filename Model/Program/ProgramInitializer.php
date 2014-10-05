@@ -37,11 +37,7 @@ class ProgramInitializer {
 	}
 	
 	private function addFiles(Program $program) {
-		if (empty($this->programInputDto->getFileInputDtos())) return;
-		
-		foreach($this->programInputDto->getFileInputDtos() as $fileInputDto) {
-			$file = (new FileInitializer($fileInputDto))->initialize();
-			$program->addFile($file);
-		}
+		$files = (new FileInitializer())->initializeAll($this->programInputDto->getFileInputDtos());
+		$program->setFiles($files);
 	}
 }

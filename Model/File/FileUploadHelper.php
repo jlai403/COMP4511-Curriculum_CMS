@@ -7,6 +7,7 @@ class FileUploadHelper {
 		$attachments = self::reorganizeAttachments($attachments);
 		$fileInputDtos = array();
 		foreach($attachments as $attachment) {
+			if(empty($attachment["name"])) continue;
 			$fileInputDto = new FileInputDto();
 			$fileInputDto->setName($attachment["name"]);
 			$fileInputDto->setType($attachment["type"]);

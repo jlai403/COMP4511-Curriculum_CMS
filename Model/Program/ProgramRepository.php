@@ -39,7 +39,7 @@ class ProgramRepository extends Repository {
 		$program->setId($resultSet[0]["ProgramId"]);
 		
 		$this->addCommentsToProgram($program);
-		$this->addFilesToProgram($program);
+		$this->addFilesToProgram($program->getId(), $program->getFiles());
 	}
 	
 	private function addCommentsToProgram(Program $program) {
@@ -53,11 +53,12 @@ class ProgramRepository extends Repository {
 		$params = array($programId, $commentId);
 		$success = parent::executeStoredProcedure("call addCommentToProgram(?,?)", $params);
 	}
-
-	private function addFilesToProgram(Program $program) {
-		foreach($program->getFiles() as $file) {
+	
+	public function addFilesToProgram($programId, $files) {
+		if (empty($files)) return;
+		foreach($files as $file) {
 			$fileId = (new FileRepository())->create($file);
-			$this->addFileToProgram($program->getId(), $fileId);
+			$this->addFileToProgram($programId, $fileId);
 		}
 	}
 	

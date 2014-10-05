@@ -13,10 +13,7 @@ class ProgramController extends BaseController {
 		$comments = $_POST["comments"];
 		$disciplineId = $_POST["discipline"];
 		
-		$fileInputDtos = array();
-		if(isset($_FILES["attachments"])){
-			$fileInputDtos = FileUploadHelper::convertToFileInputDtos($_FILES["attachments"]);
-		}
+		$fileInputDtos = FileUploadHelper::convertToFileInputDtos($_FILES["attachments"]);
 		
 		$programInputDto = new ProgramInputDto();
 		$programInputDto->setRequesterDto($currentUser);
@@ -34,7 +31,9 @@ class ProgramController extends BaseController {
 		$action = $_POST["submit"];
 		$programId = $_POST["id"];
 		$comment = $_POST["comments"];
-
+		$attachments = $_FILES["attachments"];
+		
+		$this->addFilesToProgram($programId, $attachments);
 		$this->addCommentToProgram($programId, $comment);
 		
 		if ($action == "approve") $this->approve($programId);
@@ -46,6 +45,14 @@ class ProgramController extends BaseController {
 		if (trim($comment) == false) return;
 		$currentUser = SessionManager::authorize();
 		FacadeFactory::getDomainFacade()->addCommentToProgram($programId, $comment, $currentUser);
+	}
+
+	private function addFilesToProgram($programId, $attachments) {
+		$fileInputDtos = FileUploadHelper::convertToFileInputDtos($_FILES["attachments"]);
+		if (empty($fileInputDtos)) return;
+		
+		$currentUser = SessionManager::authorize();
+		FacadeFactory::getDomainFacade()->addFilesToProgram($programId, $fileInputDtos);
 	}
 	
 	private function approve($programId) {

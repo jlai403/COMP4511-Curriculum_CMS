@@ -111,12 +111,21 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 								</div>
 								
 								<?php if ($programDto->getCurrentWorkflowDataDto() === $workflowDataDto) { ?>
-								<form class="update-program-form" action="/Controller/ProgramController.php?action=updateStatus" method="post">
+								<form class="update-program-form" action="/Controller/ProgramController.php?action=updateStatus" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="id" value="<?= $programDto->getId() ?>">
 
 									<div class="row left-align" style="padding: 0 15px; margin-top: 15px;">
 										<h6 style="padding-left: 2px;">Comments</h6>
 										<textarea name="comments" class="form-control" rows="3" placeholder="Comments..."></textarea>
+									</div>
+									
+									<div class="row">
+										<div class="col-md-3">
+											Attachments
+										</div>
+										<div class="col-md-9">
+											<input name="attachments[]" type="file" multiple style="font-size:12px;"/>
+										</div>
 									</div>
 									
 									<div class="row">
@@ -128,10 +137,10 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 										</div>
 									</div>
 								</form>
-								<?php } //END FORM?>
+								<?php } //END FORM ?>
 								
 								<hr/>
-							<?php } //END WORKFLOWS ITERATION?> 
+							<?php } //END WORKFLOWS ITERATION ?> 
 						</div>
 					</div>
 				
