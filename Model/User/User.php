@@ -85,7 +85,7 @@ class User implements IEntity {
 	}
 	
 	private function assertAtLeastOneRoleIsSelected() {
-		if (sizeof($this->getRoles()) == 0 ) {
+		if (is_null($this->getRoles()) || sizeof($this->getRoles()) == 0 ) {
 			throw new MyException("At least one role must be selected");
 		}
 	}

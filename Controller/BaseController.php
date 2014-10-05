@@ -6,7 +6,7 @@ abstract class BaseController {
 	}
 	
 	protected function redirect($location) {
-		header($location);
+		header("Location: ".$location);
 		exit();
 	}
 	

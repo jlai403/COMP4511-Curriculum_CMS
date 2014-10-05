@@ -1,3 +1,8 @@
+<?php 
+require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
+$errorMessage = SessionManager::getError();
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,6 +27,12 @@
 						<img class="logo" src="/Content/img/Mount_Royal_University_Logo.svg.png" /> <br/>
 						<h3>Please sign in</h3>
 					</div>
+					
+					<?php if (!is_null($errorMessage)) { ?>
+					<div class="row">
+						<p class="error center-text"><?= $errorMessage ?></p>
+					</div>
+					<?php } ?>
 					
 					<div class="row">
 						<input class="form-control" type="email" name="email" placeholder="email" />

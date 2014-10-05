@@ -1,6 +1,8 @@
 <?php 
+require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/FacadeFactory.php');
 
+$errorMessage = SessionManager::getError();
 $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 ?>
 
@@ -29,6 +31,12 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					<div class="row">
 						<h6>* All fields required.</h6>
 					</div>
+					
+					<?php if (!is_null($errorMessage)) { ?>
+					<div class="row">
+						<p class="error center-text"><?= $errorMessage ?></p>
+					</div>
+					<?php } ?>
 					
 					<div class="row">
 						<div class="col-md-6 split-left">

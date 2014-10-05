@@ -24,6 +24,8 @@ class UserInitializer {
 	}
 	
 	private function initializeRoles($roleDtos){
+		if(is_null($roleDtos)) return null;
+		
 		$roles = array();
 		foreach($roleDtos as $roleDto) {
 			array_push($roles, (new RoleInitializer($roleDto))->initialize());

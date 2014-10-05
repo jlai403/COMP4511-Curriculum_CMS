@@ -110,3 +110,9 @@
 	text-decoration: none;
 	text-transform: uppercase;
 }
+
+.error {
+	color: #FF0000;
+	font-style: italic;
+	font-size: 12px;
+}

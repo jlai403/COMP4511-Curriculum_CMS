@@ -17,6 +17,8 @@ class RoleRepository extends Repository {
 	}
 	
 	public function findRolesByIds($roleIds) {
+		if(is_null($roleIds)) return null;
+		
 		$roles = array();
 		foreach($roleIds as $id) {
 			$role = $this->findById($id);

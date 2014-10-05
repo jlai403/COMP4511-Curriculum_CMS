@@ -9,7 +9,8 @@ class UserController extends BaseController {
 		$lastName = $_POST["lastName"];
 		$email = $_POST["email"];
 		$password = $_POST["password"];
-		$selectedRoles = $_POST["roles"];
+		$selectedRoles = isset($_POST["roles"]) ? $_POST["roles"] : null;
+		
 		$roleDtos = FacadeFactory::getDomainFacade()->findRolesByIds($selectedRoles);
 		
 		$userDto = new UserDto();
@@ -19,10 +20,15 @@ class UserController extends BaseController {
 		$userDto->setPassword($password);
 		$userDto->setRoleDtos($roleDtos);
 	
-		FacadeFactory::getDomainFacade()->signUp($userDto);
-		FacadeFactory::getDomainFacade()->signIn($userDto);
-	
-		parent::redirect("Location: /View/Dashboard");
+		try {
+			FacadeFactory::getDomainFacade()->signUp($userDto);
+			FacadeFactory::getDomainFacade()->signIn($userDto);
+			parent::redirect("/View/Dashboard");
+		} catch (Exception $e) {
+			$uri = $_SERVER['HTTP_REFERER'];
+			SessionManager::addError($e->getMessage());
+			parent::redirect($uri);
+		}
 	}
 	
 	function signIn() {
@@ -32,15 +38,20 @@ class UserController extends BaseController {
 		$userDto = new UserDto();
 		$userDto->setEmail($email);
 		$userDto->setPassword($password);
-	
-		FacadeFactory::getDomainFacade()->signIn($userDto);
-	
-		parent::redirect("Location: /View/Dashboard");
+		
+		try {
+			FacadeFactory::getDomainFacade()->signIn($userDto);
+			parent::redirect("/View/Dashboard");
+		} catch (Exception $e) {
+			$uri = $_SERVER['HTTP_REFERER'];
+			SessionManager::addError($e->getMessage());
+			parent::redirect($uri);
+		}
 	}
 	
 	function logout() {
 		FacadeFactory::getDomainFacade()->logout();
-		parent::redirect("Location: /View");
+		parent::redirect("/View");
 	}
 }
 

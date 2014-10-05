@@ -24,7 +24,7 @@ class ProgramController extends BaseController {
 		$programInputDto->setDisciplineDto($disciplineDto);
 		
 		FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
-		parent::redirect("Location: /View/Program/Requested.php");
+		parent::redirect("/View/Program/Requested.php");
 	}
 	
 	function updateStatus(){
@@ -58,13 +58,13 @@ class ProgramController extends BaseController {
 	private function approve($programId) {
 		$currentUser = SessionManager::authorize();
 		FacadeFactory::getDomainFacade()->approveProgram($currentUser->getId(), $programId);
-		parent::redirect("Location: /View/Program/Summary.php?id=".$programId);
+		parent::redirect("/View/Program/Summary.php?id=".$programId);
 	}
 	
 	private function reject($programId) {
 		$currentUser = SessionManager::authorize();
 		FacadeFactory::getDomainFacade()->rejectProgram($currentUser->getId(), $programId);
-		parent::redirect("Location: /View/Program/Summary.php?id=".$programId);
+		parent::redirect("/View/Program/Summary.php?id=".$programId);
 	}
 }
 

@@ -19,7 +19,7 @@ class SessionManager {
 		return $value;
 	}
 	
-	public static function signIn(User $user, UserDto $userDto) {
+	public static function signIn($user, UserDto $userDto) {
 		$success = self::authenticateSignIn($user, $userDto);
 		if ($success) {
 			self::set("userEmail", $userDto->getEmail());
@@ -28,8 +28,8 @@ class SessionManager {
 		}
 	}
 	
-	private static function authenticateSignIn(User $user, UserDto $userDto) {
-		if ($user == null) return false;
+	private static function authenticateSignIn($user, UserDto $userDto) {
+		if (is_null($user)) return false;
 	
 		$encryptedPassword = SecurityManager::assertAndEncrpytPassword($userDto->getPassword());
 		if ($user->getPassword() !== $encryptedPassword) return false;
@@ -45,7 +45,7 @@ class SessionManager {
 	
 	public static function authorize() {
 		if (self::userIsLoggedIn() == false) {
-			header('Location: /View/Error/401.php');
+			header('/View/Error/401.php');
 			exit;
 		}
 		return FacadeFactory::getDomainFacade()->findUserByEmail(self::get("userEmail"));
@@ -55,5 +55,15 @@ class SessionManager {
 		$currentUserEmail = self::get("userEmail");
 		if (is_null($currentUserEmail)) return false;
 		return true;
+	}
+	
+	public static function addError($errorMessage) {
+		self::set("errorMessage", $errorMessage);
+	}
+	
+	public static function getError() {
+		$errorMessage = self::get("errorMessage");
+		unset($_SESSION["errorMessage"]);
+		return $errorMessage;
 	}
 }

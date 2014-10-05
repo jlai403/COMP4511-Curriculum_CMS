@@ -5,6 +5,8 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Role/RoleDto.php');
 class RoleAssembler {
 	
 	public function assembleAll($roles) {
+		if (is_null($roles)) return null;
+		
 		$roleDtos = array();
 		foreach($roles as $role){
 			$roleDto = $this->assemble($role);			
