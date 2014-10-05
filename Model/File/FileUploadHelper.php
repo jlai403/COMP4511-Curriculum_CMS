@@ -11,9 +11,10 @@ class FileUploadHelper {
 			$fileInputDto->setName($attachment["name"]);
 			$fileInputDto->setType($attachment["type"]);
 			$fileInputDto->setSize($attachment["size"]);
-
-			$content = self::getContent($attachment);
+			
+			$content = file_get_contents($attachment["tmp_name"]);
 			$fileInputDto->setContent($content);
+			
 			array_push($fileInputDtos, $fileInputDto);
 		}		
 		return $fileInputDtos;
@@ -27,13 +28,5 @@ class FileUploadHelper {
 			}
 		}
 		return $result;
-	}
-	
-	private static function getContent($attachment) {
-		$fp = fopen($attachment["tmp_name"], 'r');
-		$content = fread($fp, $attachment["size"]);
-		$content= addslashes($content);
-		fclose($fp);
-		return $content;
 	}
 }

@@ -103,7 +103,7 @@ $requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($cur
 							Attachments
 						</div>
 						<div class="col-md-9">
-							<input name="attachments[]" class="form-control" type="file" multiple />
+							<input name="attachments[]" type="file" multiple style="font-size:12px;"/>
 						</div>
 					</div>
 					
