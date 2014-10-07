@@ -45,8 +45,29 @@ $searchResultsDto = SessionManager::get("searchResults");
 		</div>
 		
 		<div class="container search-results center">
-			<div class="col-md-12">
-				<h1>Search Results For '<?= $searchResultsDto->getQueryString() ?>'</h1>		
+			<div class="row">
+				<h1 class="center-text">Search Results For '<?= $searchResultsDto->getQueryString() ?>'</h1>		
+			</div>
+			
+			<div class="row">
+				<?php foreach($searchResultsDto->getSearchResultDtos() as $searchResultDto) {  ?>
+					<a href="<?= $searchResultDto->getUri() ?>">
+						<div class="container item">
+							<div class="row">
+								<div class="col-md-4 col-xs-6 right-align"> Type: </div>
+								<div class="col-md-8 col-xs-6"> <?= $searchResultDto->getType() ?>  </div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 col-xs-6 right-align"> Name: </div>
+								<div class="col-md-8 col-xs-6"> <?= $searchResultDto->getName() ?>  </div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 col-xs-6 right-align"> Requested By: </div>
+								<div class="col-md-8 col-xs-6"> <?= $searchResultDto->getRequesterFullName() ?>  </div>
+							</div>
+						</div>
+					</a>
+				<?php }?>
 			</div>
 		</div>
 	</body>

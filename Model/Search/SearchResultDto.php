@@ -2,6 +2,7 @@
 
 class SearchResultDto {
 	private $uri;
+	private $type;
 	private $name;
 	private $requesterFirstName;
 	private $requesterLastName;
@@ -12,6 +13,14 @@ class SearchResultDto {
 	
 	public function setUri($uri) {
 		$this->uri = $uri;
+	}
+
+	public function getType() {
+		return $this->type;
+	}
+	
+	public function setType($type) {
+		$this->type = $type;
 	}
 	
 	public function getName() {

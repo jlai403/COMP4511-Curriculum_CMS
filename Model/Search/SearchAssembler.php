@@ -18,6 +18,8 @@ class SearchAssembler {
 		foreach($searchResults as $searchResult) {
 			$searchResultDto = new SearchResultDto();
 			$searchResultDto->setUri($this->getUriForType($searchResult->getType(), $searchResult->getId()));
+			
+			$searchResultDto->setType($searchResult->getType());
 			$searchResultDto->setName($searchResult->getName());
 			$searchResultDto->setRequesterFirstName($searchResult->getRequesterFirstName());
 			$searchResultDto->setRequesterLastName($searchResult->getRequesterLastName());
