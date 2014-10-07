@@ -14,6 +14,7 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap-theme.min.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
 
@@ -27,6 +28,15 @@ $actionableProgramDtos = FacadeFactory::getDomainFacade()->findProgramsForApprov
 	      	</a>
 			
 			<ul>
+				<li>
+					<form action="/Controller/SearchController.php?action=query" method="post">
+						<div class="form-group has-feedback">
+						    <input class="form-control" type="text" name="queryString" placeholder="Search..."/>
+						    <i class="glyphicon glyphicon-search form-control-feedback" style="top:0px;"></i>
+						</div>
+					</form>
+				</li>
+			
 				<li>
 					<a href="/View/Program/Request.php">Create Program</a>
 				</li>

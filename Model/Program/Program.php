@@ -1,8 +1,9 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/IEntity.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Search/ISearchable.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Error/MyException.php');
 
-class Program implements IEntity {
+class Program implements IEntity, ISearchable {
 	
 	private $id;
 	private $programName;

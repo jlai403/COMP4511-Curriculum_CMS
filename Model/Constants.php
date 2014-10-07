@@ -15,3 +15,7 @@ class StatusConstants {
 	const COMPLETED = 3;
 	const REJECTED = 4;
 }
+
+class SearchCriteriaTypes {
+	const PROGRAM = "Program";
+}

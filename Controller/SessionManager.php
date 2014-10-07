@@ -19,6 +19,13 @@ class SessionManager {
 		return $value;
 	}
 	
+	public static function getAndClear($key) {
+		self::startSession();
+		$value = isset($_SESSION[$key]) ? unserialize($_SESSION[$key]) : null;
+		unset($_SESSION[$key]);
+		return $value;
+	}
+	
 	public static function signIn($user, UserDto $userDto) {
 		$success = self::authenticateSignIn($user, $userDto);
 		if ($success) {

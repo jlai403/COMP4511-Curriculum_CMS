@@ -38,7 +38,7 @@ abstract class Repository {
 		$this->beginTransaction();
 		try {
 			$statement = $this->dbConnection->prepare($query);
-			$statement->execute();
+			$success = $statement->execute();
 			$resultSet = $statement->fetchAll();
 		} catch(Exception $e){
 			throw new MyException($e->getMessage());

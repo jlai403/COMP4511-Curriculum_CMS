@@ -23,8 +23,12 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileAssembler.php');
 
 class FacadeFactory {
 	
-	public static function getDomainFacade(){
+	public static function getDomainFacade() {
 		return new DomainFacade();
+	}
+	
+	public static function getSearchFacade() {
+		return new SearchFacade();
 	}
 }
 
@@ -126,4 +130,18 @@ class DomainFacade {
 		$file = (new FileRepository())->findById($fileId);
 		return (new FileAssembler())->assemble($file);
 	}
+}
+
+
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Search/SearchCriteriaDto.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Search/SearchRepository.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Search/SearchAssembler.php');
+
+class SearchFacade {
+
+	public function search(SearchCriteriaDto $searchCriteriaDto) {
+		$searchResults = (new SearchRepository())->search($searchCriteriaDto);
+		return (new SearchAssembler($searchCriteriaDto->getQueryString()))->assemble($searchResults);
+	}
+
 }
