@@ -77,7 +77,7 @@ class User implements IEntity {
 	}
 	
 	private function assertEmailIsValid() {
-		$validEmailPattern = "/[\w\d\.]+@mtroyal\.ca/";
+		$validEmailPattern = "/[\w\d\.]+@mtroyal\.ca/"; //any letter, digit, or period that occurs 1 or more times and ends with @mtroyal.ca
 		$matches = preg_match($validEmailPattern, $this->email);
 		if ($matches === 0) {
 			throw new MyException("Email is an invalid format.");
