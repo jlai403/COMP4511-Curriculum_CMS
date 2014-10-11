@@ -7,6 +7,7 @@ class ProgramInputDto {
 	private $requesterDto;
 	private $disciplineDto;
 	private $fileInputDtos;
+	private $effectiveTermDto;
 	
 	public function getProgramName(){
 		return $this->programName;
@@ -46,5 +47,13 @@ class ProgramInputDto {
 	
 	public function setFileInputDtos($fileInputDtos){
 		$this->fileInputDtos = $fileInputDtos;
+	}
+	
+	public function getEffectiveTermDto(){
+		return $this->effectiveTermDto;
+	}
+	
+	public function setEffectiveTermDto($termDto){
+		$this->effectiveTermDto = $termDto;
 	}
 }

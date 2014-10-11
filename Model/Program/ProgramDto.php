@@ -10,7 +10,8 @@ class ProgramDto {
 	private $disciplineDto;
 	private $requestedDate;
 	private $workflowDataDtos = array();
-
+	private $effectiveTermDto;
+	
 	public function getId(){
 		return $this->id;
 	}
@@ -74,6 +75,14 @@ class ProgramDto {
 	
 	public function setDisciplineDto($disciplineDto){
 		$this->disciplineDto = $disciplineDto;
+	}
+	
+	public function getEffectiveTermDto(){
+		return $this->effectiveTermDto;
+	}
+	
+	public function setEffectiveTermDto($effectiveTermDto){
+		$this->effectiveTermDto = $effectiveTermDto;
 	}
 	
 	public function getResponsibleParty() {

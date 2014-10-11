@@ -4,6 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramDto.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Workflow/WorkflowDataAssembler.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Comment/CommentAssembler.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileAssembler.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Term/TermAssembler.php');
 
 class ProgramAssembler {
 	
@@ -32,6 +33,9 @@ class ProgramAssembler {
 		
 		$disciplineDto = (new DisciplineAssembler())->assemble($program->getDiscipline());
 		$programDto->setDisciplineDto($disciplineDto);
+		
+		$effectiveTermDto = (new TermAssembler())->assemble($program->getEffectiveTerm());
+		$programDto->setEffectiveTermDto($effectiveTermDto);
 		
 		$workflowDataDtos = (new WorkflowDataAssembler())->assembleAll($program->getWorkflowDatas());
 		$programDto->setWorkflowDataDtos($workflowDataDtos);

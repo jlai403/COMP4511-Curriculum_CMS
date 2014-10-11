@@ -2,6 +2,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Discipline/DisciplineInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Comment/CommentInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileInitializer.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Term/TermInitializer.php');
 
 class ProgramInitializer {
 	
@@ -18,6 +19,9 @@ class ProgramInitializer {
 		
 		$this->addComments($program);
 		$this->addFiles($program);
+		
+		$term = (new TermInitializer($this->programInputDto->getEffectiveTermDto()))->initialize();
+		$program->setEffectiveTerm($term);
 		
 		$discipline = (new DisciplineInitializer($this->programInputDto->getDisciplineDto()))->initialize();
 		$program->setDiscipline($discipline);

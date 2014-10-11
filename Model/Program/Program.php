@@ -13,6 +13,7 @@ class Program implements IEntity, ISearchable {
 	private $workflowDatas;
 	private $requestedDate;
 	private $files = array();
+	private $effectiveTerm;
 	
 	// Overriden: IEntity
 	public function getId(){
@@ -89,6 +90,14 @@ class Program implements IEntity, ISearchable {
 	
 	public function setDiscipline($discipline){
 		$this->discipline = $discipline;
+	}
+	
+	public function getEffectiveTerm(){
+		return $this->effectiveTerm;
+	}
+	
+	public function setEffectiveTerm($effectiveTerm){
+		$this->effectiveTerm = $effectiveTerm;
 	}
 	
 	public function getWorkflowDatas(){

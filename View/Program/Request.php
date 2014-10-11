@@ -4,10 +4,10 @@ $currentUser = SessionManager::authorize();
 
 $errorMessage = SessionManager::getError();
 
+$effectiveTerms = FacadeFactory::getDomainFacade()->findAllTerms();
 $faculties = FacadeFactory::getDomainFacade()->findAllFaculties();
 $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 
-$requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($currentUser->getEmail());
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +68,19 @@ $requestedItems = FacadeFactory::getDomainFacade()->findProgramsByRequester($cur
 						</div>
 						<div class="col-md-9">
 							<input class="form-control" type="text" name="name" placeholder="Program Name" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							Effective Term
+						</div>
+						<div class="col-md-9">
+							<select class="form-control" name="effectiveTerm">
+								<?php foreach($effectiveTerms as $term) { ?>
+									<option value="<?=$term->getId()?>"> <?=$term->getDisplayName()?> </option>
+								<?php } ?>
+							</select>
 						</div>
 					</div>
 					

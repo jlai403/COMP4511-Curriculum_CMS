@@ -52,15 +52,25 @@ class SessionManager {
 	
 	public static function authorize() {
 		if (self::userIsLoggedIn() == false) {
-			header('/View/Error/401.php');
+			header('Location: /View/Error/401.php');
 			exit;
 		}
-		return FacadeFactory::getDomainFacade()->findUserByEmail(self::get("userEmail"));
+		
+		$user = FacadeFactory::getDomainFacade()->findUserByEmail(self::get("userEmail"));
+		
+		if (is_null($user)){
+			self::logout();
+			header('Location: /');
+			exit;
+		}
+		return $user;
 	}
 	
 	public static function userIsLoggedIn() {
 		$currentUserEmail = self::get("userEmail");
-		if (is_null($currentUserEmail)) return false;
+		if (is_null($currentUserEmail)) {
+			return false;
+		}
 		return true;
 	}
 	

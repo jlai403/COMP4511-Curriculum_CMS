@@ -33,9 +33,11 @@ class ProgramRepository extends Repository {
 			$program->getRequester()->getId(),
 			$program->getDiscipline()->getId(),
 			$program->getRequestedDate(),
-			$workflowDataId
+			$workflowDataId,
+			$program->getEffectiveTerm()->getId()
 		);
-		$resultSet = parent::executeStoredProcedureWithResultSet("call createProgramRequest(?,?,?,?,?)", $params);
+		
+		$resultSet = parent::executeStoredProcedureWithResultSet("call createProgramRequest(?,?,?,?,?,?)", $params);
 		$program->setId($resultSet[0]["ProgramId"]);
 		
 		$this->addCommentsToProgram($program);
@@ -111,6 +113,9 @@ class ProgramRepository extends Repository {
 		
 		$discipline = (new DisciplineRepository())->findById($record["discipline_id"]);
 		$program->setDiscipline($discipline);
+		
+		$effectiveTerm = (new TermRepository())->findById($record["effectiveTerm_id"]);
+		$program->setEffectiveTerm($effectiveTerm);
 		
 		$workflowDatas = array();
 		(new WorkflowRepository())->getWorkflowDataHistory($record["workflowData_id"], $workflowDatas);

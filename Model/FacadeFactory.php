@@ -19,6 +19,9 @@ require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramInitializer.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramRepository.php');
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Program/ProgramAssembler.php');
 
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Term/TermRepository.php');
+require_once($_SERVER["DOCUMENT_ROOT"].'/Model/Term/TermAssembler.php');
+
 require_once($_SERVER["DOCUMENT_ROOT"].'/Model/File/FileAssembler.php');
 
 class FacadeFactory {
@@ -129,6 +132,16 @@ class DomainFacade {
 	public function findFileById($fileId) {
 		$file = (new FileRepository())->findById($fileId);
 		return (new FileAssembler())->assemble($file);
+	}
+	
+	public function findAllTerms() {
+		$terms = (new TermRepository())->findAll();
+		return (new TermAssembler())->assembleAll($terms);
+	}
+	
+	public function findTermById($termId) {
+		$term = (new TermRepository())->findById($termId);
+		return (new TermAssembler())->assemble($term);
 	}
 }
 

@@ -12,6 +12,7 @@ class ProgramController extends BaseController {
 		$programName = $_POST["name"];
 		$comments = $_POST["comments"];
 		$disciplineId = $_POST["discipline"];
+		$effectiveTermId = $_POST["effectiveTerm"];
 		
 		$fileInputDtos = FileUploadHelper::convertToFileInputDtos($_FILES["attachments"]);
 		
@@ -20,6 +21,10 @@ class ProgramController extends BaseController {
 		$programInputDto->setComments($comments);
 		$programInputDto->setProgramName($programName);
 		$programInputDto->setFileInputDtos($fileInputDtos);
+		
+		$termDto = FacadeFactory::getDomainFacade()->findTermById($effectiveTermId);
+		$programInputDto->setEffectiveTermDto($termDto);
+		
 		$disciplineDto = FacadeFactory::getDomainFacade()->findDisiplineById($disciplineId);
 		$programInputDto->setDisciplineDto($disciplineDto);
 		
