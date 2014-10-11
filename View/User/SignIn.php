@@ -40,16 +40,16 @@ $errorMessage = SessionManager::getError();
 					</div>
 					
 					<div class="row">
-						<input class="form-control" type="email" name="email" placeholder="email" />
+						<input class="form-control" type="email" name="email" placeholder="email" tabindex="1"/>
 					</div>
 			
 					<div class="row">
-						<input class="form-control" type="password" name="password" placeholder="password" />
+						<input class="form-control" type="password" name="password" placeholder="password" tabindex="2"/>
 					</div>
 			
 					<div class="row center-text">
-						<input class="form-control button blue" type="submit" value="Login"/>
-						<a class="link" href="/View/User/SignUp.php">Don't have an account?</a>
+						<input class="form-control button blue" type="submit" value="Login" tabindex="3"/>
+						<a class="link" href="/View/User/SignUp.php" tabindex="4">Don't have an account?</a>
 					</div>
 				</form>			
 			</div>

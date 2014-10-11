@@ -90,7 +90,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Program Name
 							</div>
 							<div class="col-md-9">
-								<input class="form-control" type="text" name="name" placeholder="Program Name" />
+								<input class="form-control" type="text" name="name" placeholder="Program Name" tabindex="1"/>
 							</div>
 						</div>
 						
@@ -99,7 +99,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Effective Term
 							</div>
 							<div class="col-md-9">
-								<select class="form-control" name="effectiveTerm">
+								<select class="form-control" name="effectiveTerm" tabindex="2">
 									<?php foreach($effectiveTerms as $term) { ?>
 										<option value="<?=$term->getId()?>"> <?=$term->getDisplayName()?> </option>
 									<?php } ?>
@@ -112,7 +112,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Faculty
 							</div>
 							<div class="col-md-9">
-								<select class="form-control" name="faculty">
+								<select class="form-control" name="faculty" tabindex="3">
 									<?php foreach($faculties as $faculty) { ?>
 										<option value="<?=$faculty->getId()?>"> <?=$faculty->getName()?> </option>
 									<?php } ?>
@@ -125,7 +125,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Discipline
 							</div>
 							<div class="col-md-9">
-								<select class="form-control" name="discipline">
+								<select class="form-control" name="discipline" tabindex="4">
 									<?php foreach($disciplines as $discipline) { ?>
 										<option value="<?=$discipline->getId()?>"> <?=$discipline->getDisplayName()?> </option>
 									<?php } ?>
@@ -133,7 +133,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 							</div>
 						</div>
 						
-						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="5">
 							<input class="form-control button blue" type="button" value="Next"/>
 						</div>
 					</div>
@@ -144,7 +144,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Cross Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="crossImpact" class="form-control"  rows="5"
+								<textarea name="crossImpact" class="form-control"  rows="5" tabindex="6"
 									placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
 							</div>
 						</div>
@@ -154,7 +154,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Student Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="studentImpact" class="form-control"  rows="5"
+								<textarea name="studentImpact" class="form-control"  rows="5" tabindex="7"
 									placeholder="Please identify how student input or impact has been assessed"></textarea>
 							</div>
 						</div>
@@ -164,7 +164,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Library Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="libraryImpact" class="form-control"  rows="5"
+								<textarea name="libraryImpact" class="form-control"  rows="5" tabindex="8"
 									placeholder="Please identify how impact to the Library has been addressed"></textarea>
 							</div>
 						</div>
@@ -174,13 +174,13 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								ITS Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="itsImpact" class="form-control"  rows="5"
+								<textarea name="itsImpact" class="form-control"  rows="5" tabindex="9"
 									placeholder="Please identify how impact to ITS has been addressed"></textarea>
 							</div>
 						</div>
 						
 						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-							<input class="form-control button blue" type="button" value="Next"/>
+							<input class="form-control button blue" type="button" value="Next" tabindex="10"/>
 						</div>
 					</div>
 					
@@ -190,7 +190,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Comments
 							</div>
 							<div class="col-md-9">
-								<textarea name="comments" class="form-control" placeholder="Comments..." rows="5"></textarea>
+								<textarea name="comments" class="form-control" placeholder="Comments..." rows="5" tabindex="11"></textarea>
 							</div>
 						</div>
 						
@@ -199,12 +199,12 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Attachments
 							</div>
 							<div class="col-md-9">
-								<input name="attachments[]" type="file" multiple style="font-size:12px;"/>
+								<input name="attachments[]" type="file" multiple style="font-size:12px;" tabindex="12"/>
 							</div>
 						</div>
 						
 						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-							<input class="form-control button blue" type="button" value="Request"/>
+							<input class="form-control button blue" type="button" value="Request" tabindex="13"/>
 						</div>
 					</div>
 					

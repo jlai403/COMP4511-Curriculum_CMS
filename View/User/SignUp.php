@@ -45,25 +45,25 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					
 					<div class="row">
 						<div class="col-md-6 split-left">
-							<input class="form-control" type="text" name="firstName" placeholder="First name" />
+							<input class="form-control" type="text" name="firstName" placeholder="First name" tabindex="1"/>
 						</div>
 						<div class="col-md-6 split-right">
-							<input class="form-control" type="text" name="lastName" placeholder="Last name"/>
+							<input class="form-control" type="text" name="lastName" placeholder="Last name" tabindex="2"/>
 						</div>
 					</div>
 			
 					<div class="row">
-						<input class="form-control" type="email" name="email" placeholder="Email"/>
+						<input class="form-control" type="email" name="email" placeholder="Email" tabindex="3"/>
 						<abbr class="info-mark" tooltip="Must be a valid @mtroyal.ca email."> i </abbr>
 					</div>
 					
 					<div class="row">
-						<input class="form-control" type="password" name="password" placeholder="Password"/>
+						<input class="form-control" type="password" name="password" placeholder="Password" tabindex="4"/>
 						<abbr class="info-mark" tooltip="Must be at least 6 characters."> i </abbr>
 					</div>
 					
 					<div class="row">
-						<select class="form-control" name="roles[]" multiple size="5">
+						<select class="form-control" name="roles[]" multiple size="5" tabindex="5">
 							<?php foreach($roles as $role) { ?>
 								<option value="<?=$role->getId()?>"> <?=$role->getName()?> </option>
 							<?php } ?>
@@ -71,8 +71,8 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					</div>
 			
 					<div class="row center-text">
-						<input class="form-control button blue" type="submit" value="Sign Up"/>
-						<a class="link" href="/View/User/SignIn.php">Already have an account?</a>
+						<input class="form-control button blue" type="submit" value="Sign Up" tabindex="6"/>
+						<a class="link" href="/View/User/SignIn.php" tabindex="7">Already have an account?</a>
 					</div>
 				</form>			
 			</div>
