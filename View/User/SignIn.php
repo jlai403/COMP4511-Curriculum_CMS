@@ -16,6 +16,9 @@ $errorMessage = SessionManager::getError();
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
 
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/Content/js/errors.js"></script>
 	</head>
 	
 	<body>
@@ -28,11 +31,13 @@ $errorMessage = SessionManager::getError();
 						<h3>Please sign in</h3>
 					</div>
 					
-					<?php if (!is_null($errorMessage)) { ?>
 					<div class="row">
-						<p class="error center-text"><?= $errorMessage ?></p>
+						<ul class="errors center-text">
+							<?php if (!is_null($errorMessage)) { ?>
+								<li><?= $errorMessage ?></li>
+							<?php }?>
+						</ul>
 					</div>
-					<?php } ?>
 					
 					<div class="row">
 						<input class="form-control" type="email" name="email" placeholder="email" />
@@ -50,4 +55,32 @@ $errorMessage = SessionManager::getError();
 			</div>
 		</div>
 	</body>
-</html> 
+</html>
+
+<script>
+	clearHighlightsOnFocus();
+
+	$('.form').submit(function(e) {
+		clearErrors();
+		
+		validateEmailIsValid();
+		validatePasswordIsValid();
+		
+		if (hasErrors()) {
+			e.preventDefault();
+			printErrors();
+			return false;
+		};
+		return true;
+	});
+
+	function validateEmailIsValid() {
+		var email = $("input[name='email']").val().trim();
+		if (email === '') addError("You must enter an email.","email");
+	}
+
+	function validatePasswordIsValid() {
+		var password = $("input[name='password']").val().trim();
+		if (password === '') addError("You must enter a password.","password");
+	}
+</script>

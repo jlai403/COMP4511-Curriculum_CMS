@@ -31,7 +31,7 @@ class SessionManager {
 		if ($success) {
 			self::set("userEmail", $userDto->getEmail());
 		} else {
-			throw new MyException("The user name or password provided is incorrect.");
+			throw new MyException("The email or password provided is incorrect.");
 		}
 	}
 	

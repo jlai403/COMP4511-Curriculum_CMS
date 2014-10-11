@@ -18,6 +18,9 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
 
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/Content/js/errors.js"></script>
 	</head>
 
 	<body>
@@ -29,14 +32,16 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 					</div>
 					
 					<div class="row">
-						<h6>* All fields required.</h6>
+						<ul class="errors center-text">
+							<?php if (!is_null($errorMessage)) { ?>
+								<li><?= $errorMessage ?></li>
+							<?php }?>
+						</ul>
 					</div>
 					
-					<?php if (!is_null($errorMessage)) { ?>
 					<div class="row">
-						<p class="error center-text"><?= $errorMessage ?></p>
+						<h6>* All fields required.</h6>
 					</div>
-					<?php } ?>
 					
 					<div class="row">
 						<div class="col-md-6 split-left">
@@ -74,3 +79,51 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 		</div>
 	</body>
 </html> 
+
+<script>
+	clearHighlightsOnFocus();
+
+	$(".form").submit(function(e) {
+		clearErrors();
+
+		validateFirstNameIsValid();
+		validateLastNameIsValid();
+		validateEmailIsValid();
+		validatePasswordIsValid();
+		validateAtLeastOneRoleSelected();
+
+		if (hasErrors()) {
+			e.preventDefault();
+			printErrors();
+			return false;
+		}
+		
+		return true;
+	});
+
+	function validateFirstNameIsValid() {
+		var firstName = $("input[name='firstName']").val().trim();
+		if (firstName.trim() === '') addError("You must enter a first name.", "firstName")
+	}
+
+	function validateLastNameIsValid() {
+		var lastName = $("input[name='lastName']").val().trim();
+		if (lastName.trim() === '') addError("You must enter a last name.", "lastName")
+	}
+
+	function validateEmailIsValid() {
+		var email = $("input[name='email']").val().trim();
+		var validEmail = new RegExp("[\w\d\.]+@mtroyal\.ca/"); // 1 or more characters or digits, ends with @mtroyal.ca
+		if (email === '' || validEmail.test(email)) addError("Email must be a valid '@mtroyal.ca' email.", "email")
+	}
+
+	function validatePasswordIsValid() {
+		var password = $("input[name='password']").val().trim();
+		if (password === '' || password.length < 6) addError("Password must be at least 6 characters long.", "password")
+	}
+
+	function validateAtLeastOneRoleSelected() {
+		var roles = $("select[name='roles[]'] option:selected");
+		if (roles.length === 0) addError("At least one role must be selected.", "roles[]");
+	}
+</script>
