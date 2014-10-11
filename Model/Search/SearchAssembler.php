@@ -12,8 +12,11 @@ class SearchAssembler {
 	}
 	
 	public function assemble($searchResults) {
+		
 		$searchResultsDto = new SearchResultsDto();
 		$searchResultsDto->setQueryString($this->queryString);
+
+		if (is_null($searchResults) || empty($searchResults)) return $searchResultsDto;
 		
 		foreach($searchResults as $searchResult) {
 			$searchResultDto = new SearchResultDto();
