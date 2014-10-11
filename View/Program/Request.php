@@ -52,26 +52,28 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 					
 					<div class="steps">
 						<div class="row">
-							<div class="col-md-4 center-text step-one-check">
+							<div class="col-xs-4 center-text step-one-check">
 								Step One </br>
 								<i class="glyphicon glyphicon-unchecked cursor"></i> 
 							</div>
-							<div class="col-md-4 center-text step-two-check">
+							<div class="col-xs-4 center-text step-two-check">
 								Step Two </br>
 								<i class="glyphicon glyphicon-unchecked cursor"></i> 
 							</div>
-							<div class="col-md-4 center-text step-three-check">
+							<div class="col-xs-4 center-text step-three-check">
 								Step Three </br>
 								<i class="glyphicon glyphicon-unchecked cursor"></i> 
 							</div>
 						</div>
 					</div>
 					
-					<?php if (!is_null($errorMessage)) { ?>
 					<div class="row">
-						<p class="error center-text"><?= $errorMessage ?></p>
+						<ul class="errors center-text">
+							<?php if (!is_null($errorMessage)) { ?>
+								<li><?= $errorMessage ?></li>
+							<?php }?>
+						</ul>
 					</div>
-					<?php } ?>
 					
 					<div class="step-one">
 						<div class="row">
@@ -213,6 +215,8 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 </html> 
 
 <script>
+	clearHighlightsOnFocus();
+
 	$(".steps").on("click", ".step-one-check .glyphicon", function() {
 		$(".step-one").removeClass("hide");
 		$(".step-two").addClass("hide");
@@ -231,23 +235,73 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		$(".step-one").addClass("hide");
 	});
 
+	
 	$(".step-one .button").click(function() {
+		clearErrors();
+
+		validateProgramName();
+
+		if (hasErrors()) {
+			printErrors();
+			return false;
+		}
+		
 		$(".step-one-check .glyphicon").removeClass("glyphicon-unchecked");
 		$(".step-one-check .glyphicon").addClass("glyphicon-check");
 		$(".step-one").toggleClass("hide");
 		$(".step-two").toggleClass("hide");
 	});
 
+	function validateProgramName() {
+		var programName = $("input[name='name']").val().trim();
+		if (programName === '') addError("Program name is required.", "name");
+	}
+
 	$(".step-two .button").click(function() {
+		clearErrors();
+
+		validateCrossImpact();
+		validateStudentImpact();
+		validateLibraryImpact();
+		validateItsImpact();
+
+		if (hasErrors()) {
+			printErrors();
+			return false;
+		}
+		
 		$(".step-two-check .glyphicon").removeClass("glyphicon-unchecked");
 		$(".step-two-check .glyphicon").addClass("glyphicon-check");
 		$(".step-two").toggleClass("hide");
 		$(".step-three").toggleClass("hide");
 	});
 
+	function validateCrossImpact() {
+		var crossImpact = $("textarea[name='crossImpact']").val().trim();
+		if (crossImpact === '') addError("Cross impact is required.", "crossImpact");
+	}
+
+	function validateStudentImpact() {
+		var studentImpact = $("textarea[name='studentImpact']").val().trim();
+		if (studentImpact === '') addError("Student impact is required.", "studentImpact");
+	}
+
+	function validateLibraryImpact() {
+		var libraryImpact = $("textarea[name='libraryImpact']").val().trim();
+		if (libraryImpact === '') addError("Library impact is required.", "libraryImpact");
+	}
+
+	function validateItsImpact() {
+		var itsImpact = $("textarea[name='itsImpact']").val().trim();
+		if (itsImpact === '') addError("ITS impact is required.", "itsImpact");
+	}
+	
+	
 	$(".step-three .button").click(function() {
 		$(".step-three-check .glyphicon").removeClass("glyphicon-unchecked");
 		$(".step-three-check .glyphicon").addClass("glyphicon-check");
+
+		$("form").submit();
 	});
 
 </script>

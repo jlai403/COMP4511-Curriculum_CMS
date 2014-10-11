@@ -5,6 +5,7 @@ function addError(errorText, inputName) {
 	if (inputName != null) {
 		$("input[name='" + inputName + "']").addClass("error-highlight");
 		$("select[name='" + inputName + "']").addClass("error-highlight");
+		$("textarea[name='" + inputName + "']").addClass("error-highlight");
 	}
 }
 
@@ -26,6 +27,9 @@ function clearHighlightsOnFocus() {
 		$(this).removeClass("error-highlight");
 	});
 	$("select").focus(function() {
+		$(this).removeClass("error-highlight");
+	});
+	$("textarea").focus(function() {
 		$(this).removeClass("error-highlight");
 	});
 }

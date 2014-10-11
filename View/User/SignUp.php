@@ -86,10 +86,10 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 	$(".form").submit(function(e) {
 		clearErrors();
 
-		validateFirstNameIsValid();
-		validateLastNameIsValid();
-		validateEmailIsValid();
-		validatePasswordIsValid();
+		validateFirstName();
+		validateLastName();
+		validateEmail();
+		validatePassword();
 		validateAtLeastOneRoleSelected();
 
 		if (hasErrors()) {
@@ -101,23 +101,23 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 		return true;
 	});
 
-	function validateFirstNameIsValid() {
+	function validateFirstName() {
 		var firstName = $("input[name='firstName']").val().trim();
-		if (firstName.trim() === '') addError("You must enter a first name.", "firstName")
+		if (firstName.trim() === '') addError("First name is required.", "firstName")
 	}
 
-	function validateLastNameIsValid() {
+	function validateLastName() {
 		var lastName = $("input[name='lastName']").val().trim();
-		if (lastName.trim() === '') addError("You must enter a last name.", "lastName")
+		if (lastName.trim() === '') addError("Last name is required.", "lastName")
 	}
 
-	function validateEmailIsValid() {
+	function validateEmail() {
 		var email = $("input[name='email']").val().trim();
 		var validEmail = new RegExp("[\w\d\.]+@mtroyal\.ca/"); // 1 or more characters or digits, ends with @mtroyal.ca
 		if (email === '' || validEmail.test(email)) addError("Email must be a valid '@mtroyal.ca' email.", "email")
 	}
 
-	function validatePasswordIsValid() {
+	function validatePassword() {
 		var password = $("input[name='password']").val().trim();
 		if (password === '' || password.length < 6) addError("Password must be at least 6 characters long.", "password")
 	}

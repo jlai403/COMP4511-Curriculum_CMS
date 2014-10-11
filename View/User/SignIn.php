@@ -63,8 +63,8 @@ $errorMessage = SessionManager::getError();
 	$('.form').submit(function(e) {
 		clearErrors();
 		
-		validateEmailIsValid();
-		validatePasswordIsValid();
+		validateEmail();
+		validatePassword();
 		
 		if (hasErrors()) {
 			e.preventDefault();
@@ -74,12 +74,12 @@ $errorMessage = SessionManager::getError();
 		return true;
 	});
 
-	function validateEmailIsValid() {
+	function validateEmail() {
 		var email = $("input[name='email']").val().trim();
 		if (email === '') addError("You must enter an email.","email");
 	}
 
-	function validatePasswordIsValid() {
+	function validatePassword() {
 		var password = $("input[name='password']").val().trim();
 		if (password === '') addError("You must enter a password.","password");
 	}
