@@ -19,6 +19,14 @@
 	width: 100%;
 }
 
+.steps {
+	margin-bottom: 20px;
+}
+
+.steps .glyphicon {
+	font-size: 2rem;
+}
+
 /** Desktop Specific css **/
 @media only screen and (min-width:990px) {
 	.split-left {

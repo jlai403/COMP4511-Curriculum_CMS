@@ -21,6 +21,9 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/create-program.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/Content/js/errors.js"></script>
 	</head>
 
 	<body>
@@ -47,132 +50,204 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						<h3 style="margin: 20px;">Create Program</h3>
 					</div>
 					
+					<div class="steps">
+						<div class="row">
+							<div class="col-md-4 center-text step-one-check">
+								Step One </br>
+								<i class="glyphicon glyphicon-unchecked cursor"></i> 
+							</div>
+							<div class="col-md-4 center-text step-two-check">
+								Step Two </br>
+								<i class="glyphicon glyphicon-unchecked cursor"></i> 
+							</div>
+							<div class="col-md-4 center-text step-three-check">
+								Step Three </br>
+								<i class="glyphicon glyphicon-unchecked cursor"></i> 
+							</div>
+						</div>
+					</div>
+					
 					<?php if (!is_null($errorMessage)) { ?>
 					<div class="row">
 						<p class="error center-text"><?= $errorMessage ?></p>
 					</div>
 					<?php } ?>
 					
-					<div class="row">
-						<div class="col-md-3">
-							Requester
+					<div class="step-one">
+						<div class="row">
+							<div class="col-md-3">
+								Requester
+							</div>
+							<div class="col-md-9">
+								<input class="form-control" type="text" name="requester" value="<?php echo $currentUser->getFirstName()." ".$currentUser->getLastName()?>" readonly/>
+							</div>
 						</div>
-						<div class="col-md-9">
-							<input class="form-control" type="text" name="requester" value="<?php echo $currentUser->getFirstName()." ".$currentUser->getLastName()?>" readonly/>
+				
+						<div class="row">
+							<div class="col-md-3">
+								Program Name
+							</div>
+							<div class="col-md-9">
+								<input class="form-control" type="text" name="name" placeholder="Program Name" />
+							</div>
 						</div>
-					</div>
-			
-					<div class="row">
-						<div class="col-md-3">
-							Program Name
+						
+						<div class="row">
+							<div class="col-md-3">
+								Effective Term
+							</div>
+							<div class="col-md-9">
+								<select class="form-control" name="effectiveTerm">
+									<?php foreach($effectiveTerms as $term) { ?>
+										<option value="<?=$term->getId()?>"> <?=$term->getDisplayName()?> </option>
+									<?php } ?>
+								</select>
+							</div>
 						</div>
-						<div class="col-md-9">
-							<input class="form-control" type="text" name="name" placeholder="Program Name" />
+					
+						<div class="row">
+							<div class="col-md-3">
+								Faculty
+							</div>
+							<div class="col-md-9">
+								<select class="form-control" name="faculty">
+									<?php foreach($faculties as $faculty) { ?>
+										<option value="<?=$faculty->getId()?>"> <?=$faculty->getName()?> </option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-3">
+								Discipline
+							</div>
+							<div class="col-md-9">
+								<select class="form-control" name="discipline">
+									<?php foreach($disciplines as $discipline) { ?>
+										<option value="<?=$discipline->getId()?>"> <?=$discipline->getDisplayName()?> </option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						
+						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+							<input class="form-control button blue" type="button" value="Next"/>
 						</div>
 					</div>
 					
-					<div class="row">
-						<div class="col-md-3">
-							Effective Term
+					<div class="step-two hide">
+						<div class="row">
+							<div class="col-md-3">
+								Cross Impact
+							</div>
+							<div class="col-md-9">
+								<textarea name="crossImpact" class="form-control"  rows="5"
+									placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
+							</div>
 						</div>
-						<div class="col-md-9">
-							<select class="form-control" name="effectiveTerm">
-								<?php foreach($effectiveTerms as $term) { ?>
-									<option value="<?=$term->getId()?>"> <?=$term->getDisplayName()?> </option>
-								<?php } ?>
-							</select>
+						
+						<div class="row">
+							<div class="col-md-3">
+								Student Impact
+							</div>
+							<div class="col-md-9">
+								<textarea name="studentImpact" class="form-control"  rows="5"
+									placeholder="Please identify how student input or impact has been assessed"></textarea>
+							</div>
 						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-							Faculty
+						
+						<div class="row">
+							<div class="col-md-3">
+								Library Impact
+							</div>
+							<div class="col-md-9">
+								<textarea name="libraryImpact" class="form-control"  rows="5"
+									placeholder="Please identify how impact to the Library has been addressed"></textarea>
+							</div>
 						</div>
-						<div class="col-md-9">
-							<select class="form-control" name="faculty">
-								<?php foreach($faculties as $faculty) { ?>
-									<option value="<?=$faculty->getId()?>"> <?=$faculty->getName()?> </option>
-								<?php } ?>
-							</select>
+						
+						<div class="row">
+							<div class="col-md-3">
+								ITS Impact
+							</div>
+							<div class="col-md-9">
+								<textarea name="itsImpact" class="form-control"  rows="5"
+									placeholder="Please identify how impact to ITS has been addressed"></textarea>
+							</div>
 						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-							Discipline
-						</div>
-						<div class="col-md-9">
-							<select class="form-control" name="discipline">
-								<?php foreach($disciplines as $discipline) { ?>
-									<option value="<?=$discipline->getId()?>"> <?=$discipline->getDisplayName()?> </option>
-								<?php } ?>
-							</select>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-							Cross Impact
-						</div>
-						<div class="col-md-9">
-							<textarea name="crossImpact" class="form-control"  rows="5"
-								placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
+						
+						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+							<input class="form-control button blue" type="button" value="Next"/>
 						</div>
 					</div>
 					
-					<div class="row">
-						<div class="col-md-3">
-							Student Impact
+					<div class="step-three hide">
+						<div class="row">
+							<div class="col-md-3">
+								Comments
+							</div>
+							<div class="col-md-9">
+								<textarea name="comments" class="form-control" placeholder="Comments..." rows="5"></textarea>
+							</div>
 						</div>
-						<div class="col-md-9">
-							<textarea name="studentImpact" class="form-control"  rows="5"
-								placeholder="Please identify how student input or impact has been assessed"></textarea>
+						
+						<div class="row">
+							<div class="col-md-3">
+								Attachments
+							</div>
+							<div class="col-md-9">
+								<input name="attachments[]" type="file" multiple style="font-size:12px;"/>
+							</div>
 						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-							Library Impact
-						</div>
-						<div class="col-md-9">
-							<textarea name="libraryImpact" class="form-control"  rows="5"
-								placeholder="Please identify how impact to the Library has been addressed"></textarea>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-							ITS Impact
-						</div>
-						<div class="col-md-9">
-							<textarea name="itsImpact" class="form-control"  rows="5"
-								placeholder="Please identify how impact to ITS has been addressed"></textarea>
+						
+						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
+							<input class="form-control button blue" type="button" value="Request"/>
 						</div>
 					</div>
 					
-					<div class="row">
-						<div class="col-md-3">
-							Comments
-						</div>
-						<div class="col-md-9">
-							<textarea name="comments" class="form-control" placeholder="Comments..." rows="5"></textarea>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-3">
-							Attachments
-						</div>
-						<div class="col-md-9">
-							<input name="attachments[]" type="file" multiple style="font-size:12px;"/>
-						</div>
-					</div>
-					
-					<div class="row center-text">
-						<input class="form-control button blue center" type="submit" value="Request" style="max-width: 300px;"/>
-					</div>
 				</form>			
 			</div>
 		</div>
 	</body>
 </html> 
+
+<script>
+	$(".steps").on("click", ".step-one-check .glyphicon", function() {
+		$(".step-one").removeClass("hide");
+		$(".step-two").addClass("hide");
+		$(".step-three").addClass("hide");
+	});
+
+	$(".steps").on("click", ".step-two-check .glyphicon", function() {
+		$(".step-two").removeClass("hide");
+		$(".step-one").addClass("hide");
+		$(".step-three").addClass("hide");
+	});
+
+	$(".steps").on("click", ".step-three-check .glyphicon", function() {
+		$(".step-three").removeClass("hide");
+		$(".step-two").addClass("hide");
+		$(".step-one").addClass("hide");
+	});
+
+	$(".step-one .button").click(function() {
+		$(".step-one-check .glyphicon").removeClass("glyphicon-unchecked");
+		$(".step-one-check .glyphicon").addClass("glyphicon-check");
+		$(".step-one").toggleClass("hide");
+		$(".step-two").toggleClass("hide");
+	});
+
+	$(".step-two .button").click(function() {
+		$(".step-two-check .glyphicon").removeClass("glyphicon-unchecked");
+		$(".step-two-check .glyphicon").addClass("glyphicon-check");
+		$(".step-two").toggleClass("hide");
+		$(".step-three").toggleClass("hide");
+	});
+
+	$(".step-three .button").click(function() {
+		$(".step-three-check .glyphicon").removeClass("glyphicon-unchecked");
+		$(".step-three-check .glyphicon").addClass("glyphicon-check");
+	});
+
+</script>
