@@ -16,6 +16,10 @@ class ProgramInitializer {
 		$program = new Program();
 		$program->setProgramName($this->programInputDto->getProgramName());
 		$program->setRequestedDate(date("Y-m-d"));
+		$program->setCrossImpact($this->programInputDto->getCrossImpact());
+		$program->setStudentImpact($this->programInputDto->getStudentImpact());
+		$program->setLibraryImpact($this->programInputDto->getLibraryImpact());
+		$program->setItsImpact($this->programInputDto->getItsImpact());
 		
 		$this->addComments($program);
 		$this->addFiles($program);

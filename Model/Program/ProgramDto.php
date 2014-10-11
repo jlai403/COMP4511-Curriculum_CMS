@@ -11,6 +11,10 @@ class ProgramDto {
 	private $requestedDate;
 	private $workflowDataDtos = array();
 	private $effectiveTermDto;
+	private $crossImpact;
+	private $studentImpact;
+	private $libraryImpact;
+	private $itsImpact;
 	
 	public function getId(){
 		return $this->id;
@@ -93,5 +97,37 @@ class ProgramDto {
 		$currentWorkflowDataDto = end($this->workflowDataDtos);
 		reset($this->workflowDataDtos);
 		return $currentWorkflowDataDto;
+	}
+	
+	public function getCrossImpact() {
+		return $this->crossImpact;
+	}
+	
+	public function setCrossImpact($crossImpact) {
+		$this->crossImpact = $crossImpact;
+	}
+	
+	public function getStudentImpact() {
+		return $this->studentImpact;
+	}
+	
+	public function setStudentImpact($studentImpact) {
+		$this->studentImpact = $studentImpact;
+	}
+	
+	public function getLibraryImpact() {
+		return $this->libraryImpact;
+	}
+	
+	public function setLibraryImpact($libraryImpact) {
+		$this->libraryImpact = $libraryImpact;
+	}
+	
+	public function getItsImpact() {
+		return $this->itsImpact;
+	}
+	
+	public function setItsImpact($itsImpact) {
+		$this->itsImpact = $itsImpact;
 	}
 }

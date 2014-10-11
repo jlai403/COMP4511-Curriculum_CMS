@@ -13,6 +13,10 @@ class ProgramController extends BaseController {
 		$comments = $_POST["comments"];
 		$disciplineId = $_POST["discipline"];
 		$effectiveTermId = $_POST["effectiveTerm"];
+		$crossImpact = $_POST["crossImpact"];
+		$studentImpact = $_POST["studentImpact"];
+		$libraryImpact = $_POST["libraryImpact"];
+		$itsImpact = $_POST["itsImpact"];
 		
 		$fileInputDtos = FileUploadHelper::convertToFileInputDtos($_FILES["attachments"]);
 		
@@ -21,6 +25,10 @@ class ProgramController extends BaseController {
 		$programInputDto->setComments($comments);
 		$programInputDto->setProgramName($programName);
 		$programInputDto->setFileInputDtos($fileInputDtos);
+		$programInputDto->setCrossImpact($crossImpact);
+		$programInputDto->setStudentImpact($studentImpact);
+		$programInputDto->setLibraryImpact($libraryImpact);
+		$programInputDto->setItsImpact($itsImpact);
 		
 		$termDto = FacadeFactory::getDomainFacade()->findTermById($effectiveTermId);
 		$programInputDto->setEffectiveTermDto($termDto);

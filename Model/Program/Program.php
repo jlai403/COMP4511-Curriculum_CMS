@@ -14,6 +14,10 @@ class Program implements IEntity, ISearchable {
 	private $requestedDate;
 	private $files = array();
 	private $effectiveTerm;
+	private $crossImpact;
+	private $studentImpact;
+	private $libraryImpact;
+	private $itsImpact;
 	
 	// Overriden: IEntity
 	public function getId(){
@@ -28,6 +32,34 @@ class Program implements IEntity, ISearchable {
 	// Overriden: IEntity
 	public function assertValid(){
 		$this->assertProgramNameIsValid();
+		$this->assertCrossImpactIsValid();
+		$this->assertStudentImpactIsValid();
+		$this->assertLibraryImpactIsValid();
+		$this->assertItsImpactIsValid();
+	}
+	
+	private function assertCrossImpactIsValid() {
+		$crossImpactIsNull = is_null($this->getCrossImpact());
+		$crossImpactIsEmpty = empty($this->getCrossImpact());
+		if ($crossImpactIsNull || $crossImpactIsEmpty) throw new MyException("Cross impact is required.");
+	}
+	
+	private function assertStudentImpactIsValid() {
+		$studentImpactIsNull = is_null($this->getStudentImpact());
+		$studentImpactIsEmpty = empty($this->getStudentImpact());
+		if ($studentImpactIsNull || $studentImpactIsEmpty) throw new MyException("Student impact is required.");
+	}
+	
+	private function assertLibraryImpactIsValid() {
+		$libraryImpactIsNull = is_null($this->getLibraryImpact());
+		$libraryImpactIsEmpty = empty($this->getLibraryImpact());
+		if ($libraryImpactIsNull || $libraryImpactIsEmpty) throw new MyException("Library impact is required.");
+	}
+	
+	private function assertItsImpactIsValid() {
+		$itsImpactIsNull = is_null($this->getItsImpact());
+		$itsImpactIsEmpty = empty($this->getItsImpact());
+		if ($itsImpactIsNull || $itsImpactIsEmpty) throw new MyException("ITS impact is required.");
 	}
 	
 	private function assertProgramNameIsValid(){
@@ -112,5 +144,37 @@ class Program implements IEntity, ISearchable {
 		$currentWorkflowData = end($this->workflowDatas);
 		reset($this->workflowDatas);
 		return $currentWorkflowData;
+	}
+
+	public function getCrossImpact() {
+		return $this->crossImpact;
+	}
+	
+	public function setCrossImpact($crossImpact) {
+		$this->crossImpact = $crossImpact;
+	}
+	
+	public function getStudentImpact() {
+		return $this->studentImpact;
+	}
+	
+	public function setStudentImpact($studentImpact) {
+		$this->studentImpact = $studentImpact;
+	}
+	
+	public function getLibraryImpact() {
+		return $this->libraryImpact;
+	}
+	
+	public function setLibraryImpact($libraryImpact) {
+		$this->libraryImpact = $libraryImpact;
+	}
+	
+	public function getItsImpact() {
+		return $this->itsImpact;
+	}
+	
+	public function setItsImpact($itsImpact) {
+		$this->itsImpact = $itsImpact;
 	}
 }

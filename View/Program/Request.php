@@ -112,10 +112,50 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 					
 					<div class="row">
 						<div class="col-md-3">
+							Cross Impact
+						</div>
+						<div class="col-md-9">
+							<textarea name="crossImpact" class="form-control"  rows="5"
+								placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							Student Impact
+						</div>
+						<div class="col-md-9">
+							<textarea name="studentImpact" class="form-control"  rows="5"
+								placeholder="Please identify how student input or impact has been assessed"></textarea>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							Library Impact
+						</div>
+						<div class="col-md-9">
+							<textarea name="libraryImpact" class="form-control"  rows="5"
+								placeholder="Please identify how impact to the Library has been addressed"></textarea>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
+							ITS Impact
+						</div>
+						<div class="col-md-9">
+							<textarea name="itsImpact" class="form-control"  rows="5"
+								placeholder="Please identify how impact to ITS has been addressed"></textarea>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-3">
 							Comments
 						</div>
 						<div class="col-md-9">
-							<textarea name="comments" class="form-control" placeholder="Comments..."></textarea>
+							<textarea name="comments" class="form-control" placeholder="Comments..." rows="5"></textarea>
 						</div>
 					</div>
 					

@@ -24,7 +24,11 @@ class ProgramAssembler {
 		$programDto->setRequestedDate($program->getRequestedDate());
 		$programDto->setProgramName($program->getProgramName());
 		$programDto->setRequesterName($program->getRequester()->getFullName());
-		
+		$programDto->setCrossImpact($program->getCrossImpact());
+		$programDto->setStudentImpact($program->getStudentImpact());
+		$programDto->setLibraryImpact($program->getLibraryImpact());
+		$programDto->setItsImpact($program->getItsImpact());
+
 		$commentDtos = (new CommentAssembler())->assembleAll($program->getComments());
 		$programDto->setCommentDtos($commentDtos);
 				

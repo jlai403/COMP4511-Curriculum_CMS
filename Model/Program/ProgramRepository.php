@@ -34,10 +34,14 @@ class ProgramRepository extends Repository {
 			$program->getDiscipline()->getId(),
 			$program->getRequestedDate(),
 			$workflowDataId,
-			$program->getEffectiveTerm()->getId()
+			$program->getEffectiveTerm()->getId(),
+			$program->getCrossImpact(),
+			$program->getStudentImpact(),
+			$program->getLibraryImpact(),
+			$program->getItsImpact()
 		);
 		
-		$resultSet = parent::executeStoredProcedureWithResultSet("call createProgramRequest(?,?,?,?,?,?)", $params);
+		$resultSet = parent::executeStoredProcedureWithResultSet("call createProgramRequest(?,?,?,?,?,?,?,?,?,?)", $params);
 		$program->setId($resultSet[0]["ProgramId"]);
 		
 		$this->addCommentsToProgram($program);
@@ -101,6 +105,10 @@ class ProgramRepository extends Repository {
 		$program->setId($record["id"]);
 		$program->setProgramName($record["name"]);
 		$program->setRequestedDate($record["requestedDate"]);
+		$program->setCrossImpact($record["crossImpact"]);
+		$program->setStudentImpact($record["studentImpact"]);
+		$program->setLibraryImpact($record["libraryImpact"]);
+		$program->setItsImpact($record["itsImpact"]);
 		
 		$comments = (new CommentRepository())->findCommentsForProgram($program->getId());
 		$program->setComments($comments);
