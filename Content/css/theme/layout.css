@@ -23,6 +23,10 @@
 	cursor: pointer;
 }
 
+.small-text * {
+	font-size: 11px;
+}
+
 .info-mark {
 	position: relative;
 	font-size: 15px;

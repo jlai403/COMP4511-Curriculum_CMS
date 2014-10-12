@@ -1,44 +1,12 @@
 .summary {
 	margin-top: 20px;
-	max-width: 800px;	
+	width: 100%;	
 }
 
-.summary {
-	font-size: 12px;
+.details .row{
+	margin: 3px auto;
 }
 
-.summary .row input, .form .row select, .summary .row textarea {
-	margin-bottom: 10px;
-}
-
-.split-left, .split-right {
-	padding: 0;
-}
-
-.form .logo {
-	width: 100%;
-}
-
-.comment {
-	width: 100%;
-	min-height: 5em;
-	max-height: 10em;
-	overflow: scroll;
-	background-color: #FAFAFA;
-	padding: 5px;
-	border: 1px solid #EEEEEE;
-}
-
-
-
-/** Desktop Specific css **/
-@media only screen and (min-width:990px) {
-	.summary .row .workflow {
-	min-height: 100vh;
-	border-right: 1px solid #EEEEEE;
-	}
-	
-	.summary .row .comments {
-		min-height: 100vh;
-	}
+.cross-impact, .student-impact, .library-impact, .its-impact {
+	margin: 0 !important;
 }
