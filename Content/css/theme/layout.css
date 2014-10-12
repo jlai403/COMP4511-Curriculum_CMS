@@ -72,10 +72,6 @@
 /******************
 	NAVIGATION
 *******************/
-.nav {
-	height: 150px;
-	background-color: #EEEEEE;
-}
 
 .nav-logo {
 	float: left;
@@ -89,17 +85,11 @@
 	max-width: 180px;
 }
 
-.nav ul {
-	float: right;
-	margin: 20px 20px 20px;
-	list-style: none;
+.nav-pills {
+	margin-top: 15px;
 }
 
-.nav ul li {
-	display: inline-block;
-}
-
-.nav ul li a {
+.nav-pills li a {
 	color: #0088CC;
 	border-radius: 3px;
 	
@@ -112,19 +102,26 @@
 	text-transform: uppercase;
 	font-weight: 700;
 	padding: 10px 13px;
+	
+	text-align: center;
 }
 
-/******************
-	ERRORS
-*******************/
-
-.nav ul li.active a, .nav ul li a:HOVER {
+.nav-pills li.active a, .nav-pills li a:HOVER {
 	color: #FFFFFF;
 	background-color: #0088CC;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
+@media screen and (max-width:767px) {
+	.nav-pills li {
+		float: none;
+	}
+}
+
+/******************
+	ERRORS
+*******************/
 .errors {
 	color: #FF0000;
 	font-style: italic;
@@ -142,11 +139,4 @@
 	outline: 0;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #F08080;
 	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px #F08080;
-}
-
-
-@media only screen and (max-width:675px) {
-	.nav-logo img {
-		display: none;
-	}
 }
