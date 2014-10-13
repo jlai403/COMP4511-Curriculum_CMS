@@ -3,19 +3,19 @@
 }
 
 .red {
-	background-color: #F00000;
+	background-color: #F08080;
 }
 
 .button.red:HOVER {
-	background-color: #CD2626;
+	background-color: #EE5C42;
 }
 
 .green {
-	background-color: #3AEEAA;
+	background-color: #BEE554;
 }
 
 .button.green:HOVER {
-	background-color: #00CC99;
+	background-color: #99CC32;
 }
 
 .button.blue:HOVER {

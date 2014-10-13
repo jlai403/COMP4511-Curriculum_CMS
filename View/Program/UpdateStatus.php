@@ -21,6 +21,9 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="/Content/css/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 		<script src="/Content/js/errors.js"></script>
+		
+		<link type="text/css" rel="stylesheet" href="/Content/css/module/collapse-text.css" />
+		<script src="/Content/js/collapse-text.js"></script>
 	</head>
 
 	<body>
@@ -64,78 +67,119 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 			</div> <!-- /.container-fluid -->
 		</nav>
 	
-		<div class="container summary center">
-			<div class="col-md-12">
+		<div class="container program-summary center">
+			<div class="col-xs-12">
 				<div class="row center-text">
 					<h3 style="margin: 20px;">Update Program Status</h3>
 				</div>
 				
 				<div class="row">
-					<div class="col-xs-5 col-sm-3 bold-text right-align"> Name: </div>
-					<div class="col-xs-7 col-sm-3"> <?= $programDto->getProgramName()?> </div>
-					
-					<div class="col-xs-5 col-sm-3 bold-text right-align"> Faculty: </div>
-					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getFacultyDto()->getName() ?> </div>
-				</div>
-		
-				<div class="row">
-					<div class="col-xs-5 col-sm-3 bold-text right-align"> Requested By: </div>
-					<div class="col-xs-7 col-sm-3"> <?= $programDto->getRequesterName() ?> </div>
-					
-					<div class="col-xs-5 col-sm-3 bold-text right-align"> Discipline: </div>
-					<div class="col-xs-7 col-sm-3"> <?= $programDto->getDisciplineDto()->getName() ?> </div>
-				</div>
-				
-				<?php if (!empty($programDto->getFileDtos())) { ?>
-				<div class="row">
-					<div class="col-xs-5 col-sm-3 bold-text right-align"> Attachments: </div>
-					<div class="col-xs-7 col-sm-3"> 
-						<?php foreach($programDto->getFileDtos() as $fileDto) { ?>
-							<a href="/Controller/FileController.php?action=download&id=<?= $fileDto->getId() ?>" target="_blank"><?= $fileDto->getName() ?></a> <br/>
-						<?php } ?>
-					</div>
-				</div>
-				<?php } ?>
-				
-				<hr style="margin:20px 0 0 0;"/>
-				
-				<div class="row">
-					<div class="col-md-6 workflow">
+					<div class="col-sm-6 summary-details">
 						<div class="row center-text">
-							<h5 style="margin-bottom: 25px;">Workflow</h5>
+							<h5>Summary</h5>
+						</div>
+						
+						<div class="details small-text">
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Requested On: </div>
+								<div class="col-xs-6 "> <?= $programDto->getRequestedDate()?> </div>
+							</div>
 							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Requested By: </div>
+								<div class="col-xs-6 "> <?= $programDto->getRequesterName()?> </div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Name: </div>
+								<div class="col-xs-6 "> <?= $programDto->getProgramName()?> </div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Faculty: </div>
+								<div class="col-xs-6 "> <?= $programDto->getDisciplineDto()->getFacultyDto()->getName()?> </div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Discipline: </div>
+								<div class="col-xs-6 "> <?= $programDto->getDisciplineDto()->getName()?> </div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Cross Impact: </div>
+								<div class="col-xs-6 "> 
+									<p class=cross-impact> <?= $programDto->getCrossImpact()?> </p> 
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Student Impact: </div>
+								<div class="col-xs-6">
+									<p class="student-impact"> <?= $programDto->getStudentImpact()?> </p>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Library Impact: </div>
+								<div class="col-xs-6">
+									<p class="library-impact"> <?= $programDto->getLibraryImpact()?> </p> 
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> ITS Impact: </div>
+								<div class="col-xs-6"> 
+									<p class="its-impact"> <?= $programDto->getItsImpact()?> </p> 
+								</div>
+							</div>
+							
+							<?php if (!empty($programDto->getFileDtos())) { ?>
+							<div class="row">
+								<div class="col-xs-6 bold-text right-align"> Attachments: </div>
+								<div class="col-xs-6"> 
+									<?php foreach($programDto->getFileDtos() as $fileDto) { ?>
+										<a href="/Controller/FileController.php?action=download&id=<?= $fileDto->getId() ?>" target="_blank"><?= $fileDto->getName() ?></a> <br/>
+									<?php } ?>
+								</div>
+							</div>
+							<?php } ?>
+						</div> <!-- div.details end -->
+					</div> <!-- div.col-xs-6 end -->
+
+					<div class="col-sm-6 workflow-details">
+						<div class="row center-text">
+							<h5>Workflow</h5>
+						</div>
+						
+						<div class="workflow-details small-text">
 							<?php foreach($programDto->getWorkflowDataDtos() as $workflowDataDto) { ?>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="row">
-											<div class="col-xs-4 right-align">
-												Role: 
-											</div>
-											<div class="col-md-8 left-align">
-												<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xs-4 right-align">
-												Status: 
-											</div>
-											<div class="col-xs-8 left-align">
-												<?= $workflowDataDto->getStatus() ?>
-											</div>
-										</div>
-										
-										<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
-										<div class="row">
-											<div class="col-xs-4 right-align">
-												
-												<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
-											</div>
-											<div class="col-xs-8 left-align">
-												<?= $workflowDataDto->getUserDto()->getFullName() ?>
-											</div>
-										</div>
-										<?php } ?>
+								<div class="row detail <?= $workflowDataDto->getStatus() ?>">
+									<div class="col-xs-5 right-align">
+										Role: 
 									</div>
+									<div class="col-xs-7 left-align">
+										<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
+									</div>
+									<div class="row">
+										<div class="col-xs-5 right-align">
+											Status: 
+										</div>
+										<div class="col-xs-7 left-align">
+											<?= $workflowDataDto->getStatus() ?>
+										</div>
+									</div>
+									
+									<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
+									<div class="row">
+										<div class="col-xs-5 right-align">
+											
+											<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
+										</div>
+										<div class="col-xs-7 left-align">
+											<?= $workflowDataDto->getUserDto()->getFullName() ?>
+										</div>
+									</div>
+									<?php } ?>
 								</div>
 								
 								<?php if ($programDto->getCurrentWorkflowDataDto() === $workflowDataDto) { ?>
@@ -166,20 +210,29 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 									</div>
 								</form>
 								<?php } //END FORM ?>
-								
-								<hr/>
-							<?php } //END WORKFLOWS ITERATION ?> 
+							<?php } ?>
 						</div>
 					</div>
+				</div>
 				
-					<div class="col-md-6 comments">
+				<div class="row">
+					<div class="col-xs-12 comments">
 						<div class="row center-text">
 							<h5>Comments</h5>
 						</div>
-					
-						<?php foreach($programDto->getCommentDtos() as $commentDto) { ?>
+						<?php if (count($programDto->getCommentDtos()) == 0) { ?>
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-xs-12">
+									<p class="comment center-text small-text">
+										No Comments
+									</p>
+								</div>
+							</div>
+						<?php } 
+						else {
+							foreach($programDto->getCommentDtos() as $commentDto) { ?>
+							<div class="row">
+								<div class="col-xs-12">
 									<h5><?=$commentDto->getAuthorName()?></h5>
 									<h6><?=$commentDto->getDateTime()?></h6>
 									
@@ -188,10 +241,25 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 									</p>
 								</div>
 							</div>
-						<?php } ?>
+						<?php }
+						} ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
 </html> 
+
+<script>
+$(".cross-impact").addReadMore();
+$(".student-impact").addReadMore();
+$(".library-impact").addReadMore();
+$(".its-impact").addReadMore();
+
+$(".details").on("click", ".show-more", function() {
+	$(this).expandText();
+});
+$(".details").on("click", ".show-less", function() {
+	$(this).collapseText();
+});
+</script>

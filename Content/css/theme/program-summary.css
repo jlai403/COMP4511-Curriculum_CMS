@@ -1,6 +1,10 @@
 .program-summary {
 	margin-top: 20px;
-	width: 1000px;	
+	width: 80%;	
+}
+
+h5 {
+	margin: 20px auto;
 }
 
 .workflow-details .detail {

@@ -74,7 +74,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 				</div>
 				
 				<div class="row">
-					<div class="col-xs-6 summary-details">
+					<div class="col-sm-6 summary-details">
 						<div class="row center-text">
 							<h5>Summary</h5>
 						</div>
@@ -146,7 +146,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 						</div> <!-- div.details end -->
 					</div> <!-- div.col-xs-6 end -->
 
-					<div class="col-xs-6 workflow-details">
+					<div class="col-sm-6 workflow-details">
 						<div class="row center-text">
 							<h5>Workflow</h5>
 						</div>
@@ -154,36 +154,32 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 						<div class="workflow-details small-text">
 							<?php foreach($programDto->getWorkflowDataDtos() as $workflowDataDto) { ?>
 								<div class="row detail <?= $workflowDataDto->getStatus() ?>">
-									<div class="col-md-12">
-										<div class="row">
-											<div class="col-xs-5 right-align">
-												Role: 
-											</div>
-											<div class="col-md-7 left-align">
-												<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-xs-5 right-align">
-												Status: 
-											</div>
-											<div class="col-xs-7 left-align">
-												<?= $workflowDataDto->getStatus() ?>
-											</div>
-										</div>
-										
-										<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
-										<div class="row">
-											<div class="col-xs-5 right-align">
-												
-												<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
-											</div>
-											<div class="col-xs-7 left-align">
-												<?= $workflowDataDto->getUserDto()->getFullName() ?>
-											</div>
-										</div>
-										<?php } ?>
+									<div class="col-xs-5 right-align">
+										Role: 
 									</div>
+									<div class="col-xs-7 left-align">
+										<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
+									</div>
+									<div class="row">
+										<div class="col-xs-5 right-align">
+											Status: 
+										</div>
+										<div class="col-xs-7 left-align">
+											<?= $workflowDataDto->getStatus() ?>
+										</div>
+									</div>
+									
+									<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
+									<div class="row">
+										<div class="col-xs-5 right-align">
+											
+											<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
+										</div>
+										<div class="col-xs-7 left-align">
+											<?= $workflowDataDto->getUserDto()->getFullName() ?>
+										</div>
+									</div>
+									<?php } ?>
 								</div>
 							<?php } ?>
 						</div>
