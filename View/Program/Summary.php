@@ -10,7 +10,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 <html>
 	<head>
 	<meta charset="UTF-8">
-		<title>Program Summary</title>
+		<title>Program Request</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="/Content/css/bootstrap-3.2.0-dist/bootstrap.min.css" />
@@ -67,14 +67,14 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 			</div> <!-- /.container-fluid -->
 		</nav>
 	
-		<div class="container summary center">
+		<div class="container program-summary center">
 			<div class="col-xs-12">
 				<div class="row center-text">
-					<h3 style="margin: 20px;">Program</h3>
+					<h3 style="margin: 20px;">Program Request</h3>
 				</div>
 				
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-xs-6 summary-details">
 						<div class="row center-text">
 							<h5>Summary</h5>
 						</div>
@@ -146,10 +146,46 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 						</div> <!-- div.details end -->
 					</div> <!-- div.col-xs-6 end -->
 
-					<div class="col-xs-6 workflow">
+					<div class="col-xs-6 workflow-details">
 						<div class="row center-text">
 							<h5>Workflow</h5>
-							
+						</div>
+						
+						<div class="workflow-details small-text">
+							<?php foreach($programDto->getWorkflowDataDtos() as $workflowDataDto) { ?>
+								<div class="row detail <?= $workflowDataDto->getStatus() ?>">
+									<div class="col-md-12">
+										<div class="row">
+											<div class="col-xs-5 right-align">
+												Role: 
+											</div>
+											<div class="col-md-7 left-align">
+												<?= $workflowDataDto->getApprovalChainStepDto()->getRoleDto()->getName()?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-5 right-align">
+												Status: 
+											</div>
+											<div class="col-xs-7 left-align">
+												<?= $workflowDataDto->getStatus() ?>
+											</div>
+										</div>
+										
+										<?php if (!is_null($workflowDataDto->getUserDto())) { ?>
+										<div class="row">
+											<div class="col-xs-5 right-align">
+												
+												<?= $workflowDataDto->isRejected() ? "Rejected By: " : "Approved By:" ?>
+											</div>
+											<div class="col-xs-7 left-align">
+												<?= $workflowDataDto->getUserDto()->getFullName() ?>
+											</div>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -159,6 +195,29 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 						<div class="row center-text">
 							<h5>Comments</h5>
 						</div>
+						<?php if (count($programDto->getCommentDtos()) == 0) { ?>
+							<div class="row">
+								<div class="col-xs-12">
+									<p class="comment center-text small-text">
+										No Comments
+									</p>
+								</div>
+							</div>
+						<?php } 
+						else {
+							foreach($programDto->getCommentDtos() as $commentDto) { ?>
+							<div class="row">
+								<div class="col-xs-12">
+									<h5><?=$commentDto->getAuthorName()?></h5>
+									<h6><?=$commentDto->getDateTime()?></h6>
+									
+									<p class="comment">
+										<?=$commentDto->getComment()?>
+									</p>
+								</div>
+							</div>
+						<?php }
+						} ?>
 					</div>
 				</div>
 			</div>

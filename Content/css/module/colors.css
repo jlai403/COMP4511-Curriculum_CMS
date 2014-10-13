@@ -26,3 +26,26 @@
 .button.blue, .button.green, .button.red {
 	color: #FFFFFF;
 }
+
+/******************
+	WORKFLOW
+*******************/
+.Pending.Approval {
+	padding: 10px 0;
+	background-color: #FFEC8B;
+}
+
+.Approved {
+	padding: 10px 0;
+	background-color: #DFFFA5;
+}
+
+.Rejected {
+	padding: 10px 0;
+	background-color: #F08080;
+}
+
+.Completed {
+	padding: 10px 0;
+	background-color: #BCEE68;
+}
