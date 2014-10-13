@@ -1,5 +1,4 @@
-.collapsed {
-	height: 30px;
+.collapsable {
 	overflow: hidden;
 	margin-bottom: 15px;
 }
