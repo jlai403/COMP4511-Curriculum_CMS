@@ -23,3 +23,11 @@
 	text-decoration: none;
 	color: #000000;
 }
+
+.search-result {
+	cursor: pointer;
+}
+
+.search-result:HOVER {
+	background-color: #F0FFFF;
+}

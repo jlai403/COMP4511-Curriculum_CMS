@@ -69,25 +69,31 @@ $searchResultsDto = SessionManager::get("searchResults");
 			</div>
 			
 			<div class="row">
-				<?php foreach($searchResultsDto->getSearchResultDtos() as $searchResultDto) {  ?>
-					<a href="<?= $searchResultDto->getUri() ?>">
-						<div class="container item">
-							<div class="row">
-								<div class="col-md-4 col-xs-6 right-align"> Type: </div>
-								<div class="col-md-8 col-xs-6"> <?= $searchResultDto->getType() ?>  </div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 col-xs-6 right-align"> Name: </div>
-								<div class="col-md-8 col-xs-6"> <?= $searchResultDto->getName() ?>  </div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 col-xs-6 right-align"> Requested By: </div>
-								<div class="col-md-8 col-xs-6"> <?= $searchResultDto->getRequesterFullName() ?>  </div>
-							</div>
-						</div>
-					</a>
-				<?php }?>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Type</th>
+							<th>Name</th>
+							<th>Requester</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($searchResultsDto->getSearchResultDtos() as $searchResultDto) {  ?>
+						<tr class="search-result" data-url="<?= $searchResultDto->getUri() ?>">
+							<td> <?= $searchResultDto->getType() ?> </td>
+							<td> <?= $searchResultDto->getName() ?>  </td>
+							<td> <?= $searchResultDto->getRequesterFullName() ?>  </td>
+						</tr>
+						<?php }?>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</body>
 </html> 
+
+<script>
+	$(".search-result").click(function (){
+		window.location.href = $(this).data('url');
+	});
+</script>
