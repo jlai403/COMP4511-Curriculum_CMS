@@ -75,7 +75,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						<h3 style="margin: 20px;">Create Program</h3>
 					</div>
 					
-					<div class="steps">
+					<div class="steps hide">
 						<div class="row">
 							<div class="col-xs-4 center-text step-one-check">
 								Step One </br>
@@ -100,6 +100,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</ul>
 					</div>
 					
+					<!-- STEP ONE START -->
 					<div class="step-one">
 						<div class="row">
 							<div class="col-md-3">
@@ -159,11 +160,13 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;" tabindex="5">
-							<input class="form-control button blue" type="button" value="Next"/>
+							<input class="form-control button blue hide" type="button" value="Next"/>
 						</div>
 					</div>
+					<!-- STEP ONE END -->
 					
-					<div class="step-two hide">
+					<!-- STEP TWO START -->
+					<div class="step-two">
 						<div class="row">
 							<div class="col-md-3">
 								Cross Impact
@@ -205,11 +208,13 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-							<input class="form-control button blue" type="button" value="Next" tabindex="10"/>
+							<input class="form-control button blue hide" type="button" value="Next" tabindex="10"/>
 						</div>
 					</div>
+					<!-- STEP TWO END -->
 					
-					<div class="step-three hide">
+					<!-- STEP THREE START -->
+					<div class="step-three">
 						<div class="row">
 							<div class="col-md-3">
 								Comments
@@ -232,6 +237,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 							<input class="form-control button blue" type="button" value="Request" tabindex="13"/>
 						</div>
 					</div>
+					<!-- STEP END START -->
 					
 				</form>			
 			</div>
@@ -240,24 +246,50 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 </html> 
 
 <script>
-	clearHighlightsOnFocus();
 
-	$(".steps").on("click", ".step-one-check .glyphicon", function() {
-		$(".step-one").removeClass("hide");
-		$(".step-two").addClass("hide");
-		$(".step-three").addClass("hide");
+	$(document).ready(function() {
+		clearHighlightsOnFocus();
+
+		// enable javascript features
+		$(".steps").removeClass("hide"); //workaround for !important attribute from bootstrap
+		$(".step-one .button").removeClass("hide"); //workaround for !important attribute from bootstrap
+		$(".step-two .button").removeClass("hide"); //workaround for !important attribute from bootstrap
+
+		$(".step-two").hide();
+		$(".step-three").hide();
 	});
 
-	$(".steps").on("click", ".step-two-check .glyphicon", function() {
-		$(".step-two").removeClass("hide");
-		$(".step-one").addClass("hide");
-		$(".step-three").addClass("hide");
+	// change to step one on checkmark click
+	$(".steps").on("click", ".step-one-check .glyphicon-check", function() {
+		$(".step-one").show();
+		$(".step-one .button").show();
+		
+		$(".step-two").hide();
+		$(".step-two .button").hide();
+		
+		$(".step-three").hide()
 	});
 
-	$(".steps").on("click", ".step-three-check .glyphicon", function() {
-		$(".step-three").removeClass("hide");
-		$(".step-two").addClass("hide");
-		$(".step-one").addClass("hide");
+	// change to step two on checkmark click
+	$(".steps").on("click", ".step-two-check .glyphicon-check", function() {
+		$(".step-two").show()
+		$(".step-two .button").show();
+		
+		$(".step-one").hide()
+		$(".step-one .button").hide();
+		
+		$(".step-three").hide()
+	});
+
+	// change to step three on checkmark click
+	$(".steps").on("click", ".step-three-check .glyphicon-check", function() {
+		$(".step-three").show()
+		
+		$(".step-two").hide()
+		$(".step-two .button").hide();
+		
+		$(".step-one").hide()
+		$(".step-one .button").hide();
 	});
 
 	
@@ -273,8 +305,13 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		
 		$(".step-one-check .glyphicon").removeClass("glyphicon-unchecked");
 		$(".step-one-check .glyphicon").addClass("glyphicon-check");
-		$(".step-one").toggleClass("hide");
-		$(".step-two").toggleClass("hide");
+
+		$(".step-one").hide();
+		$(".step-one .button").hide();
+
+		$(".step-two").show();
+		$(".step-two .button").removeClass("hide"); 
+		$(".step-two .button").show();
 	});
 
 	function validateProgramName() {
@@ -297,8 +334,11 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		
 		$(".step-two-check .glyphicon").removeClass("glyphicon-unchecked");
 		$(".step-two-check .glyphicon").addClass("glyphicon-check");
-		$(".step-two").toggleClass("hide");
-		$(".step-three").toggleClass("hide");
+
+		$(".step-two").hide();
+		$(".step-two .button").hide()
+		
+		$(".step-three").show();
 	});
 
 	function validateCrossImpact() {
