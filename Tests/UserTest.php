@@ -5,7 +5,7 @@ class UserTest extends PHPUnit_Framework_TestCase
 	public function setUp() {
 		$_SERVER['DOCUMENT_ROOT'] = "/Users/jlai/Documents/Projects/COMP4511/Assignment1";
 		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/User/User.php');
-		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/Erro/MyException.php');
+		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/Error/MyException.php');
 		require_once('/Users/jlai/Documents/Projects/COMP4511/Assignment1/Model/SecurityManager.php');
 	}
 	
@@ -18,8 +18,9 @@ class UserTest extends PHPUnit_Framework_TestCase
 		// Arrange
 		$user = new User();
 		$user->setEmail("jlai4991@mtroyal.ca");
-		$user->setPassword("password$1");
-		
+		$user->setEncryptedPassword("password$1");
+		$user->setRoles(array("role", "role2"));
+
 		// Act
 		$user->assertValid();
 	
@@ -35,7 +36,7 @@ class UserTest extends PHPUnit_Framework_TestCase
         // Arrange
     	$user = new User();
     	$user->setEmail("username@gmail.com");
-    	$user->setPassword("password$1");
+    	$user->setEncryptedPassword("password$1");
 
         // Act
 		$user->assertValid();        
@@ -44,13 +45,31 @@ class UserTest extends PHPUnit_Framework_TestCase
        	// assert exception thrown (above function declaration)
     }
     
-    public function testValidateAndEncrpytPassword()
+    /**
+     * @expectedException        MyException
+     * @expectedExceptionMessage At least one role must be selected.
+     */
+    public function testAssert_noRoleSelected()
+    {
+    	// Arrange
+    	$user = new User();
+    	$user->setEmail("username@mtroyal.ca");
+    	$user->setEncryptedPassword("password$1");
+    
+    	// Act
+    	$user->assertValid();
+    
+    	// Assert
+    	// assert exception thrown (above function declaration)
+    }
+    
+    public function testAssertAndEncrpytPassword()
     {
     	// Arrange
     	$password = "password$1";
     
     	// Act
-    	$encrpytedPassword = SecurityManager::validateAndEncrpytPassword($password);
+    	$encrpytedPassword = SecurityManager::assertAndEncrpytPassword($password);
     
     	// Assert
     	$this->assertNotEquals($password, $encrpytedPassword);
@@ -60,13 +79,13 @@ class UserTest extends PHPUnit_Framework_TestCase
      * @expectedException        MyException
      * @expectedExceptionMessage Password does not have at least 6 characters.
      */
-    public function testValidateAndEncrpytPassword_invalidPassword()
+    public function testAssertAndEncrpytPassword_invalidPassword()
     {
     	// Arrange
     	$password = "passw";
     
     	// Act
-    	$encrpytedPassword = SecurityManager::validateAndEncrpytPassword($password);
+    	$encrpytedPassword = SecurityManager::assertAndEncrpytPassword($password);
     
     	// Assert
     	$this->assertNotEquals($password, $encrpytedPassword);      
