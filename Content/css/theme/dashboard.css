@@ -23,7 +23,6 @@
 	color: #000000;
 }
 
-
 .container.item {
 	max-width: 100%;
 	font-size: 12px;
@@ -31,6 +30,10 @@
 	border-bottom: 1px solid #EFEFEF;
 	padding: 10px 20px;
 	margin-top: 0;
+}
+
+.container.item:last-child {
+    border-bottom: none;
 }
 
 .container.item:HOVER {
