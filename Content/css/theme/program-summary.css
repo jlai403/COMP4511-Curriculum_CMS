@@ -22,3 +22,8 @@ h5 {
 .cross-impact, .student-impact, .library-impact, .its-impact {
 	margin: 0 !important;
 }
+
+.add-comment textarea {
+    max-width: 600px;
+    margin: auto;
+}

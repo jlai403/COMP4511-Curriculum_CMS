@@ -25,7 +25,9 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="/Content/css/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 		<script src="/Content/js/errors.js"></script>
-	</head>
+        <script src="/Content/js/animation.js"></script>
+
+    </head>
 
 	<body>
 		<nav class="navbar navbar-default" role="navigation">
@@ -172,7 +174,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Cross Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="crossImpact" class="form-control"  rows="5" tabindex="6"
+								<textarea name="crossImpact" class="form-control expandOnFocus"  rows="2" tabindex="6"
 									placeholder="Please identify how impact to other departments has been addressed, including General Education as appropriate"></textarea>
 							</div>
 						</div>
@@ -182,7 +184,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Student Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="studentImpact" class="form-control"  rows="5" tabindex="7"
+								<textarea name="studentImpact" class="form-control expandOnFocus"  rows="2" tabindex="7"
 									placeholder="Please identify how student input or impact has been assessed"></textarea>
 							</div>
 						</div>
@@ -192,7 +194,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Library Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="libraryImpact" class="form-control"  rows="5" tabindex="8"
+								<textarea name="libraryImpact" class="form-control expandOnFocus"  rows="2" tabindex="8"
 									placeholder="Please identify how impact to the Library has been addressed"></textarea>
 							</div>
 						</div>
@@ -202,7 +204,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								ITS Impact
 							</div>
 							<div class="col-md-9">
-								<textarea name="itsImpact" class="form-control"  rows="5" tabindex="9"
+								<textarea name="itsImpact" class="form-control expandOnFocus"  rows="2" tabindex="9"
 									placeholder="Please identify how impact to ITS has been addressed"></textarea>
 							</div>
 						</div>
@@ -220,7 +222,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 								Comments
 							</div>
 							<div class="col-md-9">
-								<textarea name="comments" class="form-control" placeholder="Comments..." rows="5" tabindex="11"></textarea>
+								<textarea name="comments" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
 							</div>
 						</div>
 						
