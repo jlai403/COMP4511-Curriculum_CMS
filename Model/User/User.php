@@ -72,10 +72,24 @@ class User implements IEntity {
 	
 	// Overriden: IEntity
 	public function assertValid() {
+        $this->assertFirstNameIsValid();
+        $this->assertLastNameIsValid();
 		$this->assertEmailIsValid();
 		$this->assertAtLeastOneRoleIsSelected();
 	}
-	
+
+    private function assertFirstNameIsValid() {
+        if (is_null($this->getFirstName()) || empty($this->getFirstName())) {
+            throw new MyException("You must enter a First Name.");
+        }
+    }
+
+    private function assertLastNameIsValid() {
+        if (is_null($this->getLastName()) || empty($this->getLastName())) {
+            throw new MyException("You must enter a Last Name.");
+        }
+    }
+
 	private function assertEmailIsValid() {
 		$validEmailPattern = "/[\w\d\.]+@mtroyal\.ca/"; //any word character (a-ZA-Z_) or digit or period that occurs 1 or more times and ends with @mtroyal.ca
 		$matches = preg_match($validEmailPattern, $this->email);
