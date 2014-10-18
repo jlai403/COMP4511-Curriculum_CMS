@@ -10,7 +10,7 @@ class Program implements IEntity, ISearchable {
 	private $comments = array();
 	private $requester;
 	private $discipline;
-	private $workflowDatas;
+	private $workflowDatas = array();
 	private $requestedDate;
 	private $files = array();
 	private $effectiveTerm;
@@ -139,6 +139,10 @@ class Program implements IEntity, ISearchable {
 	public function setWorkflowDatas($workflowDatas){
 		$this->workflowDatas = $workflowDatas;
 	}
+
+    public function setCurrentWorkflowData($workflowData) {
+        array_push($this->workflowDatas, $workflowData);
+    }
 	
 	public function getCurrentWorkflowData() {
 		$currentWorkflowData = end($this->workflowDatas);

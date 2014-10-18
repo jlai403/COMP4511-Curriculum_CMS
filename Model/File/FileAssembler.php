@@ -6,6 +6,8 @@ class FileAssembler {
 	
 	public function assembleAll($files) {
 		$fileDtos = array();
+        if (is_null($files)) return $fileDtos;
+
 		foreach($files as $file) {
 			$fileDto = $this->assemble($file);
 			array_push($fileDtos, $fileDto);

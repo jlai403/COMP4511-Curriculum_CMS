@@ -27,13 +27,14 @@ class ProgramRepository extends Repository {
 	}
 	
 	public function createProgramRequest(Program $program) {
-		$workflowDataId = (new WorkflowRepository())->create(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME);
+        $this->addWorkflowData($program);
+
 		$params = array(
 			$program->getProgramName(),
 			$program->getRequester()->getId(),
 			$program->getDiscipline()->getId(),
 			$program->getRequestedDate(),
-			$workflowDataId,
+			$program->getCurrentWorkflowData()->getId(),
 			$program->getEffectiveTerm()->getId(),
 			$program->getCrossImpact(),
 			$program->getStudentImpact(),
@@ -46,8 +47,18 @@ class ProgramRepository extends Repository {
 		
 		$this->addCommentsToProgram($program);
 		$this->addFilesToProgram($program->getId(), $program->getFiles());
+
+        return $program;
 	}
-	
+
+
+    public function addWorkflowData(Program $program)
+    {
+        $workflowDataId = (new WorkflowRepository())->create(ApprovalChainConstants::PROGRAM_APPROVAL_CHAIN_NAME);
+        $workflowData = (new WorkflowRepository())->findById($workflowDataId);
+        $program->setCurrentWorkflowData($workflowData);
+    }
+
 	private function addCommentsToProgram(Program $program) {
 		foreach($program->getComments() as $comment) {
 			$commentId = (new CommentRepository())->create($comment);

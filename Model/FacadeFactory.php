@@ -86,7 +86,9 @@ class DomainFacade {
 	public function createProgramRequest(ProgramInputDto $programInputDto) {
 		$program = (new ProgramInitializer($programInputDto))->initialize();
 		$program->assertValid();
-		(new ProgramRepository())->createProgramRequest($program);
+		$program = (new ProgramRepository())->createProgramRequest($program);
+
+        return (new ProgramAssembler())->assemble($program);
 	}
 	
 	public function findProgramsByRequester($email) {

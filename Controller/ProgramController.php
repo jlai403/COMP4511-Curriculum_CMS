@@ -37,8 +37,8 @@ class ProgramController extends BaseController {
 		$programInputDto->setDisciplineDto($disciplineDto);
 		
 		try {
-			FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
-			parent::redirect("/View/Program/Requested.php");
+			$programDto = FacadeFactory::getDomainFacade()->createProgramRequest($programInputDto);
+			parent::redirect("/View/Program/Requested.php?id=".$programDto->getId());
 		} catch (Exception $e) {
 			parent::addError($e->getMessage());
 		}

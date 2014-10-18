@@ -1,6 +1,8 @@
 <?php 
 require_once($_SERVER["DOCUMENT_ROOT"].'/Controller/SessionManager.php');
 $currentUser = SessionManager::authorize();
+
+$programId = $_GET["id"];
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +66,32 @@ $currentUser = SessionManager::authorize();
 		<div class="container form center">
 			<div class="col-md-12 center-text">
 				<h4>Program requested is now in the approval process.</h4>
-				<h6>You can check the status of your request on the <a href="/View/Dashboard">Homepage</a>.</h6>		
+                <h6 class="redirect-text"><a href="/View/Program/Summary.php?id=<?= $programId ?>">Click here</a> to view your request</h6>
+				<h6>You can also check the status of your request on the <a href="/View/Dashboard">Homepage</a>.</h6>
 			</div>
 		</div>
 	</body>
-</html> 
+</html>
+
+<script>
+    var redirectSeconds = 10;
+    var redirectUrl = "/View/Program/Summary.php?id=<?= $programId ?>";
+
+    $(document).ready(function(){
+        redirectToProgramSummary();
+    });
+
+    function redirectToProgramSummary() {
+        $(".redirect-text").html("Redirecting to <a href='" + redirectUrl + "'>Program Summary</a> in <span id='seconds'></span> seconds...");
+        $("#seconds").text(redirectSeconds--);
+        setInterval(function(){redirectCountDown()}, 1000);
+    }
+
+    function redirectCountDown(){
+        $("#seconds").text(redirectSeconds--);
+        if (redirectSeconds === 0) {
+            window.location.replace(redirectUrl);
+        }
+    }
+
+</script>
