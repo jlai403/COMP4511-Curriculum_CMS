@@ -122,6 +122,7 @@ class DomainFacade {
 		$comment = (new CommentInitializer($commentString, $authorDto))->initialize();
 		$commentId = (new CommentRepository())->create($comment);
 		(new ProgramRepository())->addCommentToProgram($programId, $commentId);
+        return (new CommentAssembler())->assemble($comment);
 	}
 	
 	public function addFilesToProgram($programId, $fileInputDtos) {

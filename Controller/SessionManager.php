@@ -25,6 +25,12 @@ class SessionManager {
 		unset($_SESSION[$key]);
 		return $value;
 	}
+
+    public static function getCookieAndClear($key) {
+        $value = isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
+        unset($_COOKIE[$key]);
+        return $value;
+    }
 	
 	public static function signIn($user, UserDto $userDto) {
 		$success = self::authenticateSignIn($user, $userDto);

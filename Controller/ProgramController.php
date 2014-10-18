@@ -58,11 +58,27 @@ class ProgramController extends BaseController {
 		if ($action == "reject") $this->reject($programId);
 		throw new MyException("Unknown action.");
 	}
-	
+
+    function addComment() {
+        $programId = $_POST["programId"];
+        $comments = $_POST["comments"];
+        $jsEnabled = SessionManager::getCookieAndClear("JSEnabled");
+
+        $commentDto = $this->addCommentToProgram($programId, $comments);
+
+        if($jsEnabled === "1") {
+            echo json_encode($commentDto);
+            exit();
+        } else {
+            parent::redirect("/View/Program/Summary.php?id=".$programId);
+        }
+
+    }
+
 	private function addCommentToProgram($programId, $comment) {
 		if (trim($comment) == false) return;
 		$currentUser = SessionManager::authorize();
-		FacadeFactory::getDomainFacade()->addCommentToProgram($programId, $comment, $currentUser);
+		return FacadeFactory::getDomainFacade()->addCommentToProgram($programId, $comment, $currentUser);
 	}
 
 	private function addFilesToProgram($programId, $attachments) {

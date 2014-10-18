@@ -1,6 +1,6 @@
 <?php
 
-class CommentDto{
+class CommentDto implements JsonSerializable {
 	
 	private $comment;
 	private $authorName;
@@ -29,4 +29,15 @@ class CommentDto{
 	public function setAuthorName($authorName){
 		$this->authorName = $authorName;
 	}
+
+    function jsonSerialize()
+    {
+        return [
+            'commentDto' => [
+                'comment' => $this->getComment(),
+                'authorName' => $this->getAuthorName(),
+                'dateTime' => $this->getDateTime()
+            ]
+        ];
+    }
 }

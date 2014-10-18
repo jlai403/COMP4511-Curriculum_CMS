@@ -17,11 +17,13 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/layout.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/theme/program-summary.css" />
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
-		
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="/Content/css/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-		<script src="/Content/js/errors.js"></script>
-		
+        <script src="/Content/js/errors.js"></script>
+        <script src="/Content/js/cookie.js"></script>
+
+
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/collapse-text.css" />
 		<script src="/Content/js/collapse-text.js"></script>
 	</head>
@@ -188,33 +190,43 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 				
 				<div class="row">
 					<div class="col-xs-12 comments">
-						<div class="row center-text">
-							<h5>Comments</h5>
-						</div>
-						<?php if (count($programDto->getCommentDtos()) == 0) { ?>
-							<div class="row">
-								<div class="col-xs-12">
-									<p class="comment center-text small-text">
-										No Comments
-									</p>
-								</div>
-							</div>
-						<?php } 
-						else {
-							foreach($programDto->getCommentDtos() as $commentDto) { ?>
-							<div class="row">
-								<div class="col-xs-12">
-									<h5><?=$commentDto->getAuthorName()?></h5>
-									<h6><?=$commentDto->getDateTime()?></h6>
-									
-									<p class="comment">
-										<?=$commentDto->getComment()?>
-									</p>
-								</div>
-							</div>
-						<?php }
-						} ?>
-					</div>
+                        <div class="row center-text">
+                            <h5>Comments</h5>
+                        </div>
+
+                        <?php if (count($programDto->getCommentDtos()) == 0) { ?>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p class="no comment center-text small-text">
+                                        No Comments
+                                    </p>
+                                </div>
+                            </div>
+                        <?php }
+                        else {
+                            foreach($programDto->getCommentDtos() as $commentDto) { ?>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <h5><?=$commentDto->getAuthorName()?></h5>
+                                        <h6><?=$commentDto->getDateTime()?></h6>
+
+                                        <p class="comment">
+                                            <?=$commentDto->getComment()?>
+                                        </p>
+                                    </div>
+                                </div>
+                            <?php }
+                        } ?>
+
+                        <div class="row add-comment" style="margin-top: 20px;">
+                            <form action="/Controller/ProgramController.php?action=addComment" method="POST">
+                                <input type="hidden" name="programId" value="<?= $programDto->getId() ?>"/>
+                                <textarea name="comments" class="form-control" placeholder="Comments..." rows="5" tabindex="11"></textarea>
+                                <input class="form-control button blue" type="submit" value="Request" tabindex="13" style="max-width: 400px; margin: 15px auto;"/>
+                            </form>
+                        </div>
+
+					</div> <!-- comments end-->
 				</div>
 			</div>
 		</div>
@@ -222,15 +234,53 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 </html> 
 
 <script>
-$(".cross-impact").addReadMore();
-$(".student-impact").addReadMore();
-$(".library-impact").addReadMore();
-$(".its-impact").addReadMore();
+    $(document).ready(function(){
+        $(".cross-impact").addReadMore();
+        $(".student-impact").addReadMore();
+        $(".library-impact").addReadMore();
+        $(".its-impact").addReadMore();
 
-$(".details").on("click", ".show-more", function() {
-	$(this).expandText();
-});
-$(".details").on("click", ".show-less", function() {
-	$(this).collapseText();
-});
+        $(".details").on("click", ".show-more", function() {
+            $(this).expandText();
+        });
+        $(".details").on("click", ".show-less", function() {
+            $(this).collapseText();
+        });
+    });
+
+    $(".comments form").submit(function(e) {
+        e.preventDefault();
+
+        setJSEnabledCookie();
+
+        var form = $(this);
+        $.ajax({
+            type: "POST",
+            dataType: "html",
+            url: form.attr("action"),
+            data: form.serialize(),
+            async: true,
+            success: function(jsonData) {
+                appendComment(jsonData);
+                $(".comments form")[0].reset();
+            }
+        });
+    });
+
+    function appendComment(jsonData) {
+        var commentDto = JSON.parse(jsonData).commentDto;
+
+        var row = $("<div></div>").addClass("row");
+        var column = $("<div></div>").addClass("col-xs-12");
+        var author = $("<h5></h5>").text(commentDto.authorName);
+        var dateTime = $("<h6></h6>").text(commentDto.dateTime);
+        var comment = $("<p></p>").addClass("comment").text(commentDto.comment);
+
+        row.append(column);
+        column.append(author);
+        column.append(dateTime);
+        column.append(comment);
+
+        row.insertBefore($(".add-comment.row"));
+    }
 </script>
