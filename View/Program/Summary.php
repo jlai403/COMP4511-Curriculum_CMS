@@ -20,7 +20,6 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="/Content/css/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-        <script src="/Content/js/errors.js"></script>
         <script src="/Content/js/cookie.js"></script>
         <script src="/Content/js/animation.js"></script>
 

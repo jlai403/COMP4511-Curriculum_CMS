@@ -18,7 +18,9 @@ $errorMessage = SessionManager::getError();
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/colors.css" />
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<script src="/Content/js/errors.js"></script>
+
+        <script src="/Content/js/errors.js"></script>
+        <link type="text/css" rel="stylesheet" href="/Content/css/module/errors.css" />
 	</head>
 	
 	<body>

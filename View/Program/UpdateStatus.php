@@ -20,10 +20,11 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="/Content/css/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-		<script src="/Content/js/errors.js"></script>
 		
 		<link type="text/css" rel="stylesheet" href="/Content/css/module/collapse-text.css" />
 		<script src="/Content/js/collapse-text.js"></script>
+
+        <script src="/Content/js/animation.js"></script>
 	</head>
 
 	<body>
@@ -188,7 +189,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
 
 									<div class="row left-align" style="padding: 0 15px; margin-top: 15px;">
 										<h6 style="padding-left: 2px;">Comments</h6>
-										<textarea name="comments" class="form-control" rows="3" placeholder="Comments..."></textarea>
+										<textarea name="comments" class="form-control expandOnFocus" rows="2" placeholder="Comments..."></textarea>
 									</div>
 									
 									<div class="row">
