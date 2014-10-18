@@ -15,26 +15,55 @@ class SortTest extends PHPUnit_Framework_TestCase
 	{
 		// Arrange
 		$sr1 = new SearchResultDto();
-		$sr1->setName("ABC");
+		$sr1->setName("Ruby");
 		
 		$sr2 = new SearchResultDto();
-		$sr2->setName("BCA");
+		$sr2->setName("Lorem Ipsum");
 		
 		$sr3 = new SearchResultDto();
-		$sr3->setName("CAB");
-		
-		$searchResultDtos = array($sr3,$sr1,$sr2);
+		$sr3->setName("Lorem Ipsum Hidden");
+
+        $sr4 = new SearchResultDto();
+        $sr4->setName("ad");
+
+		$searchResultDtos = array($sr1,$sr2,$sr3,$sr4);
 		
 		// Act
 		$sortedArray = (new SearchViewHelper())->sortByName($searchResultDtos);
 		
 		// Assert
-		$this->assertEquals($sr1->getName(), $sortedArray[0]->getName());
+		$this->assertEquals($sr4->getName(), $sortedArray[0]->getName());
 		$this->assertEquals($sr2->getName(), $sortedArray[1]->getName());
-		$this->assertEquals($sr3->getName(), $sortedArray[2]->getName());
-	}
+        $this->assertEquals($sr3->getName(), $sortedArray[2]->getName());
+        $this->assertEquals($sr1->getName(), $sortedArray[3]->getName());
 
-	public function testSortByType()
+    }
+
+    public function testSortByName_LowerCase()
+    {
+        // Arrange
+        $sr1 = new SearchResultDto();
+        $sr1->setName("ABC");
+
+        $sr2 = new SearchResultDto();
+        $sr2->setName("BCA");
+
+        $sr3 = new SearchResultDto();
+        $sr3->setName("CAB");
+
+        $searchResultDtos = array($sr3,$sr1,$sr2);
+
+        // Act
+        $sortedArray = (new SearchViewHelper())->sortByName($searchResultDtos);
+
+        // Assert
+        $this->assertEquals($sr1->getName(), $sortedArray[0]->getName());
+        $this->assertEquals($sr2->getName(), $sortedArray[1]->getName());
+        $this->assertEquals($sr3->getName(), $sortedArray[2]->getName());
+    }
+
+
+    public function testSortByType()
 	{
 		// Arrange
 		$sr1 = new SearchResultDto();

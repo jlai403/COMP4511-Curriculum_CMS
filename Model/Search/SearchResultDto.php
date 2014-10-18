@@ -1,6 +1,6 @@
 <?php
 
-class SearchResultDto {
+class SearchResultDto implements JsonSerializable{
 	private $uri;
 	private $type;
 	private $name;
@@ -50,4 +50,16 @@ class SearchResultDto {
 	public function getRequesterFullName() {
 		return $this->getRequesterFirstName() . " " . $this->getRequesterLastName();
 	}
+
+    function jsonSerialize()
+    {
+        return [
+            'searchResultDto' => [
+                'name' => $this->getName(),
+                'type' => $this->getType(),
+                'requester' => $this->getRequesterFullName(),
+                'uri' => $this->getUri()
+            ]
+        ];
+    }
 }

@@ -93,7 +93,57 @@ $searchResultsDto = SessionManager::get("searchResults");
 </html> 
 
 <script>
-    $(".search-result").click(function (){
-        window.location.href = $(this).data('url');
+    $(document).ready(function(){
+       bindClickForSearchResultRow();
     });
+
+    $(".search-results .table").on("click", "th", function(e){
+        var clickedElement = $(this);
+
+        var url = "/Controller/SearchController.php?action=sort";
+        var sortBy = clickedElement.text();
+        var queryString = "<?= $searchResultsDto->getQueryString() ?>";
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            data: {
+                sortBy: sortBy,
+                queryString: queryString
+            },
+            async: true,
+            success: function(jsonData) {
+                $(".search-results .table thead>tr>th").removeClass("sorted");
+                clickedElement.addClass("sorted");
+                reloadSearchResults(jsonData);
+                bindClickForSearchResultRow();
+            }
+        });
+    });
+
+    function bindClickForSearchResultRow(){
+        $(".search-result").click(function (){
+            window.location.href = $(this).data('url');
+        });
+    }
+
+    function reloadSearchResults(jsonData){
+        var searchResultBody = $(".search-results .table tbody");
+        searchResultBody.empty();
+
+        for (var index in jsonData) {
+            var searchResultDto = jsonData[index].searchResultDto;
+            var row = $("<tr></tr>").addClass("search-result").attr("data-url", searchResultDto.uri);
+            var typeColumn = $("<td></td>").text(searchResultDto.type);
+            var nameColumn = $("<td></td>").text(searchResultDto.name);
+            var requesterColumn = $("<td></td>").text(searchResultDto.requester);
+
+            row.append(typeColumn);
+            row.append(nameColumn);
+            row.append(requesterColumn);
+
+            searchResultBody.append(row);
+        }
+    }
 </script>
