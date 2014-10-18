@@ -93,7 +93,7 @@ $searchResultsDto = SessionManager::get("searchResults");
 </html> 
 
 <script>
-	$(".search-result").click(function (){
-		window.location.href = $(this).data('url');
-	});
+    $(".search-result").click(function (){
+        window.location.href = $(this).data('url');
+    });
 </script>

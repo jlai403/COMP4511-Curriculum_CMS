@@ -81,7 +81,9 @@ $roles = FacadeFactory::getDomainFacade()->findAllRoles();
 </html> 
 
 <script>
-	clearHighlightsOnFocus();
+    $(document).ready(function(){
+        clearHighlightsOnFocus();
+    });
 
 	$(".form").submit(function(e) {
 		clearErrors();

@@ -58,14 +58,16 @@ $errorMessage = SessionManager::getError();
 </html>
 
 <script>
-	clearHighlightsOnFocus();
+    $(document).ready(function(){
+        clearHighlightsOnFocus();
+    });
 
 	$('.form').submit(function(e) {
 		clearErrors();
-		
+
 		validateEmail();
 		validatePassword();
-		
+
 		if (hasErrors()) {
 			e.preventDefault();
 			printErrors();
