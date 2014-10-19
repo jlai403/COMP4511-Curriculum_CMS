@@ -32,6 +32,12 @@
 	background-color: #F0FFFF;
 }
 
+.search-result a {
+    display: block;
+    height: inherit;
+    width: inherit;
+}
+
 .search-results .table th {
     cursor: pointer;
 }
