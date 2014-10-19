@@ -237,7 +237,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row center-text" style="padding: 0 100px; margin: 15px 0;">
-							<input class="form-control button blue" type="button" value="Request" tabindex="13"/>
+							<input class="form-control button blue" type="submit" value="Request" tabindex="13"/>
 						</div>
 					</div>
 					<!-- STEP END START -->
@@ -260,6 +260,22 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 
 		$(".step-two").hide();
 		$(".step-three").hide();
+
+        $(".step-one input, .step-one textarea").keydown(function(){
+            // enter key
+            if (event.keyCode == 13) {
+                $(".step-one .button").click();
+                return false;
+            }
+        });
+
+        $(".step-two input, .step-two textarea").keydown(function(){
+            // enter key
+            if (event.keyCode == 13) {
+                $(".step-two .button").click();
+                return false;
+            }
+        });
 	});
 
 	// change to step one on checkmark click

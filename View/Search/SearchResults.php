@@ -78,11 +78,17 @@ $searchResultsDto = SessionManager::get("searchResults");
 					</thead>
 					<tbody>
 						<?php foreach($searchResultsDto->getSearchResultDtos() as $searchResultDto) {  ?>
-						<tr class="search-result" data-url="<?= $searchResultDto->getUri() ?>">
-							<td> <?= $searchResultDto->getType() ?> </td>
-							<td> <?= $searchResultDto->getName() ?>  </td>
-							<td> <?= $searchResultDto->getRequesterFullName() ?>  </td>
-						</tr>
+                            <tr class="search-result" data-url="<?= $searchResultDto->getUri() ?>">
+                                <td>
+                                    <a href="<?= $searchResultDto->getUri() ?>"> <?= $searchResultDto->getType() ?> </a>
+                                </td>
+                                <td>
+                                    <a href="<?= $searchResultDto->getUri() ?>"> <?= $searchResultDto->getName() ?> </a>
+                                </td>
+                                <td>
+                                    <a href="<?= $searchResultDto->getUri() ?>"> <?= $searchResultDto->getRequesterFullName() ?> </a>
+                                </td>
+                            </tr>
 						<?php }?>
 					</tbody>
 				</table>
