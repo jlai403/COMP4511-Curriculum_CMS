@@ -222,7 +222,7 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
                             <form action="/Controller/ProgramController.php?action=addComment" method="POST">
                                 <input type="hidden" name="programId" value="<?= $programDto->getId() ?>"/>
                                 <textarea name="comments" class="form-control expandOnFocus" placeholder="Comments..." rows="2" tabindex="11"></textarea>
-                                <input class="form-control button blue" type="submit" value="Request" tabindex="13" style="max-width: 400px; margin: 15px auto;"/>
+                                <input class="form-control button blue" type="submit" value="Add Comment" tabindex="13" style="max-width: 400px; margin: 15px auto;"/>
                             </form>
                         </div>
 
