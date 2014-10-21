@@ -239,13 +239,6 @@ $programDto = FacadeFactory::getDomainFacade()->findProgramById($_GET["id"]);
         $(".student-impact").addReadMore();
         $(".library-impact").addReadMore();
         $(".its-impact").addReadMore();
-
-        $(".details").on("click", ".show-more", function() {
-            $(this).expandText();
-        });
-        $(".details").on("click", ".show-less", function() {
-            $(this).collapseText();
-        });
     });
 
     $(".comments form").submit(function(e) {

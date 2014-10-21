@@ -115,7 +115,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 				
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Program Name
 							</div>
 							<div class="col-md-9">
@@ -124,7 +124,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Effective Term
 							</div>
 							<div class="col-md-9">
@@ -137,7 +137,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 					
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Faculty
 							</div>
 							<div class="col-md-9">
@@ -150,7 +150,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Discipline
 							</div>
 							<div class="col-md-9">
@@ -171,7 +171,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 					<!-- STEP TWO START -->
 					<div class="step-two">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Cross Impact
 							</div>
 							<div class="col-md-9">
@@ -181,7 +181,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Student Impact
 							</div>
 							<div class="col-md-9">
@@ -191,7 +191,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								Library Impact
 							</div>
 							<div class="col-md-9">
@@ -201,7 +201,7 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 						
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-3 required">
 								ITS Impact
 							</div>
 							<div class="col-md-9">

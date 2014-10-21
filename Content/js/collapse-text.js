@@ -4,10 +4,18 @@
 		
 		if (element.height() < 16) return;
 		
-		element.addClass("collapsible");
+		element.addClass("collapsed");
 		element.css("height","30");
 		var readMore = $("<span class='show-more'>read more ...</span>");
 		readMore.insertAfter(element);
+
+        element.parent().on("click", ".show-more", function() {
+            $(this).expandText();
+        });
+
+        element.parent().on("click", ".show-less", function() {
+            $(this).collapseText();
+        });
 	}
 	
 	$.fn.expandText = function() {
@@ -20,7 +28,7 @@
 		var height = textToExpand.height();
 		var heightToExpand = textToExpand.css("height","auto").height();
 		textToExpand.css("height",height).height();
-		textToExpand.animate({height: heightToExpand}).removeClass("collapsible");
+		textToExpand.animate({height: heightToExpand}).removeClass("collapsed");
 	}
 	
 	$.fn.collapseText = function() {
@@ -30,6 +38,6 @@
 		actionElement.text("read more ...");
 		
 		var textToCollapse = actionElement.prev();
-		textToCollapse.animate({height:"30"}).addClass("collapsible");
+		textToCollapse.animate({height:"30"}).addClass("collapsed");
 	}
 }(jQuery));

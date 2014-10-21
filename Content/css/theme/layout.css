@@ -27,6 +27,11 @@
 	font-size: 11px;
 }
 
+.required:after {
+    content: "*";
+    color: #FF0000;
+}
+
 .info-mark {
 	position: relative;
 	font-size: 15px;
