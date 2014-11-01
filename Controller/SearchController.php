@@ -20,6 +20,17 @@ class SearchController extends BaseController {
 		parent::redirect("/View/Search/SearchResults.php");
 	}
 
+    function asyncQuery(){
+        $queryString = $_POST["queryString"];
+        $searchCriteriaDto = new SearchCriteriaDto();
+        $searchCriteriaDto->setQueryString($queryString);
+        $searchCriteriaDto->setType(SearchCriteriaTypes::PROGRAM); //todo: Hardcoded for now, should be dynamic or based on user input
+
+        $searchResultsDto = FacadeFactory::getSearchFacade()->search($searchCriteriaDto);
+
+        echo json_encode($searchResultsDto->getSearchResultDtos());
+    }
+
     function sort() {
         $queryString = $_POST["queryString"];
         $sortBy = $_POST["sortBy"];

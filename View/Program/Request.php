@@ -167,7 +167,44 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 						</div>
 					</div>
 					<!-- STEP ONE END -->
-					
+
+                    <!-- CONTEXT FOR STEP TWO AND THREE -->
+                    <div class="context hide small-text" style="padding: 10px 0; margin: -15px 0 15px; background-color:#FAFAFA;">
+                        <div class="row" >
+                            <div class="col-md-5 right-align">
+                                Program Name:
+                            </div>
+                            <div class="col-md-5">
+                                <span class="programName left-align"/></span>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-5 right-align">
+                                Effective Term:
+                            </div>
+                            <div class="col-md-5">
+                                <span class="effectiveTerm left-align"/></span>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-5 right-align">
+                                Faculty:
+                            </div>
+                            <div class="col-md-5">
+                                <span class="faculty left-align"/></span>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-5 right-align">
+                                Discipline:
+                            </div>
+                            <div class="col-md-5">
+                                <span class="discipline left-align"/></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END CONTEXT FOR STEP TWO AND THREE -->
+
 					<!-- STEP TWO START -->
 					<div class="step-two">
 						<div class="row">
@@ -287,6 +324,8 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		$(".step-two .button").hide();
 		
 		$(".step-three").hide()
+
+        hideContext();
 	});
 
 	// change to step two on checkmark click
@@ -298,6 +337,8 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		$(".step-one .button").hide();
 		
 		$(".step-three").hide()
+
+        showContext();
 	});
 
 	// change to step three on checkmark click
@@ -309,6 +350,8 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		
 		$(".step-one").hide()
 		$(".step-one .button").hide();
+
+        showContext();
 	});
 
 	
@@ -331,7 +374,21 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		$(".step-two").show();
 		$(".step-two .button").removeClass("hide"); 
 		$(".step-two .button").show();
+
+        showContext();
 	});
+
+    function showContext(){
+        $(".context").removeClass("hide"); //workaround for !important attribute from bootstrap
+        $(".context .programName").text($("input[name='name']").val());
+        $(".context .effectiveTerm").text($("select[name='effectiveTerm'] option:selected").text());
+        $(".context .faculty").text($("select[name='faculty'] option:selected").text());
+        $(".context  .discipline").text($("select[name='discipline'] option:selected").text());
+    }
+
+    function hideContext(){
+        $(".context").addClass("hide");
+    }
 
 	function validateProgramName() {
 		var programName = $("input[name='name']").val().trim();
@@ -358,6 +415,8 @@ $disciplines = FacadeFactory::getDomainFacade()->findAllDisciplines();
 		$(".step-two .button").hide()
 		
 		$(".step-three").show();
+
+        showContext();
 	});
 
 	function validateCrossImpact() {

@@ -41,18 +41,6 @@ $searchResultsDto = SessionManager::get("searchResults");
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav nav-pills navbar-right">
-						<li>
-							<form action="/Controller/SearchController.php?action=query"
-								method="post">
-								<div class="form-group has-feedback">
-									<input class="form-control" type="text" name="queryString"
-										placeholder="Search..." /> <i
-										class="glyphicon glyphicon-search form-control-feedback"
-										style="top: 0px;"></i>
-								</div>
-							</form>
-						</li>
-						
 						<!-- NAV LINKS START -->
 						<li> <a href="/View/Program/Request.php">Create Program</a> </li>
 						<li> <a href="/Controller/UserController.php?action=logout">Logout</a> </li>
@@ -63,8 +51,15 @@ $searchResultsDto = SessionManager::get("searchResults");
 		</nav>
 		
 		<div class="container search-results center">
-			<div class="row">
-				<h1 class="center-text">Search Results For '<?= $searchResultsDto->getQueryString() ?>'</h1>		
+	        <div class="row">
+                <form action="/Controller/SearchController.php?action=query" method="post">
+                    <input name="queryString" class="async-search form-control" type="text">
+                    <i class="glyphicon glyphicon-search form-control-feedback" style="position: relative; top: -34px; float: right;"></i>
+                </form>
+	        </div>
+
+            <div class="row">
+				<h1 class="center-text">Search Results For '<span class="queryString"><?= $searchResultsDto->getQueryString() ?></span>'</h1>
 			</div>
 			
 			<div class="row">
@@ -99,7 +94,25 @@ $searchResultsDto = SessionManager::get("searchResults");
 
 <script>
     $(document).ready(function(){
-       bindClickForSearchResultRow();
+        bindClickForSearchResultRow();
+    });
+
+    $('.async-search').keyup(function(){
+        var queryString = $(this).val();
+        $('.queryString').text(queryString);
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/Controller/SearchController.php?action=asyncQuery",
+            data: { queryString : queryString },
+            async: true,
+            success: function(jsonData){
+                $(".search-results .table thead>tr>th").removeClass("sorted");
+                reloadSearchResults(jsonData);
+                bindClickForSearchResultRow();
+            }
+        });
     });
 
     $(".search-results .table").on("click", "th", function(e){
@@ -107,7 +120,7 @@ $searchResultsDto = SessionManager::get("searchResults");
 
         var url = "/Controller/SearchController.php?action=sort";
         var sortBy = clickedElement.text();
-        var queryString = "<?= $searchResultsDto->getQueryString() ?>";
+        var queryString = $('.queryString').text();
 
         $.ajax({
             type: "POST",
