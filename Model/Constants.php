@@ -3,6 +3,7 @@ class DBConstants {
 	const HOSTNAME = "localhost";
 	const USERNAME = "comp4511_dev";
 	const PASSWORD = "comp4511_password$1";
+    const DB_NAME = "assignment1";
 }
 
 class ApprovalChainConstants {

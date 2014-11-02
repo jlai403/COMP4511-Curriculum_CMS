@@ -6,7 +6,7 @@ abstract class Repository {
 	
 	protected function initializeDbConnection() {
 		try {
-			$this->dbConnection = new PDO("mysql:host=".DBConstants::HOSTNAME.";dbname=assignment1", DBConstants::USERNAME, DBConstants::PASSWORD);
+			$this->dbConnection = new PDO("mysql:host=".DBConstants::HOSTNAME.";dbname=".DBConstants::DB_NAME, DBConstants::USERNAME, DBConstants::PASSWORD);
 			return $this->dbConnection;
 		}
 		catch(PDOException $e)
