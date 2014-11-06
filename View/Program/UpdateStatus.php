@@ -257,10 +257,4 @@ $(".student-impact").addReadMore();
 $(".library-impact").addReadMore();
 $(".its-impact").addReadMore();
 
-$(".details").on("click", ".show-more", function() {
-	$(this).expandText();
-});
-$(".details").on("click", ".show-less", function() {
-	$(this).collapseText();
-});
 </script>
